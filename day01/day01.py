@@ -1,25 +1,19 @@
 def part_1(number_list):
     times_increasing = 0
 
-    for n, n_1 in zip(number_list[0::], number_list[1::]):
-        if n < n_1:
+    for i in range(1, len(number_list)):
+        if number_list[i - 1] < number_list[i]:
             times_increasing += 1
 
     print(f"Part 1: The numbers increase {times_increasing} times.")
 
 
-def part_2(number_list, sliding_size=3):
+def part_2(number_list):
     times_increasing = 0
-    last_sliding_sum = sum(number_list[:sliding_size])
 
-    for i in range(1, len(number_list) - sliding_size + 1):
-        sliding = number_list[i:i + sliding_size]
-        sliding_sum = sum(sliding)
-
-        if last_sliding_sum < sliding_sum:
+    for i in range(3, len(number_list)):
+        if sum(number_list[i - 4:i - 1]) < sum(number_list[i - 3:i]):
             times_increasing += 1
-
-        last_sliding_sum = sliding_sum
 
     print(f"Part 2: The value of the sums increases {times_increasing} times.")
 
