@@ -8,18 +8,17 @@ class Point(object):
         self.y = y
 
 
-def part_1(point_list: list):
+def part_1(point_list: list) -> int:
     coordinate_dict = defaultdict(int)
     for line in point_list:
         for x, y in get_coordinates_between_points(Point(int(line[0]), int(line[1])),
                                                    Point(int(line[2]), int(line[3]))):
             coordinate_dict[(x, y)] = coordinate_dict[(x, y)] + 1
 
-    number_of_overlaps = len(list(filter(lambda entry: entry[1] > 1, coordinate_dict.items())))
-    print(f"Part 1: The number of points where at least two lines overlap is {number_of_overlaps}.")
+    return len(list(filter(lambda entry: entry[1] > 1, coordinate_dict.items())))
 
 
-def part_2(point_list: list):
+def part_2(point_list: list) -> int:
     coordinate_dict = defaultdict(int)
     for line in point_list:
         for x, y in get_coordinates_between_points(Point(int(line[0]), int(line[1])),
@@ -27,8 +26,7 @@ def part_2(point_list: list):
                                                    diagonal=True):
             coordinate_dict[(x, y)] = coordinate_dict[(x, y)] + 1
 
-    number_of_overlaps = len(list(filter(lambda entry: entry[1] > 1, coordinate_dict.items())))
-    print(f"Part 2: The number of points where at least two lines overlap is {number_of_overlaps}.")
+    return len(list(filter(lambda entry: entry[1] > 1, coordinate_dict.items())))
 
 
 def get_coordinates_between_points(p1: Point, p2: Point, diagonal: bool = False) -> list:
@@ -55,13 +53,17 @@ def get_coordinates_between_points(p1: Point, p2: Point, diagonal: bool = False)
         return [(left.x + i, left.y + sign * i) for i in range(right.x - left.x + 1)]
 
 
-if __name__ == "__main__":
+def parse_input():
     with open("input.txt", "r") as file:
         lines = file.read().splitlines()
-        coordinate_regex = re.compile("(\d+),(\d+) -> (\d+),(\d+)")
+        coordinate_regex = re.compile(r"(\d+),(\d+) -> (\d+),(\d+)")
 
-        points = [coordinate_regex.search(line).groups() for line in lines]
+        return [coordinate_regex.search(line).groups() for line in lines]
 
-        part_1(points)
 
-        part_2(points)
+if __name__ == "__main__":
+    points = parse_input()
+
+    print(f"Part 1: The number of points where at least two lines overlap is {part_1(points)}.")
+
+    print(f"Part 2: The number of points where at least two lines overlap is {part_2(points)}.")

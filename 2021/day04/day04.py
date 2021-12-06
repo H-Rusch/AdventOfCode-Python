@@ -45,24 +45,18 @@ class BingoBoard:
             print("\t".join([str(b) for b in line]))
 
 
-def part_1(number_list: list, board_list: list):
+def part_1(number_list: list, board_list: list) -> int:
     bingo_boards = [BingoBoard(board) for board in board_list]
 
     winner, winning_number = get_first_winning_board(number_list, bingo_boards)
-    # winner.print()
-    final_score = winner.sum_unmarked() * winning_number
-
-    print(f"Part 1: The final score for the first winning bingo board is {final_score}.")
+    return winner.sum_unmarked() * winning_number
 
 
-def part_2(number_list: list, board_list: list):
+def part_2(number_list: list, board_list: list) -> int:
     bingo_boards = [BingoBoard(board) for board in board_list]
 
     winner, winning_number = get_last_winning_board(number_list, bingo_boards)
-    # winner.print()
-    final_score = winner.sum_unmarked() * winning_number
-
-    print(f"Part 2: The final score for the last winning bingo board is {final_score}.")
+    return winner.sum_unmarked() * winning_number
 
 
 def get_first_winning_board(number_list: list, board_list: list) -> (BingoBoard, int):
@@ -82,7 +76,7 @@ def get_last_winning_board(number_list: list, board_list: list) -> (BingoBoard, 
                     return board, int(number)
 
 
-if __name__ == "__main__":
+def parse_input():
     with open("input.txt", "r") as file:
         lines = file.read().split("\n\n")
 
@@ -90,6 +84,12 @@ if __name__ == "__main__":
         board_input = [line.split("\n") for line in lines[1:]]
         board_input = [[line.replace("  ", " ").split() for line in board_input[i]] for i in range(len(board_input))]
 
-        part_1(draw_input, board_input)
+        return draw_input, board_input
 
-        part_2(draw_input, board_input)
+
+if __name__ == "__main__":
+    draw_input, board_input = parse_input()
+
+    print(f"Part 1: The final score for the first winning bingo board is {part_1(draw_input, board_input)}.")
+
+    print(f"Part 2: The final score for the last winning bingo board is {part_2(draw_input, board_input)}.")

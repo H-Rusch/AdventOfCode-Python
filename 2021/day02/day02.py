@@ -1,10 +1,8 @@
-def part_1():
-    global instructions
-
+def part_1(instruction_list: list) -> int:
     horizontal = 0
     vertical = 0
 
-    for instruction in instructions:
+    for instruction in instruction_list:
         direction, number = instruction.split()
 
         if direction == "up":
@@ -14,17 +12,15 @@ def part_1():
         else:
             horizontal += int(number)
 
-    print(f"Part 1: The final horizontal position multiplied by the final depth is {str(horizontal * vertical)}.")
+    return horizontal * vertical
 
 
-def part_2():
-    global instructions
-
+def part_2(instruction_list: list) -> int:
     horizontal = 0
     vertical = 0
     aim = 0
 
-    for instruction in instructions:
+    for instruction in instruction_list:
         direction, number = instruction.split()
 
         if direction == "up":
@@ -35,13 +31,17 @@ def part_2():
             horizontal += int(number)
             vertical += aim * int(number)
 
-    print(f"Part 1: The final horizontal position multiplied by the final depth is {str(horizontal * vertical)}.")
+    return horizontal * vertical
+
+
+def parse_input():
+    with open("input.txt", 'r', encoding='utf-8') as file:
+        return [s for s in file.read().splitlines()]
 
 
 if __name__ == "__main__":
-    with open("input.txt", 'r', encoding='utf-8') as file:
-        instructions = [s for s in file.read().splitlines()]
+    instructions = parse_input()
 
-        part_1()
+    print(f"Part 1: The final horizontal position multiplied by the final depth is {part_1(instructions)}.")
 
-        part_2()
+    print(f"Part 2: The final horizontal position multiplied by the final depth is {part_2(instructions)}.")

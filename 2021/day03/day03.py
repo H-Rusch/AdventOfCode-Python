@@ -1,19 +1,17 @@
-def part_1(diagnostics: list):
+def part_1(diagnostics: list) -> int:
     common_bits = [most_common_bit_at_position(diagnostics, i) for i in range(len(diagnostics[0]))]
 
     gamma_rate = "".join([str(i) for i in common_bits])
     epsilon_rate = complement(gamma_rate)
 
-    power_consumption = int(gamma_rate, 2) * int(epsilon_rate, 2)
-    print(f"Part 1: The power consumption is {power_consumption}.")
+    return int(gamma_rate, 2) * int(epsilon_rate, 2)
 
 
-def part_2(diagnostic_data: list):
-    life_support_rating = calculate_oxygen_rating(diagnostic_data) * calculate_co2_rating(diagnostic_data)
-    print(f"Part 2: The life support rating is {life_support_rating}.")
+def part_2(diagnostic_data: list) -> int:
+    return calculate_oxygen_rating(diagnostic_data) * calculate_co2_rating(diagnostic_data)
 
 
-def complement(binary_string):
+def complement(binary_string: str) -> str:
     complement_string = "".join(["1" if binary_string[i] == "0" else "0" for i in range(len(binary_string))])
     return complement_string
 
@@ -59,9 +57,14 @@ def least_common_bit_at_position(diagnostic_data: list, position: int) -> int:
     return (most_common_bit_at_position(diagnostic_data, position) + 1) % 2
 
 
-if __name__ == "__main__":
+def parse_input():
     with open("input.txt", "r") as file:
-        lines = [s for s in file.read().splitlines()]
+        return [s for s in file.read().splitlines()]
 
-        part_1(lines)
-        part_2(lines)
+
+if __name__ == "__main__":
+    lines = parse_input()
+
+    print(f"Part 1: The power consumption is {part_1(lines)}.")
+
+    print(f"Part 2: The life support rating is {part_2(lines)}.")
