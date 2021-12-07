@@ -22,8 +22,10 @@ def calculate_oxygen_rating(diagnostic_data: list) -> int:
     for i in range(len(diagnostic_data[0])):
         if len(oxygen_list) == 1:
             break
-        bit_value = most_common_bit_at_position(oxygen_list, i)
-        oxygen_list = list(filter(lambda bin_number: bin_number[i] == str(bit_value), oxygen_list))
+        bit_value = str(most_common_bit_at_position(oxygen_list, i))
+        oxygen_list = list(
+            filter(lambda bin_number, iteration=i, bit_string=bit_value: bin_number[iteration] == bit_string,
+                   oxygen_list))
 
     return int(oxygen_list[0], 2)
 
@@ -34,8 +36,10 @@ def calculate_co2_rating(diagnostic_data: list) -> int:
     for i in range(len(diagnostic_data[0])):
         if len(co2_list) == 1:
             break
-        bit_value = least_common_bit_at_position(co2_list, i)
-        co2_list = list(filter(lambda bin_number: bin_number[i] == str(bit_value), co2_list))
+        bit_value = str(least_common_bit_at_position(co2_list, i))
+        co2_list = list(
+            filter(lambda bin_number, iteration=i, bit_string=bit_value: bin_number[iteration] == bit_string,
+                   co2_list))
 
     return int(co2_list[0], 2)
 
