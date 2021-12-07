@@ -1,8 +1,8 @@
-def part_1() -> int:
+def part_1(a: list) -> int:
     return 0
 
 
-def part_2() -> int:
+def part_2(a: list) -> int:
     return 0
 
 
@@ -14,5 +14,6 @@ def parse_input():
 if __name__ == "__main__":
     a = parse_input()
 
-    print(part_1())
-    print(part_2())
+    print(f"Part 1: {part_1(a)}.")
+
+    print(f"Part 2: {part_2(a)}.")
