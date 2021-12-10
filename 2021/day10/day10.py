@@ -2,7 +2,7 @@ from collections import deque
 import numpy as np
 
 
-def both_parts(line_list: list) -> tuple[int, int]:
+def both_parts(line_list: list) -> tuple:
     bracket_pairs = {"(": ")", "[": "]", "{": "}", "<": ">"}
     corrupted_points = {")": 3, "]": 57, "}": 1197, ">": 25137}
 
