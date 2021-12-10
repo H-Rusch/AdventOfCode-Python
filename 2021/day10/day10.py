@@ -1,4 +1,5 @@
 from collections import deque
+import numpy as np
 
 
 def both_parts(line_list: list) -> tuple[int, int]:
@@ -30,7 +31,7 @@ def both_parts(line_list: list) -> tuple[int, int]:
             completion_string = [bracket_pairs[opening] for opening in reversed(stack)]
             incomplete_scores.append(calculate_incomplete_score(completion_string))
 
-    return corrupted_score, sorted(incomplete_scores)[int(len(incomplete_scores) / 2)]
+    return corrupted_score, int(np.median(incomplete_scores))
 
 
 def calculate_incomplete_score(completion_signs: list) -> int:
