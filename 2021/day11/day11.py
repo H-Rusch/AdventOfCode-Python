@@ -42,7 +42,6 @@ def get_adjacent(coordinate: tuple, octopus_dict: dict) -> list:
     return list(set(octopus_dict.keys()).intersection(adj))
 
 
-
 def parse_input():
     with open("input.txt", "r") as file:
         matrix = [[int(n) for n in line] for line in file.read().splitlines()]
