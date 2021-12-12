@@ -1,4 +1,4 @@
-class Intcode_v1:
+class IntcodeV1:
     def __init__(self, program: list):
         self.memory = program[:]
 
@@ -27,7 +27,7 @@ class Intcode_v1:
 def part_1(program: list) -> int:
     program[1] = 12
     program[2] = 2
-    computer = Intcode_v1(program)
+    computer = IntcodeV1(program)
     computer.execute_program()
 
     return computer.memory[0]
@@ -39,7 +39,7 @@ def part_2(program: list) -> int:
             program[1] = noun
             program[2] = verb
 
-            computer = Intcode_v1(program)
+            computer = IntcodeV1(program)
             computer.execute_program()
 
             if computer.memory[0] == 19690720:
