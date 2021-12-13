@@ -2,7 +2,7 @@ from itertools import permutations
 from collections import deque
 
 
-class IntcodeV3:
+class IntcodeV2_5:
     def __init__(self, program: list, phase_setting):
         self.memory = program[:]
         # halt: 0 = running, 1 = paused, 2 = execution finished
@@ -150,23 +150,23 @@ def part_1(program: list):
     maximum_value = 0
 
     for p1, p2, p3, p4, p5 in permutations(range(5)):
-        amplifier_a = IntcodeV3(program, p1)
+        amplifier_a = IntcodeV2_5(program, p1)
         amplifier_a.input_value = 0
         amplifier_a.execute_program()
 
-        amplifier_b = IntcodeV3(program, p2)
+        amplifier_b = IntcodeV2_5(program, p2)
         amplifier_b.input_value = amplifier_a.output_value
         amplifier_b.execute_program()
 
-        amplifier_c = IntcodeV3(program, p3)
+        amplifier_c = IntcodeV2_5(program, p3)
         amplifier_c.input_value = amplifier_b.output_value
         amplifier_c.execute_program()
 
-        amplifier_d = IntcodeV3(program, p4)
+        amplifier_d = IntcodeV2_5(program, p4)
         amplifier_d.input_value = amplifier_c.output_value
         amplifier_d.execute_program()
 
-        amplifier_e = IntcodeV3(program, p5)
+        amplifier_e = IntcodeV2_5(program, p5)
         amplifier_e.input_value = amplifier_d.output_value
         amplifier_e.execute_program()
 
@@ -181,11 +181,11 @@ def part_2(program: list):
 
     for p1, p2, p3, p4, p5 in permutations(range(5, 10)):
         amplifiers = deque()
-        amplifiers.append(IntcodeV3(program, p1))
-        amplifiers.append(IntcodeV3(program, p2))
-        amplifiers.append(IntcodeV3(program, p3))
-        amplifiers.append(IntcodeV3(program, p4))
-        amplifiers.append(IntcodeV3(program, p5))
+        amplifiers.append(IntcodeV2_5(program, p1))
+        amplifiers.append(IntcodeV2_5(program, p2))
+        amplifiers.append(IntcodeV2_5(program, p3))
+        amplifiers.append(IntcodeV2_5(program, p4))
+        amplifiers.append(IntcodeV2_5(program, p5))
 
         input_to_next = 0
 
