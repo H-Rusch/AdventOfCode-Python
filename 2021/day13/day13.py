@@ -34,7 +34,7 @@ def fold(coordinates: set, instruction: str) -> set:
 
 
 def show_coordinates(coordinates: set):
-    print_dict = {coordinate: "# " for coordinate in coordinates}
+    print_dict = {coordinate: "█ " for coordinate in coordinates}
 
     dimension_x = max([coordinate[0] for coordinate in coordinates])
     dimension_y = max([coordinate[1] for coordinate in coordinates])
@@ -42,7 +42,7 @@ def show_coordinates(coordinates: set):
     for y in range(dimension_y + 1):
         row = ""
         for x in range(dimension_x + 1):
-            row += print_dict.get((x, y), ". ")
+            row += print_dict.get((x, y), "  ")
         print(row)
 
 
