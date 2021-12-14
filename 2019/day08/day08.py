@@ -4,7 +4,7 @@ LAYER_SIZE = WIDTH * HEIGHT
 
 
 def part_1(image_layers: list) -> int:
-    # here I chose an approach with iterationg over the values once and memorizing the layer with the least amount of
+    # here I chose an approach with iterating over the values once and memorizing the layer with the least amount of
     # zeros in order to save computing time
     minimum_zeros = LAYER_SIZE
     layer_with_min_zeros = None
@@ -17,10 +17,10 @@ def part_1(image_layers: list) -> int:
 
 
 def part_2(image_layers: list):
-    visibible_image = [get_value_at_index(i, image_layers) for i in range(LAYER_SIZE)]
+    visible_image = [get_value_at_index(i, image_layers) for i in range(LAYER_SIZE)]
 
     for y in range(HEIGHT):
-        print("".join(["█ " if n == 1 else "  " for n in visibible_image[y * WIDTH: (y + 1) * WIDTH]]))
+        print("".join(["█ " if n == 1 else "  " for n in visible_image[y * WIDTH: (y + 1) * WIDTH]]))
 
 
 def get_value_at_index(index: int, image_layers: list) -> int:
