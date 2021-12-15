@@ -56,7 +56,7 @@ def get_shortest_path_risk_slow(matrix: list) -> int:
             # insert into sorted list based on the summed risk
             history.add((adjacent, summed_risk))
             node_costs[adjacent] = summed_risk
-            bisect.insort_left(expanded_nodes, (adjacent, summed_risk), key=lambda t: t[1])
+            bisect.insort_left(expanded_nodes, (adjacent, summed_risk), key=lambda t: t[1])  # requires python 3.10
 
         current, risk = expanded_nodes.pop(0)
 
@@ -86,8 +86,8 @@ def parse_input():
 if __name__ == "__main__":
     riskmap = parse_input()
 
-    # print(f"Part 1: The shortest path from the top left to the bottom right has a combined risk factor of"
-    #      f" {part_1(riskmap)}.")
+    print(f"Part 1: The shortest path from the top left to the bottom right has a combined risk factor of"
+          f" {part_1(riskmap)}.")
 
     big_map = [[0 for i in range(len(riskmap * 5))] for j in range(len(riskmap) * 5)]
 
@@ -110,3 +110,4 @@ if __name__ == "__main__":
 
     print(f"Part 2: The shortest path from the top left to the bottom right has a combined risk factor of"
           f" {part_2(big_map)}.")
+    # took only 5 minutes. That's nothing
