@@ -1,66 +1,42 @@
-import bisect
+import math
+from queue import PriorityQueue
 
 
 def part_1(matrix: list) -> int:
-    return get_shortest_path_risk_faster(matrix)
+    return get_shortest_path_risk_dijkstra(matrix)
 
 
 def part_2(matrix: list) -> int:
-    return get_shortest_path_risk_faster(matrix)
+    return get_shortest_path_risk_dijkstra(matrix)
 
 
-def get_shortest_path_risk_faster(matrix: list) -> int:
-    # A*
+def get_shortest_path_risk_dijkstra(matrix: list) -> int:
+    # Dijkstra Algorithm
     limit = len(matrix) - 1
     end = (limit, limit)
 
-    open_list = [((0, 0), 0)]  # ((x, y), cost)
-    closed_set = set()
+    node_costs = {(x, y): math.inf for x in range(len(matrix)) for y in range(len(matrix))}
+
+    expanded = PriorityQueue()
+    expanded.put((0, (0, 0)))
+
+    visited = set()
 
     while True:
-        open_list.sort(key=lambda t: t[1])
+        risk, current = expanded.get()
 
-        coordinate, cost = open_list.pop(0)
+        if current == end:
+            return risk
 
-        if coordinate == end:
-            return cost
+        visited.add(current)
 
-        closed_set.add(coordinate)
+        for neighbour in get_adjacent(current[0], current[1], limit):
+            if neighbour not in visited:
+                risk_summed = risk + matrix[neighbour[1]][neighbour[0]]
 
-        for adjacent in get_adjacent(coordinate[0], coordinate[1], limit):
-            summed_cost = cost + matrix[adjacent[1]][adjacent[0]]
-
-            if adjacent not in closed_set and (adjacent, summed_cost) not in open_list:
-                open_list.append((adjacent, summed_cost))
-
-
-def get_shortest_path_risk_slow(matrix: list) -> int:
-    # works, but it already takes ~30 seconds for part 1, so I'm just not going to try it for part 2
-    limit = len(matrix) - 1
-    end = (limit, limit)
-
-    current, risk = (0, 0), 0
-
-    expanded_nodes = []  # list maintaining ((x, y), summed_risk).
-    history = set()
-    node_costs = dict()
-
-    while current != end:
-        for adjacent in get_adjacent(current[0], current[1], limit):
-            summed_risk = risk + matrix[adjacent[1]][adjacent[0]]
-
-            # don't expand a node which is already expanded, or which has a worse risk then an already expanded one
-            if (adjacent, summed_risk) in history and node_costs[adjacent] <= summed_risk:
-                continue
-
-            # insert into sorted list based on the summed risk
-            history.add((adjacent, summed_risk))
-            node_costs[adjacent] = summed_risk
-            bisect.insort_left(expanded_nodes, (adjacent, summed_risk), key=lambda t: t[1])  # requires python 3.10
-
-        current, risk = expanded_nodes.pop(0)
-
-    return risk
+                if risk_summed < node_costs[neighbour]:
+                    node_costs[neighbour] = risk_summed
+                    expanded.put((risk_summed, neighbour))
 
 
 def get_adjacent(x: int, y: int, limit: int) -> list:
@@ -110,4 +86,3 @@ if __name__ == "__main__":
 
     print(f"Part 2: The shortest path from the top left to the bottom right has a combined risk factor of"
           f" {part_2(big_map)}.")
-    # took only 5 minutes. That's nothing
