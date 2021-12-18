@@ -1,4 +1,6 @@
 import math
+import copy
+from itertools import permutations
 
 
 class Node:
@@ -34,6 +36,24 @@ def part_1(node_list: list) -> int:
         node_list.insert(0, parent)
 
     return calculate_magnitude(node_list[0])
+
+
+def part_2(node_list: list) -> int:
+    max_magnitude = 0
+    for n1, n2 in permutations(node_list, 2):
+        parent = Node()
+        n1 = copy.deepcopy(n1)
+        n2 = copy.deepcopy(n2)
+        n1.parent, n2.parent = parent, parent
+        parent.left, parent.right = n1, n2
+
+        reduce(parent)
+        magnitude = calculate_magnitude(parent)
+
+        if magnitude > max_magnitude:
+            max_magnitude = magnitude
+
+    return max_magnitude
 
 
 def calculate_magnitude(node: Node) -> int:
@@ -171,10 +191,6 @@ def split(node: Node):
     node.right = right_child
 
 
-def part_2(a: list) -> int:
-    return 0
-
-
 def create_tree(line: list, parent: Node = None):
     # bottom reached
     if len(line) == 1:
@@ -232,14 +248,14 @@ def parse_input():
             root = create_tree(parts)
             nodes.append(root)
 
-        # for i in range(len(nodes)):
-        #    print(nodes[i].get_string())
         return nodes
 
 
 if __name__ == "__main__":
-    a = parse_input()
+    snailfish_numbers = parse_input()
 
-    print(f"Part 1: {part_1(a)}.")
+    print(f"Part 1: The magnitude is {part_1(snailfish_numbers)}.")
 
-    print(f"Part 2: {part_2(a)}.")
+    snailfish_numbers = parse_input()
+
+    print(f"Part 2: The maximum magnitude of a permutation of two elements is {part_2(snailfish_numbers)}.")
