@@ -147,4 +147,4 @@ if __name__ == "__main__":
 
     print(f"Part 1: The number of beacons is {num_beacons}.")
 
-    print(f"Part 2: The maximum distance between beacons is {max_distance}.")
+    print(f"Part 2: The maximum distance between scanners is {max_distance}.")
