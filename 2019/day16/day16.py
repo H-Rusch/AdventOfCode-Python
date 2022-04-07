@@ -18,14 +18,12 @@ def part_1(numbers: list) -> str:
 
 def part_2(numbers: list) -> str:
     offset = int("".join(str(n) for n in numbers[:7]))
-    numbers = 10_000 * numbers
-    numbers = numbers[offset:]
+    numbers = (numbers * 10000)[offset:]
 
     for _ in range(100):
-        new_numbers = numbers[:]
-        for i in range(len(numbers)):
-            new_numbers[i] = sum(numbers[i:]) % 10
-        numbers = new_numbers
+        summed_from_index = numbers[-1]
+        for i in range(len(numbers) - 2, -1, -1):
+            numbers[i] = summed_from_index = (summed_from_index + numbers[i]) % 10
 
     return "".join([str(n) for n in numbers][:8])
 
@@ -47,4 +45,4 @@ if __name__ == "__main__":
 
     print(f"Part 1: The first eight digits after 100 iterations are {part_1(number_list)}.")
 
-    print(f"Part 2: {part_2(number_list)}.")
+    print(f"Part 2: The eight-digit message embedded in the final output list is {part_2(number_list)}.")
