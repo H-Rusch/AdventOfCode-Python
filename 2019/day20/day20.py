@@ -18,6 +18,46 @@ def part_1(tiles: set, portal_links: dict, start: tuple, end: tuple) -> int:
                 expanded.append(((x, y), steps + 1))
 
 
+def part_2(tiles: set, portal_links: dict, start: tuple, end: tuple) -> int:
+    visited = set()
+    expanded = [(start, 0, 0)]
+
+    # get the edges to see if a portal is moving upwards or downwards
+    x_values = list(map(lambda c: c[0], tiles))
+    y_values = list(map(lambda c: c[1], tiles))
+    x_min, x_max = min(x_values), max(x_values)
+    y_min, y_max = min(y_values), max(y_values)
+
+    while True:
+        expanded.sort(key=lambda e: e[1])
+
+        current, steps, level = expanded.pop(0)
+        if current == end and level == 0:
+            return steps
+
+        visited.add((current, level))
+
+        x, y = current[0], current[1]
+        reachable = []
+        if (x, y) in portal_links:
+            # this is a portal on the outer layer
+            if x in [x_min, x_max] or y in [y_min, y_max]:
+                if level != 0:
+                    reachable.append((portal_links[(x, y)], level - 1))
+            else:
+                reachable.append((portal_links[(x, y)], level + 1))
+
+        for (dx, dy) in get_adjacent(x, y):
+            if (dx, dy) in tiles:
+                reachable.append(((dx, dy), level))
+
+        for coordinate, new_level in reachable:
+            # prevent many useless cycles into deeper areas from happening by disallowing too deep levels.
+            # this cut the execution time from ~4min to ~3s
+            if new_level <= len(portal_links) and (coordinate, new_level) not in visited:
+                expanded.append((coordinate, steps + 1, new_level))
+
+
 def get_walkable(tiles: set, portal_links: dict, coordinate: tuple) -> list:
     x, y = coordinate[0], coordinate[1]
     reachable = []
@@ -101,3 +141,5 @@ if __name__ == "__main__":
     tile_list, link_dict, start_point, end_point = parse_input()
 
     print(f"Part 1: It takes {part_1(tile_list, link_dict, start_point, end_point)} steps to get from AA to ZZ.")
+
+    print(f"Part 2: It takes {part_2(tile_list, link_dict, start_point, end_point)} steps to get from AA to ZZ.")
