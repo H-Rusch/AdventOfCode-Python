@@ -214,29 +214,12 @@ def part_1(instructions: list) -> int:
 
 
 def part_2(instructions: list) -> int:
-    def find_first(last_x: int, dy: int) -> int:
-        dx = int(last_x * 0.9)
-        while True:
-            if test_coordinate(instructions, dx, dy):
-                return dx
-            dx += 1
-
-    def test_square(x: int, y: int):
-        """Top left not tested, because it is tested before this call. """
-        if test_coordinate(instructions, x, y + size) and test_coordinate(instructions, x + size, y) and \
-                test_coordinate(instructions, x + size, y + size):
-            return True, (x, y)
-        return False, (0, 0)
-
     size = 99
-    x, y = 0, 10
+    x, y = 0, 100
     while True:
-        x = find_first(x, y)
-
-        while test_coordinate(instructions, x, y):
-            b, (dx, dy) = test_square(x, y)
-            if b:
-                return dx * 10000 + dy
+        while test_coordinate(instructions, x + size, y):
+            if test_coordinate(instructions, x, y + size):
+                return x * 10000 + y
             x += 1
         y += 1
 
