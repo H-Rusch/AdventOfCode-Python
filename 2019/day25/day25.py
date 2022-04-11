@@ -1,4 +1,4 @@
-class IntcodeV3_5:
+class IntcodeV3_4:
     def __init__(self, program: list):
         self.memory = program[:]
         for _ in range(10_000):
@@ -44,8 +44,8 @@ class IntcodeV3_5:
                 if len(self.input) != 0:
                     user_input = self.input.pop(0)
                 else:
-                    user_input = -1
                     self.running = 2
+                    return
                 # user_input = int(input("Which value to save?: "))
                 parameters = [user_input,
                               self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
@@ -189,57 +189,27 @@ class IntcodeV3_5:
         self.relative_base += value
 
 
-# --- code for day 23 --------------------------------------------------------------------------
+# --- code for day 25 --------------------------------------------------------------------------
 def part_1(instructions: list) -> int:
-    computers = []
-    for i in range(50):
-        computer = IntcodeV3_5(instructions)
-        computer.input.append(i)
-        computers.append(computer)
+    computer = IntcodeV3_4(instructions)
 
     while True:
-        for computer in computers:
-            computer.execute_program()
-            while len(computer.output) >= 3:
-                adr, x, y = computer.output[:3]
-                computer.output = computer.output[3:]
+        computer.execute_program()
+        print_output(computer.output)
+        computer.output = []
 
-                if adr == 255:
-                    return y
-                computers[adr].input.extend([x, y])
+        program = ""
+        while True:
+            program = input()
+            if program in ["north", "east", "west", "south", "inv"] or program.startswith("drop ") or \
+                    program.startswith("take "):
+                break
+        program = [ord(c) for c in program + "\n"]
+        computer.input = program
 
 
-def part_2(instructions: list) -> int:
-    computers = []
-    nat_x, nat_y = None, None
-    last_delivered_y = None
-
-    for i in range(50):
-        computer = IntcodeV3_5(instructions)
-        computer.input.append(i)
-        computers.append(computer)
-
-    while True:
-        all_idle = True
-        for computer in computers:
-            computer.execute_program()
-            while len(computer.output) >= 3:
-                adr, x, y = computer.output[:3]
-                computer.output = computer.output[3:]
-
-                if adr == 255:
-                    nat_x, nat_y = x, y
-                else:
-                    computers[adr].input.extend([x, y])
-                    all_idle = False
-
-        if all_idle:
-            if nat_y is None:
-                continue
-            computers[0].input.extend([nat_x, nat_y])
-            if last_delivered_y == nat_y:
-                return nat_y
-            last_delivered_y = nat_y
+def print_output(numbers: list):
+    print("".join([chr(n) for n in numbers]))
 
 
 def parse_input():
@@ -250,6 +220,6 @@ def parse_input():
 if __name__ == "__main__":
     number_list = parse_input()
 
-    print(f"Part 1: The y-value of the first package for address 255 is {part_1(number_list)}.")
+    part_1(number_list)
 
-    print(f"Part 2: The first y-value delivered by the NAT twice in a row is {part_2(number_list)}.")
+    print(f"Part 1: The password for the main airlock is 319815680 found by playing part 1.")
