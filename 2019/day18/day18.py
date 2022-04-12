@@ -42,6 +42,58 @@ def part_1(tiles: dict) -> int:
                     heapq.heappush(expanded, (cost + path_cost, key, new_keys))
 
 
+def part_2(tiles: dict) -> int:
+    # find the positions of all keys and the start
+    key_positions = dict()
+    for (dx, dy), symbol in tiles.items():
+        if symbol in KEYS:
+            key_positions[symbol] = (dx, dy)
+
+    start_x, start_y = key_positions["@"]
+    del key_positions["@"]
+
+    tiles[(start_x - 1, start_y - 1)] = "1"
+    key_positions["1"] = (start_x - 1, start_y - 1)
+    tiles[(start_x - 1, start_y + 1)] = "2"
+    key_positions["2"] = (start_x - 1, start_y + 1)
+    tiles[(start_x + 1, start_y - 1)] = "3"
+    key_positions["3"] = (start_x + 1, start_y - 1)
+    tiles[(start_x + 1, start_y + 1)] = "4"
+    key_positions["4"] = (start_x + 1, start_y + 1)
+
+    for (dx, dy) in [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)]:
+        del tiles[(start_x + dx, start_y + dy)]
+
+    number_of_keys = len(key_positions) - 4
+
+    key_reaches = defaultdict(dict)
+    for key, (x, y) in key_positions.items():
+        key_reaches[key] = find_reachable(tiles, x, y)
+
+    expanded = [(0, "1234", frozenset())]
+    visited = set()
+    while len(expanded) > 0:
+        cost, positions, keys_owned = heapq.heappop(expanded)
+        # print(cost, positions, keys_owned)
+
+        if (positions, keys_owned) in visited:
+            continue
+        visited.add((positions, keys_owned))
+
+        if len(keys_owned) == number_of_keys:
+            return cost
+
+        for i, position in enumerate(positions):
+            for key in key_reaches[position]:
+                passing_doors, path_cost = key_reaches[position][key]
+                if key in keys_owned:
+                    continue
+                if all([door.lower() in keys_owned for door in passing_doors]):
+                    new_keys = keys_owned.union(frozenset(key))
+                    if (key, new_keys) not in visited:
+                        heapq.heappush(expanded, (cost + path_cost, positions[:i] + key + positions[i + 1:], new_keys))
+
+
 def find_reachable(tiles: dict, x: int, y: int) -> dict:
     reachable = dict()
     expanded = [(0, (x, y), frozenset({}))]
@@ -94,3 +146,6 @@ if __name__ == "__main__":
     tile_dict = parse_input()
 
     print(f"Part 1: The shortest path which collects all of the keys takes {part_1(tile_dict)} steps.")
+
+    print(f"Part 2: The shortest path which collects all of the keys takes {part_2(tile_dict)} steps.")
+
