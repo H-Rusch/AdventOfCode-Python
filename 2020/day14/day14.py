@@ -1,26 +1,89 @@
 import re
 
-# read in docking parameters
-with open("input.txt", "r") as file:
-    docking_parameters = [parameter for parameter in file.read().split("\n")]
 
-memory = dict()
-mask = []
+def part_1(instructions: list) -> int:
+    mask = ""
+    memory = dict()
 
-address_regex = re.compile(r"mem\[(\d*)] = (\d*)")
+    for instruction in instructions:
+        if instruction.startswith("mask"):
+            mask = instruction[7:]
+        else:
+            address, value = re.search(r"mem\[(\d+)] = (\d+)", instruction).groups()
+            value = list(bin(int(value))[2:].zfill(36))
+            for i, b in enumerate(value):
+                if mask[i] == "1":
+                    value[i] = "1"
+                elif mask[i] == "0":
+                    value[i] = "0"
+            memory[address] = int("".join(value), 2)
 
-for parameter in docking_parameters:
-    if parameter.startswith("mask = "):
-        mask = list(parameter[7:])
-    else:
-        match = address_regex.search(parameter).groups()
-        value = list(bin(int(match[1]))[2:].zfill(36))
-        for i in range(len(mask)):
+    return sum(memory.values())
+
+
+def part_2(instructions: list) -> int:
+    mask = ""
+    memory = dict()
+
+    for instruction in instructions:
+        if instruction.startswith("mask"):
+            mask = instruction[7:]
+        else:
+            address, value = re.search(r"mem\[(\d+)] = (\d+)", instruction).groups()
+
+            address = list(bin(int(address))[2:].zfill(36))
+            for possible_address in get_floating_addresses(address, mask):
+                memory[possible_address] = int(value)
+
+    return sum(memory.values())
+
+def get_floating_addresses(address: list, mask: str):
+    expanded = [(address, 0)]
+    finished = []
+    while len(expanded) > 0:
+        current, i = expanded.pop()
+
+        while i < len(current):
             if mask[i] == "1":
-                value[i] = "1"
+                current[i] = "1"
+                i += 1
             elif mask[i] == "0":
-                value[i] = "0"
-        value = int("".join(value), 2)
-        memory[match[0]] = value
+                current[i] = current[i]
+                i += 1
+            else:
+                if i == 0:
+                    replace_0 = ["0"] + current[i + 1:]
+                    replace_1 = ["1"] + current[i + 1:]
 
-print("The sum of values lef is: {}".format(sum(memory.values())))
+                elif i == len(current):
+                    replace_0 = current[:i] + ["0"]
+                    replace_1 = current[:i] + ["1"]
+
+                else:
+                    replace_0 = current[:i] + ["0"] + current[i + 1:]
+                    replace_1 = current[:i] + ["1"] + current[i + 1:]
+
+                i += 1
+                expanded.append((replace_1, i))
+                expanded.append((replace_0, i))
+
+                break
+
+        else:
+            finished.append(int("".join(current), 2))
+
+    return finished
+
+
+
+def parse_input():
+    with open("input.txt") as file:
+        return file.readlines()
+
+
+if __name__ == "__main__":
+    instruction_list = parse_input()
+
+    print(f"Part 1: The sum of all values left in memory is {part_1(instruction_list)} for version 1.0.")
+
+    print(f"Part 2: The sum of all values left in memory is {part_2(instruction_list)} for version 2.0.")
