@@ -1,18 +1,19 @@
+from itertools import cycle
+
+
 def part_1(changes: list) -> int:
     return sum([int(s) for s in changes])
 
 
 def part_2(changes: list) -> int:
-    seen_frequencies = set()
     current = 0
-    seen_frequencies.add(current)
+    seen_frequencies = {current}
 
-    while True:
-        for change in changes:
-            current += int(change)
-            if current in seen_frequencies:
-                return current
-            seen_frequencies.add(current)
+    for change in cycle(changes):
+        current += int(change)
+        if current in seen_frequencies:
+            return current
+        seen_frequencies.add(current)
 
 
 def parse_input() -> list:
