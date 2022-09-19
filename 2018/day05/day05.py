@@ -33,6 +33,6 @@ if __name__ == "__main__":
     polymer_str = parse_input()
 
     print()
-    print(f"Part 1: After fully reacting the polymer it has a length of {part_1(polymer_str)} units.")  # 15388
+    print(f"Part 1: After fully reacting the polymer it has a length of {part_1(polymer_str)} units.")
 
     print(f"Part 2: The shortest polymer which can produced has a length of {part_2(polymer_str)} units.")
