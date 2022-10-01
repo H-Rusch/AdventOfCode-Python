@@ -1,0 +1,40 @@
+00 | seti 123 0 4      | r4 = 123                       | r4 = 123
+01 | bani 4 456 4      | r4 = r4 & 456      			| r4 = if (r4 == 72): GOTO 5 else GOTO 1
+02 | eqri 4 72 4       | r4 = 1 if r4 == 72 else 0      | r4 = 1
+03 | addr 4 1 1        | ip += r4                       | GOTO 5
+04 | seti 0 0 1        | ip = 0                         | GOTO 0
+
+
+																						  r4 = 0
+																						  while True:
+																						    r5 = r4 | 65536
+																						    r4 = 10704114
+05 | seti 0 0 4        | r4 = 0                         | r4 = 0						|   while True:
+06 | bori 4 65536 5    | r5 = r4 | 65536 			    | #r5 = 65536					| 	  r2 = (r4 | 65536) + 255
+07 | seti 10704114 0 4 | r4 = 10704114                  | r4 = 10704114					| 	  r4 = (((10704114 + r2) & 16777215) * 65899) & 16777215
+08 | bani 5 255 2      | r2 = r5 & 255                  | r2 = 65791					| 
+09 | addr 4 2 4        | r4 += r2                       | r4 = 10769905					| 
+10 | bani 4 16777215 4 | r4 = r4 & 16777215 			| r4 = 16777215					| 
+11 | muli 4 65899 4    | r4 *= 65899                    | r4 = 1,10560169128e+12		| 
+12 | bani 4 16777215 4 | r4 = r4 & 16777215 			| r4 = 16711317					| 
+13 | gtir 256 5 2      | r2 = 1 if r2 > 256 else 0      | if r2 > 256:					| 	  if 256 > r5:
+14 | addr 2 1 1        | ip += r2                       | 	  GOTO 28					|       if r4 == r0: 
+15 | addi 1 1 1        | ip += 1                        | else							|         EXIT
+														      GOTO 17					| 	  else: 
+16 | seti 27 2 1       | ip = 27                        | 								| 		r5 = r5 // 256
+
+17 | seti 0 4 2        | r2 = 0                         | r2 = 0						| 
+18 | addi 2 1 3        | r3 = r2 + 1                    | while True:
+19 | muli 3 256 3      | r3 *= 256                      | 	if (r2 * 256) > r5:
+20 | gtrr 3 5 3        | r3 = 1 if r3 > r5 else 0       |     r5 = r2
+21 | addr 3 1 1        | ip += r3                       |     break
+22 | addi 1 1 1        | ip += 1                        |   r2 += 1
+23 | seti 25 5 1       | ip = 25                        | 
+24 | addi 2 1 2        | r2 += 1                        | 
+25 | seti 17 5 1       | ip = 17                        | 
+26 | setr 2 6 5        | r5 = r2                        | 
+
+27 | seti 7 8 1        | ip = 7                         | GOTO 8
+28 | eqrr 4 0 2        | r2 = 1 if r4 == r0 else 0      | if r4 == r0:
+29 | addr 2 1 1        | ip += r2                       | 	EXIT
+30 | seti 5 3 1        | ip = 5                         | GOTO 6						| 	
