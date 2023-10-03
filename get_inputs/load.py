@@ -43,11 +43,11 @@ def build_filename(day: int) -> str:
 
 def write_puzzle_input(path: Path, puzzle_input: str):
     with open(path, "w") as file:
-        file.write(puzzle_input.strip())
+        file.write(puzzle_input.rstrip())
 
     print(f"Input saved to file at {path}")
 
 
 def read_puzzle_input(path: Path) -> str:
     with open(path) as file:
-        return file.read().strip()
+        return file.read().rstrip()
