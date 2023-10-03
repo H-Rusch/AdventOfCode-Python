@@ -5,3 +5,9 @@ My solutions for the Advent of Code
 - [2019](https://adventofcode.com/2019)
 - [2020](https://adventofcode.com/2020)
 - [2021](https://adventofcode.com/2021)
+
+## Usage
+* Install required dependencies with `pip install -r requirements.txt`
+* Entrypoint is `aoc.py` in the root directory
+* Year and Day are read from the command line arguments
+* Example: `python aoc.py 2017 1`

@@ -140,3 +140,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# do not publish input files to github
+**/inputs/*.txt
+
+# ignore vscode settings
+.vscode
