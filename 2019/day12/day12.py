@@ -31,7 +31,7 @@ class Moon:
         return sum([abs(v) for v in self.pos]) * sum([abs(v) for v in self.vel])
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         moons = []
 
@@ -42,7 +42,7 @@ def parse_input():
         return moons
 
 
-def part_1(moons: list) -> int:
+def part1(moons: list) -> int:
     for _ in range(1000):
         for i in range(len(moons) - 1):
             for j in range(i + 1, len(moons)):
@@ -54,7 +54,7 @@ def part_1(moons: list) -> int:
     return sum([moon.calculate_total_energy() for moon in moons])
 
 
-def part_2(moons: list) -> int:
+def part2(moons: list) -> int:
     starting_positions = [moon.pos[:] for moon in moon_list]
 
     steps_till_cycle = [0, 0, 0]
@@ -76,8 +76,8 @@ def part_2(moons: list) -> int:
 
 
 if __name__ == "__main__":
-    moon_list = parse_input()
+    moon_list = parse(input)
 
-    print(f"After 1000 steps there is a total energy of {part_1(deepcopy(moon_list))} in the system.")
+    print(f"After 1000 steps there is a total energy of {part1(deepcopy(moon_list))} in the system.")
 
-    print(f"The moons cycle back to the starting space after {part_2(moon_list)} steps.")
+    print(f"The moons cycle back to the starting space after {part2(moon_list)} steps.")

@@ -115,7 +115,7 @@ class Card:
         self.previous = None
 
 
-def part_1(instructions: list) -> int:
+def part1(instructions: list) -> int:
     deck = Deck()
     deck.generate_deck(10_007)
 
@@ -130,12 +130,12 @@ def part_1(instructions: list) -> int:
     return deck.index_of_value(2019)
 
 
-def parse_input() -> list:
+def parse(input) -> list:
     with open("input.txt", "r") as file:
         return file.readlines()
 
 
 if __name__ == "__main__":
-    instruction_list = parse_input()
+    instruction_list = parse(input)
 
-    print(f"Part 1: Card 2019 is at position {part_1(instruction_list)}.")
+    print(f"Part 1: Card 2019 is at position {part1(instruction_list)}.")

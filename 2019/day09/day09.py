@@ -180,28 +180,28 @@ class IntcodeV3:
         self.relative_base += value
 
 
-def part_1(program: list):
+def part1(program: list):
     computer = IntcodeV3(program)
     computer.execute_program()
 
     return computer.output
 
 
-def part_2(program: list):
+def part2(program: list):
     computer = IntcodeV3(program)
     computer.execute_program()
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    instructions = parse_input()
+    instructions = parse(input)
 
     print("Part 1: Give '1' as initial value:\n The BOOST keycode in test mode is:")
-    part_1(instructions)
+    part1(instructions)
 
     print("Part 2: Give '2' as initial value:\n The BOOST keycode in boost mode is:")
-    part_2(instructions)
+    part2(instructions)

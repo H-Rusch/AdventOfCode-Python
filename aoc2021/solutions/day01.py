@@ -1,4 +1,4 @@
-def part_1(input: str) -> int:
+def part1(input: str) -> int:
     numbers = parse(input)
     times_increasing = 0
 
@@ -9,7 +9,7 @@ def part_1(input: str) -> int:
     return times_increasing
 
 
-def part_2(input: str) -> int:
+def part2(input: str) -> int:
     numbers = parse(input)
     times_increasing = 0
 

@@ -2,11 +2,11 @@ import math
 from collections import defaultdict, deque
 
 
-def part_1(coordinate_dict: dict) -> int:
+def part1(coordinate_dict: dict) -> int:
     return max(coordinate_dict.values())
 
 
-def part_2(coordinate: tuple, coordinate_list: list) -> int:
+def part2(coordinate: tuple, coordinate_list: list) -> int:
     coordinate_list.remove(coordinate)
 
     enhanced_coordinates = coordinates_at_angle(coordinate[0], coordinate[1], coordinate_list)
@@ -50,7 +50,7 @@ def coordinates_at_angle(x1: int, y1: int, coordinate_list: list) -> dict:
     return coordinate_dict
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         asteroid_map = file.read().splitlines()
         coordinates = []
@@ -63,14 +63,14 @@ def parse_input():
 
 
 if __name__ == "__main__":
-    asteroid_coordinates = parse_input()
+    asteroid_coordinates = parse(input)
 
     visible_coordinates = {(x, y): number_of_visible_coordinates(x, y, asteroid_coordinates)
                            for (x, y) in asteroid_coordinates}
 
-    print(f"Part 1: The best location to detect asteroids, detects {part_1(visible_coordinates)} asteroids.")
+    print(f"Part 1: The best location to detect asteroids, detects {part1(visible_coordinates)} asteroids.")
 
     # best_location = max(visible_coordinates, key=visible_coordinates.get)  # both work
     best_location = max(visible_coordinates, key=lambda key: visible_coordinates.get(key))
 
-    print(f"Part 2: The 200th asteroid shot has a 'score' of {part_2(best_location, asteroid_coordinates)}.")
+    print(f"Part 2: The 200th asteroid shot has a 'score' of {part2(best_location, asteroid_coordinates)}.")

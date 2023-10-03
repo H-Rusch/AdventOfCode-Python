@@ -190,7 +190,7 @@ class IntcodeV3_2:
 
 
 # --- actual functionality ----------------------------------------------
-def part_1(instructions: list):
+def part1(instructions: list):
     """ Generate the tile map and then go through it breadth-first until the goal is reached. """
     tiles = generate_tile_map(instructions)
     x, y = 0, 0
@@ -210,7 +210,7 @@ def part_1(instructions: list):
             return cost
 
 
-def part_2(instructions: list):
+def part2(instructions: list):
     """ Pretty much the same algorithm from part 1,
     except now we start at the 'end' and we stop when all tiles have been visited.
     """
@@ -342,14 +342,14 @@ def print_maze(tiles: dict):
         print(line)
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    numbers = parse_input()
+    numbers = parse(input)
 
-    print(f"Part 1: The fewest number of moves to get to the oxygen system is {part_1(numbers)}.")
+    print(f"Part 1: The fewest number of moves to get to the oxygen system is {part1(numbers)}.")
 
-    print(f"Part 2: After {part_2(numbers)} minutes the area is flooded with oxygen.")
+    print(f"Part 2: After {part2(numbers)} minutes the area is flooded with oxygen.")

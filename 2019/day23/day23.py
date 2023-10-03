@@ -190,7 +190,7 @@ class IntcodeV3_5:
 
 
 # --- code for day 23 --------------------------------------------------------------------------
-def part_1(instructions: list) -> int:
+def part1(instructions: list) -> int:
     computers = []
     for i in range(50):
         computer = IntcodeV3_5(instructions)
@@ -209,7 +209,7 @@ def part_1(instructions: list) -> int:
                 computers[adr].input.extend([x, y])
 
 
-def part_2(instructions: list) -> int:
+def part2(instructions: list) -> int:
     computers = []
     nat_x, nat_y = None, None
     last_delivered_y = None
@@ -242,14 +242,14 @@ def part_2(instructions: list) -> int:
             last_delivered_y = nat_y
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    number_list = parse_input()
+    number_list = parse(input)
 
-    print(f"Part 1: The y-value of the first package for address 255 is {part_1(number_list)}.")
+    print(f"Part 1: The y-value of the first package for address 255 is {part1(number_list)}.")
 
-    print(f"Part 2: The first y-value delivered by the NAT twice in a row is {part_2(number_list)}.")
+    print(f"Part 2: The first y-value delivered by the NAT twice in a row is {part2(number_list)}.")

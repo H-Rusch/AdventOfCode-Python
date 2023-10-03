@@ -146,7 +146,7 @@ class IntcodeV2_5:
             self.memory[dest] = 0
 
 
-def part_1(program: list):
+def part1(program: list):
     maximum_value = 0
 
     for p1, p2, p3, p4, p5 in permutations(range(5)):
@@ -176,7 +176,7 @@ def part_1(program: list):
     return maximum_value
 
 
-def part_2(program: list):
+def part2(program: list):
     maximum_value = 0
 
     for p1, p2, p3, p4, p5 in permutations(range(5, 10)):
@@ -208,15 +208,15 @@ def part_2(program: list):
     return maximum_value
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    instructions = parse_input()
+    instructions = parse(input)
 
-    print(f"Part 1: The highest signal that can be sent to the thrusters is {part_1(instructions)}.")
+    print(f"Part 1: The highest signal that can be sent to the thrusters is {part1(instructions)}.")
 
     print(f"Part 2: The highest signal that can be sent to the thrusters when the amplifiers are installed with a "
-          f"feedback loop is {part_2(instructions)}.")
+          f"feedback loop is {part2(instructions)}.")

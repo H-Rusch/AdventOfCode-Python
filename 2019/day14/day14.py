@@ -38,11 +38,11 @@ def calculate_ore_for_fuel(rules: dict, amount_of_fuel: int) -> int:
     return ore_count
 
 
-def part_1(rules: dict) -> int:
+def part1(rules: dict) -> int:
     return calculate_ore_for_fuel(rules, 1)
 
 
-def part_2(rules: dict) -> int:
+def part2(rules: dict) -> int:
     cost_for_one = calculate_ore_for_fuel(rules, 1)
     n = int(trillion / cost_for_one)
 
@@ -62,7 +62,7 @@ def part_2(rules: dict) -> int:
     return middle
 
 
-def parse_input():
+def parse(input):
     def make_ingredient(ingredient: str) -> dict:
         a, i = ingredient.split()
         return {"amount": int(a), "item": i}
@@ -83,8 +83,8 @@ def parse_input():
 
 
 if __name__ == "__main__":
-    rule_dict = parse_input()
+    rule_dict = parse(input)
 
-    print(f"Part 1: The minimum amount of ore needed to produce one unit of fuel is {part_1(rule_dict)}.")
+    print(f"Part 1: The minimum amount of ore needed to produce one unit of fuel is {part1(rule_dict)}.")
 
-    print(f"Part 2: With 1 trillion ore, {part_2(rule_dict)} units of fuel can be created.")
+    print(f"Part 2: With 1 trillion ore, {part2(rule_dict)} units of fuel can be created.")

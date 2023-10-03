@@ -1,7 +1,7 @@
 from _collections import defaultdict
 
 
-def part_1(instructions: list) -> int:
+def part1(instructions: list) -> int:
     line1 = get_coordinates(instructions[0])
     line2 = get_coordinates(instructions[1])
 
@@ -11,7 +11,7 @@ def part_1(instructions: list) -> int:
     return min([abs(c[0]) + abs(c[1]) for c in intersections])
 
 
-def part_2(instructions: list) -> int:
+def part2(instructions: list) -> int:
     line1 = get_coordinates_and_steps(instructions[0])
     line2 = get_coordinates_and_steps(instructions[1])
 
@@ -58,15 +58,15 @@ def get_coordinates_and_steps(instructions: list) -> dict:
     return coordinates
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [line.split(",") for line in file.read().splitlines()]
 
 
 if __name__ == "__main__":
-    line_instructions = parse_input()
+    line_instructions = parse(input)
 
     print(
-        f"Part 1: The manhattan distance from the center point to the closest intersection is {part_1(line_instructions)}.")
+        f"Part 1: The manhattan distance from the center point to the closest intersection is {part1(line_instructions)}.")
 
-    print(f"Part 2: The fewest combined steps to reach an intersection is {part_2(line_instructions)}.")
+    print(f"Part 2: The fewest combined steps to reach an intersection is {part2(line_instructions)}.")

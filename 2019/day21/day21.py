@@ -190,7 +190,7 @@ class IntcodeV3_4:
 
 
 # --- code for day 21 --------------------------------------------------------------------------
-def part_1(instructions: list) -> int:
+def part1(instructions: list) -> int:
     computer = IntcodeV3_4(instructions)
 
     computer.execute_program()
@@ -212,7 +212,7 @@ def part_1(instructions: list) -> int:
     return last
 
 
-def part_2(instructions: list) -> int:
+def part2(instructions: list) -> int:
     computer = IntcodeV3_4(instructions)
 
     computer.execute_program()
@@ -246,14 +246,14 @@ def print_output(numbers: list):
     print("".join([chr(n) for n in numbers]))
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    numbers = parse_input()
+    numbers = parse(input)
 
-    print(f"Part 1: The droid reports a hull damage of {part_1(numbers)} while walking.")
+    print(f"Part 1: The droid reports a hull damage of {part1(numbers)} while walking.")
 
-    print(f"Part 2: The droid reports a hull damage of {part_2(numbers)} while running.")
+    print(f"Part 2: The droid reports a hull damage of {part2(numbers)} while running.")

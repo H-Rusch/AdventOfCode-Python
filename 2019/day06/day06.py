@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 
-def part_1(orbit_dict: dict) -> int:
+def part1(orbit_dict: dict) -> int:
     return sum([len(body_orbits_bodies(body, orbit_dict)) for body in orbit_dict.keys()])
 
 
@@ -15,7 +15,7 @@ def body_orbits_bodies(body: str, orbit_dict: dict) -> list:
     return body_list
 
 
-def part_2(orbit_dict: dict) -> int:
+def part2(orbit_dict: dict) -> int:
     start = orbit_dict.get("YOU")
     target = orbit_dict.get("SAN")
 
@@ -32,7 +32,7 @@ def part_2(orbit_dict: dict) -> int:
     return min(numbers_of_transfers)
 
 
-def parse_input():
+def parse(input):
     # return dictionary with entries 'A': 'B' which means 'A' orbits around 'B'
     orbit_dict = defaultdict(None)
     with open("input.txt", "r") as file:
@@ -43,8 +43,8 @@ def parse_input():
 
 
 if __name__ == "__main__":
-    orbits = parse_input()
+    orbits = parse(input)
 
-    print(f"Part 1: The sum of direct and indirect orbits is {part_1(orbits)}.")
+    print(f"Part 1: The sum of direct and indirect orbits is {part1(orbits)}.")
 
-    print(f"Part 2: The minimum number of transfers to get to the body Santa orbits around is {part_2(orbits)}.")
+    print(f"Part 2: The minimum number of transfers to get to the body Santa orbits around is {part2(orbits)}.")

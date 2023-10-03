@@ -1,4 +1,4 @@
-def part_1(start: int, stop: int) -> int:
+def part1(start: int, stop: int) -> int:
     count = 0
     for i in range(start, stop):
         if check_valid_password(i):
@@ -7,7 +7,7 @@ def part_1(start: int, stop: int) -> int:
     return count
 
 
-def part_2(start: int, stop: int) -> int:
+def part2(start: int, stop: int) -> int:
     count = 0
     for i in range(start, stop):
         if check_valid_password_part2(i):
@@ -54,6 +54,6 @@ def check_valid_password_part2(password: int) -> bool:
 if __name__ == "__main__":
     lower, upper = 234208, 765869
 
-    print(f"Part 1: There are {part_1(lower, upper)} valid passwords in the given range.")
+    print(f"Part 1: There are {part1(lower, upper)} valid passwords in the given range.")
 
-    print(f"Part 2: There are {part_2(lower, upper)} valid passwords in the given range.")
+    print(f"Part 2: There are {part2(lower, upper)} valid passwords in the given range.")

@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 
-def part_1(tiles: set, portal_links: dict, start: tuple, end: tuple) -> int:
+def part1(tiles: set, portal_links: dict, start: tuple, end: tuple) -> int:
     visited = set()
     expanded = [(start, 0)]
 
@@ -18,7 +18,7 @@ def part_1(tiles: set, portal_links: dict, start: tuple, end: tuple) -> int:
                 expanded.append(((x, y), steps + 1))
 
 
-def part_2(tiles: set, portal_links: dict, start: tuple, end: tuple) -> int:
+def part2(tiles: set, portal_links: dict, start: tuple, end: tuple) -> int:
     visited = set()
     expanded = [(start, 0, 0)]
 
@@ -75,7 +75,7 @@ def get_adjacent(x: int, y: int) -> list:
     return [(x + dx, y + dy) for (dx, dy) in [(1, 0), (-1, 0), (0, 1), (0, -1)]]
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         lines = file.read().splitlines()
         # create a mapping of the full map
@@ -138,8 +138,8 @@ def find_portal(tile_map: dict, x_in: int, y_in: int) -> tuple[str, tuple[int, i
 
 
 if __name__ == "__main__":
-    tile_list, link_dict, start_point, end_point = parse_input()
+    tile_list, link_dict, start_point, end_point = parse(input)
 
-    print(f"Part 1: It takes {part_1(tile_list, link_dict, start_point, end_point)} steps to get from AA to ZZ.")
+    print(f"Part 1: It takes {part1(tile_list, link_dict, start_point, end_point)} steps to get from AA to ZZ.")
 
-    print(f"Part 2: It takes {part_2(tile_list, link_dict, start_point, end_point)} steps to get from AA to ZZ.")
+    print(f"Part 2: It takes {part2(tile_list, link_dict, start_point, end_point)} steps to get from AA to ZZ.")

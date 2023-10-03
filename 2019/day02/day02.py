@@ -24,7 +24,7 @@ class IntcodeV1:
         self.memory[destination] = self.memory[adr1] * self.memory[adr2]
 
 
-def part_1(program: list) -> int:
+def part1(program: list) -> int:
     program[1] = 12
     program[2] = 2
     computer = IntcodeV1(program)
@@ -33,7 +33,7 @@ def part_1(program: list) -> int:
     return computer.memory[0]
 
 
-def part_2(program: list) -> int:
+def part2(program: list) -> int:
     for noun in range(100):
         for verb in range(100):
             program[1] = noun
@@ -48,14 +48,14 @@ def part_2(program: list) -> int:
     return -1
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(s) for s in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    instruction_list = parse_input()
+    instruction_list = parse(input)
 
-    print(f"Part 1: The number at address 0 after executing the program is {part_1(instruction_list)}.")
+    print(f"Part 1: The number at address 0 after executing the program is {part1(instruction_list)}.")
 
-    print(f"Part 2: 100 * noun + verb which produce the desired output is {part_2(instruction_list)}.")
+    print(f"Part 2: 100 * noun + verb which produce the desired output is {part2(instruction_list)}.")

@@ -1,13 +1,13 @@
 import regex
 
 
-def part_1(rules: str, messages: str) -> int:
+def part1(rules: str, messages: str) -> int:
     reg = regex.compile(build_regex_string(rules))
 
     return sum([bool(reg.fullmatch(message)) for message in messages.splitlines()])
 
 
-def part_2(rules: str, messages: str) -> int:
+def part2(rules: str, messages: str) -> int:
     reg = regex.compile(build_regex_string(rules, recursive=True))
 
     return sum([bool(reg.fullmatch(message)) for message in messages.splitlines()])
@@ -44,14 +44,14 @@ def build_regex_string(rules: str, recursive=False) -> str:
     return "^" + dfs() + "$"
 
 
-def parse_input():
+def parse(input):
     with open("input.txt") as file:
         return file.read().split("\n\n")
 
 
 if __name__ == "__main__":
-    rule_part, message_part = parse_input()
+    rule_part, message_part = parse(input)
 
-    print(f"Part 1: {part_1(rule_part, message_part)} messages match the rules.")
+    print(f"Part 1: {part1(rule_part, message_part)} messages match the rules.")
 
-    print(f"Part 2: {part_2(rule_part, message_part)} messages match the new rules.")
+    print(f"Part 2: {part2(rule_part, message_part)} messages match the new rules.")

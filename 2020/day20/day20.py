@@ -5,7 +5,7 @@ from functools import reduce
 import numpy as np
 
 
-def part_1(tiles: dict) -> int:
+def part1(tiles: dict) -> int:
     # find out how many neighbours there are for each tile. Corners only have 2 neighbours
     solution = 1
     for tile_id, data in tiles.items():
@@ -27,7 +27,7 @@ def part_1(tiles: dict) -> int:
     return solution
 
 
-def part_2(tiles: dict) -> int:
+def part2(tiles: dict) -> int:
     # build the map by starting from an edge
     assembled = dict()
     N = int(math.sqrt(len(tiles)))
@@ -179,7 +179,7 @@ def get_edges(tile: list) -> tuple:
            "".join(str(line[-1]) for line in tile)
 
 
-def parse_input():
+def parse(input):
     with open("input.txt") as file:
         tiles = defaultdict(dict)
         for fragment in file.read().split("\n\n"):
@@ -208,8 +208,8 @@ def parse_input():
 
 
 if __name__ == "__main__":
-    tile_dict = parse_input()
+    tile_dict = parse(input)
 
-    print(f"Part 1: If you multiply the ID numbers of the edges, you get {part_1(tile_dict)}.")
+    print(f"Part 1: If you multiply the ID numbers of the edges, you get {part1(tile_dict)}.")
 
-    print(f"Part 2: There are {part_2(tile_dict)} sea-monsters visible.")
+    print(f"Part 2: There are {part2(tile_dict)} sea-monsters visible.")

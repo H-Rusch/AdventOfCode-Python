@@ -1,7 +1,7 @@
 import time
 
 
-def part_1(numbers: list) -> str:
+def part1(numbers: list) -> str:
     for _ in range(100):
         new_numbers = numbers[:]
         for i in range(len(numbers)):
@@ -16,7 +16,7 @@ def part_1(numbers: list) -> str:
     return "".join([str(n) for n in numbers[:8]])
 
 
-def part_2(numbers: list) -> str:
+def part2(numbers: list) -> str:
     offset = int("".join(str(n) for n in numbers[:7]))
     numbers = (numbers * 10000)[offset:]
 
@@ -35,14 +35,14 @@ def generate_pattern(index: int) -> list:
     return pattern
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read()]
 
 
 if __name__ == "__main__":
-    number_list = parse_input()
+    number_list = parse(input)
 
-    print(f"Part 1: The first eight digits after 100 iterations are {part_1(number_list)}.")
+    print(f"Part 1: The first eight digits after 100 iterations are {part1(number_list)}.")
 
-    print(f"Part 2: The eight-digit message embedded in the final output list is {part_2(number_list)}.")
+    print(f"Part 2: The eight-digit message embedded in the final output list is {part2(number_list)}.")

@@ -191,7 +191,7 @@ class IntcodeV3_3:
 
 
 # --- actual functionality ----------------------------------------------
-def part_1(instructions: list):
+def part1(instructions: list):
     tiles = generate_tile_map(instructions)
     # print_scaffold(tiles)
     intersections = find_intersections(tiles)
@@ -199,7 +199,7 @@ def part_1(instructions: list):
     return sum(map(lambda c: c[0] * c[1], intersections))
 
 
-def part_2(instructions: list):
+def part2(instructions: list):
     tiles = generate_tile_map(instructions)
     # print_scaffold(tiles)
     movement = find_path(tiles)[1:]
@@ -371,14 +371,14 @@ def print_scaffold(tiles: dict):
         print(line)
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    numbers = parse_input()
+    numbers = parse(input)
 
-    print(f"Part 1: The sum of all alignment parameters is {part_1(numbers)}.")
+    print(f"Part 1: The sum of all alignment parameters is {part1(numbers)}.")
 
-    print(f"Part 2: The vacuum has {part_2(numbers)} dust-units collected.")
+    print(f"Part 2: The vacuum has {part2(numbers)} dust-units collected.")

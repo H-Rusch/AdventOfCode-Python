@@ -186,13 +186,13 @@ class IntcodeV3_1:
         self.relative_base += value
 
 
-def part_1(program: list):
+def part1(program: list):
     tiles_painted = paint(program)
 
     return len(tiles_painted.keys())
 
 
-def part_2(program: list):
+def part2(program: list):
     tiles_painted = paint(program, start_on_white=True)
 
     print_hull(tiles_painted)
@@ -250,15 +250,15 @@ def paint(program: list, start_on_white: bool = False) -> dict:
     return tiles_painted
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    instructions = parse_input()
+    instructions = parse(input)
 
-    print(f"Part 1: The robot paints {part_1(instructions)} tiles at least once.")
+    print(f"Part 1: The robot paints {part1(instructions)} tiles at least once.")
 
     print("Part 2: The robot paints the following on the hull:")
-    part_2(instructions)
+    part2(instructions)

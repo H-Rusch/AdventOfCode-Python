@@ -189,14 +189,14 @@ class IntcodeV3_2:
         self.relative_base += value
 
 
-def part_1(instructions: list):
+def part1(instructions: list):
     computer = IntcodeV3_2(instructions)
     computer.execute_program()
 
     return computer.output[2::3].count(2)
 
 
-def part_2(instructions: list):
+def part2(instructions: list):
     computer = IntcodeV3_2(instructions)
     computer.execute_program()
 
@@ -270,16 +270,16 @@ def render_game(tiles: dict):
         print(line)
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    numbers = parse_input()
+    numbers = parse(input)
     numbers2 = numbers[:]
     numbers2[0] = 2
 
-    print(f"After the game ended, there are {part_1(numbers)} block tiles left.")
+    print(f"After the game ended, there are {part1(numbers)} block tiles left.")
 
-    print(f"The score after the last block is broken is {part_2(numbers2)}.")
+    print(f"The score after the last block is broken is {part2(numbers2)}.")

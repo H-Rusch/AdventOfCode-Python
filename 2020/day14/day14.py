@@ -1,7 +1,7 @@
 import re
 
 
-def part_1(instructions: list) -> int:
+def part1(instructions: list) -> int:
     mask = ""
     memory = dict()
 
@@ -21,7 +21,7 @@ def part_1(instructions: list) -> int:
     return sum(memory.values())
 
 
-def part_2(instructions: list) -> int:
+def part2(instructions: list) -> int:
     mask = ""
     memory = dict()
 
@@ -76,14 +76,14 @@ def get_floating_addresses(address: list, mask: str):
 
 
 
-def parse_input():
+def parse(input):
     with open("input.txt") as file:
         return file.readlines()
 
 
 if __name__ == "__main__":
-    instruction_list = parse_input()
+    instruction_list = parse(input)
 
-    print(f"Part 1: The sum of all values left in memory is {part_1(instruction_list)} for version 1.0.")
+    print(f"Part 1: The sum of all values left in memory is {part1(instruction_list)} for version 1.0.")
 
-    print(f"Part 2: The sum of all values left in memory is {part_2(instruction_list)} for version 2.0.")
+    print(f"Part 2: The sum of all values left in memory is {part2(instruction_list)} for version 2.0.")

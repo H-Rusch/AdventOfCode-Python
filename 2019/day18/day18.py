@@ -6,7 +6,7 @@ KEYS = string.ascii_lowercase + "@"
 DOORS = {l.upper() for l in KEYS[:-1]}
 
 
-def part_1(tiles: dict) -> int:
+def part1(tiles: dict) -> int:
     # find the positions of all keys and the start
     key_positions = dict()
     for (dx, dy), symbol in tiles.items():
@@ -42,7 +42,7 @@ def part_1(tiles: dict) -> int:
                     heapq.heappush(expanded, (cost + path_cost, key, new_keys))
 
 
-def part_2(tiles: dict) -> int:
+def part2(tiles: dict) -> int:
     # find the positions of all keys and the start
     key_positions = dict()
     for (dx, dy), symbol in tiles.items():
@@ -131,7 +131,7 @@ def get_adjacent(tiles: dict, x: int, y: int) -> list:
     return adjacent
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         tiles = dict()
         for y, line in enumerate(file.readlines()):
@@ -143,9 +143,9 @@ def parse_input():
 
 
 if __name__ == "__main__":
-    tile_dict = parse_input()
+    tile_dict = parse(input)
 
-    print(f"Part 1: The shortest path which collects all of the keys takes {part_1(tile_dict)} steps.")
+    print(f"Part 1: The shortest path which collects all of the keys takes {part1(tile_dict)} steps.")
 
-    print(f"Part 2: The shortest path which collects all of the keys takes {part_2(tile_dict)} steps.")
+    print(f"Part 2: The shortest path which collects all of the keys takes {part2(tile_dict)} steps.")
 

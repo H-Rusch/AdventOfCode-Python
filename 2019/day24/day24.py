@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 
-def part_1(bugs: set) -> int:
+def part1(bugs: set) -> int:
     past_positions = set(unique_repr(bugs))
 
     while True:
@@ -24,7 +24,7 @@ def part_1(bugs: set) -> int:
             past_positions.add(unique)
 
 
-def part_2(bugs: set) -> int:
+def part2(bugs: set) -> int:
     level_dict = defaultdict(set)
     level_dict[0] = bugs
 
@@ -108,7 +108,7 @@ def unique_repr(bugs: set) -> str:
     return "".join([str(t) for t in sorted(list(bugs))])
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         lines = file.readlines()
 
@@ -116,8 +116,8 @@ def parse_input():
 
 
 if __name__ == "__main__":
-    bug_positions = parse_input()
+    bug_positions = parse(input)
 
-    print(f"Part 1: The biodiversity score of the first repeating pattern is {part_1(bug_positions)}.")
+    print(f"Part 1: The biodiversity score of the first repeating pattern is {part1(bug_positions)}.")
 
-    print(f"Part 2: After 200 minutes there are {part_2(bug_positions)} bugs present.")
+    print(f"Part 2: After 200 minutes there are {part2(bug_positions)} bugs present.")

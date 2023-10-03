@@ -71,11 +71,11 @@ class Equation2(Equation):
         return result
 
 
-def part_1(equations: list) -> int:
+def part1(equations: list) -> int:
     return sum([Equation(equation).evaluate() for equation in equations])
 
 
-def part_2(equations: list) -> int:
+def part2(equations: list) -> int:
     return sum([Equation2(equation).evaluate() for equation in equations])
 
 
@@ -87,6 +87,6 @@ def parse_inputs():
 if __name__ == "__main__":
     equation_list = parse_inputs()
 
-    print(f"Part 1: The sum of all equations is {part_1(equation_list)}.")
+    print(f"Part 1: The sum of all equations is {part1(equation_list)}.")
 
-    print(f"Part 2: With advanced mathematics the sum of all equations is {part_2(equation_list)}.")
+    print(f"Part 2: With advanced mathematics the sum of all equations is {part2(equation_list)}.")

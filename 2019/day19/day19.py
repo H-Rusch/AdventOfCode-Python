@@ -191,7 +191,7 @@ class IntcodeV3_3:
 
 
 # --- code for day 19 -------------------------------------
-def part_1(instructions: list) -> int:
+def part1(instructions: list) -> int:
     def horizontal(start_x, start_y):
         count = 0
         x = start_x
@@ -213,7 +213,7 @@ def part_1(instructions: list) -> int:
     return affected
 
 
-def part_2(instructions: list) -> int:
+def part2(instructions: list) -> int:
     size = 99
     x, y = 0, 100
     while True:
@@ -234,14 +234,14 @@ def test_coordinate(instructions: list, x: int, y: int) -> bool:
     return computer.output == 1
 
 
-def parse_input():
+def parse(input):
     with open("input.txt", "r") as file:
         return [int(n) for n in file.read().split(",")]
 
 
 if __name__ == "__main__":
-    numbers = parse_input()
+    numbers = parse(input)
 
-    print(f"Part 1: {part_1(numbers)} points are affected by the tractor beam.")
+    print(f"Part 1: {part1(numbers)} points are affected by the tractor beam.")
 
-    print(f"Part 2: The calculated score for the closest emitter is {part_2(numbers)}.")
+    print(f"Part 2: The calculated score for the closest emitter is {part2(numbers)}.")
