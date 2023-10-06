@@ -146,3 +146,6 @@ cython_debug/
 
 # ignore vscode settings
 .vscode
+
+# MacOS specific
+.DS_Store
