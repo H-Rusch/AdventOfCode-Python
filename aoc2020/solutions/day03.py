@@ -1,53 +1,58 @@
 from functools import reduce
+from typing import List
+
+TREE = "#"
+
+
+class Slope:
+    def __init__(self, movement: (int, int), width: int) -> None:
+        self.movement = movement
+        self.width = width
+        self.x = 0
+        self.tree_count = 0
+
+    def evaluate_line(self, line: str, index: int):
+        if not index % self.movement[1] == 0:
+            return
+        self.evaluate_tree(line)
+        self.adjust_position()
+
+    def evaluate_tree(self, line: str):
+        if line[self.x] == TREE:
+            self.tree_count += 1
+
+    def adjust_position(self):
+        self.x = (self.x + self.movement[0]) % self.width
 
 
 def part1(input):
-    tree_count = get_tree_counts(input)
+    slopes = sled_down_slopes(input.splitlines())
 
-    return tree_count[1]
+    return slopes[1].tree_count
 
 
 def part2(input):
-    tree_count = get_tree_counts(parse(input))
+    slopes = sled_down_slopes(input.splitlines())
 
-    return reduce(lambda a, b: a * b, tree_count)
-
-
-def get_tree_counts(lines):
-    tree_count = [0 for _ in range(5)]
-    x = [0 for _ in range(5)]
-
-    map_width = len(lines[0])
-
-    for i in range(len(lines)):
-        # Right 1, down 1.
-        if lines[i][x[0]] == "#":
-            tree_count[0] += 1
-        x[0] = (x[0] + 1) % map_width
-
-        # Right 3, down 1.
-        if lines[i][x[1]] == "#":
-            tree_count[1] += 1
-        x[1] = (x[1] + 3) % map_width
-
-        # Right 5, down 1.
-        if lines[i][x[2]] == "#":
-            tree_count[2] += 1
-        x[2] = (x[2] + 5) % map_width
-
-        # Right 7, down 1.
-        if lines[i][x[3]] == "#":
-            tree_count[3] += 1
-        x[3] = (x[3] + 7) % map_width
-
-        # Right 1, down 2.
-        if i % 2 == 0:
-            if lines[i][x[4]] == "#":
-                tree_count[4] += 1
-            x[4] = (x[4] + 1) % map_width
-
-    return tree_count
+    return reduce(lambda i, slope: i * slope.tree_count, slopes, 1)
 
 
-def parse(input):
-    return input.splitlines()
+def sled_down_slopes(lines):
+    width = len(lines[0])
+    slopes = initial_tree_counts(width)
+
+    for i, line in enumerate(lines):
+        for slope in slopes:
+            slope.evaluate_line(line, i)
+
+    return slopes
+
+
+def initial_tree_counts(width) -> List[Slope]:
+    return [
+        Slope((1, 1), width),
+        Slope((3, 1), width),
+        Slope((5, 1), width),
+        Slope((7, 1), width),
+        Slope((1, 2), width),
+    ]
