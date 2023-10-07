@@ -11,8 +11,6 @@ def test_checksum():
     assert 4 == day02.checksum(rows[1])
     assert 6 == day02.checksum(rows[2])
 
-    assert True
-
 
 def test_part1_example():
     input = load_example("day02_1.txt")
