@@ -9,6 +9,6 @@ My solutions for the Advent of Code
 
 ## Usage
 * Install required dependencies with `pip install -r requirements.txt`
-* Entrypoint is `aoc.py` in the root directory
+* Entrypoint is `main.py` in the root directory
 * Year and Day are read from the command line arguments
-* Example: `python aoc.py 2017 1`
+* Example: `python main.py 2017 1`
