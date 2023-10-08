@@ -8,11 +8,10 @@ def test_part1_examples():
     assert 31 == day03.part1(1024)
 
 def test_adjacent_generation():
-    spiral = day03.Spiral()
-    spiral.generate_next_square()
+    spiral = day03.AdjacentSummer()
     spiral.adjacent_sums[(0, 0)] = 1
-    spiral.spiral_movement()
 
+    spiral.spiral_movement()
     assert 1 == spiral.generate_next_sum()
     spiral.spiral_movement() 
     assert 2 == spiral.generate_next_sum()
