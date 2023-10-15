@@ -1,10 +1,8 @@
 from ..solutions import day10
 
-EXAMPLE_INPUT = "3,4,1,5"
-
 
 def test_part1_example():
-    assert 12 == day10.execute_part1(EXAMPLE_INPUT, 5)
+    assert 12 == day10.execute_part1("3,4,1,5", 5)
 
 
 def test_part2_examples():
