@@ -6,14 +6,10 @@ def test_part1_example():
 
 
 def test_part2_examples():
-    knotHash = day10.KnotHash(day10.adjust_input(""))
-    assert "a2582a3a0e66e6e86e3812dcb672a272" == knotHash.hash()
-    knotHash = day10.KnotHash(day10.adjust_input("AoC 2017"))
-    assert "33efeb34ea91902bb2f59c9920caa6cd" == knotHash.hash()
-    knotHash = day10.KnotHash(day10.adjust_input("1,2,3"))
-    assert "3efbe78a8d82f29979031a4aa0b16a9d" == knotHash.hash()
-    knotHash = day10.KnotHash(day10.adjust_input("1,2,4"))
-    assert "63960835bcdc130f0b66d7ff4f6a5a8e" == knotHash.hash()
+    assert "a2582a3a0e66e6e86e3812dcb672a272" == day10.KnotHash.hash("")
+    assert "33efeb34ea91902bb2f59c9920caa6cd" == day10.KnotHash.hash("AoC 2017")
+    assert "3efbe78a8d82f29979031a4aa0b16a9d" == day10.KnotHash.hash("1,2,3")
+    assert "63960835bcdc130f0b66d7ff4f6a5a8e" == day10.KnotHash.hash("1,2,4")
 
 
 def test_reverse_odd():

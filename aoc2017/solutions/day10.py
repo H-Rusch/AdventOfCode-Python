@@ -1,19 +1,36 @@
 from functools import reduce
 
 class KnotHash:
-    BLOCK_SIZE = 16
+    ROUNDS = 64
+    CAPACITY = 256
 
-    def __init__(self, lenghts: list[int], capacity: int = 256) -> None:
-        self.numbers = [n for n in range(capacity)]
-        self.lengths = lenghts
-        self.index = 0
-        self.skip_size = 0
+    @classmethod
+    def hash(self, input: str):
+        lengths = adjust_input(input)
+        performer = KnotHashPerformer(lengths, KnotHash.CAPACITY)
 
-    def hash(self):
-        self.perform_rounds(64)
-        dense_hash = self.dense_hash()
+        performer.perform_rounds(KnotHash.ROUNDS)
+        dense_hash = performer.dense_hash()
 
         return KnotHash.dense_hash_repr(dense_hash)
+
+
+    @classmethod
+    def dense_hash_repr(cls, dense_hash: list[int]) -> str:
+        def num_to_hex(number: int) -> str:
+            return hex(number)[2:].zfill(2)
+        
+        return "".join(map(num_to_hex, dense_hash))
+
+
+class KnotHashPerformer:
+    BLOCK_SIZE = 16
+
+    def __init__(self, lengths: list[int], capacity: int = 256) -> None:
+        self.numbers = [n for n in range(capacity)]
+        self.lengths = lengths
+        self.index = 0
+        self.skip_size = 0
 
     def perform_rounds(self, rounds: int):
         for _ in range(rounds):
@@ -26,15 +43,8 @@ class KnotHash:
             self.skip_size += 1
 
     def dense_hash(self):
-        blocks = [self.numbers[i * KnotHash.BLOCK_SIZE: (i + 1) * KnotHash.BLOCK_SIZE] for i in range(KnotHash.BLOCK_SIZE)]
+        blocks = [self.numbers[i * KnotHashPerformer.BLOCK_SIZE: (i + 1) * KnotHashPerformer.BLOCK_SIZE] for i in range(KnotHashPerformer.BLOCK_SIZE)]
         return list(map(lambda block: reduce(lambda v1, v2: v1^v2, block), blocks))
-
-    @classmethod
-    def dense_hash_repr(cls, dense_hash: list[int]) -> str:
-        def num_to_hex(number: int) -> str:
-            return hex(number)[2:].zfill(2)
-        
-        return "".join(map(num_to_hex, dense_hash))
 
 
 def part1(input):
@@ -44,17 +54,14 @@ def part1(input):
 def execute_part1(input: str, capacity: int) -> int:
     lengths = [int(n) for n in input.split(",")]
 
-    knotHash = KnotHash(lengths, capacity)
-    knotHash.perform_round()
+    performer = KnotHashPerformer(lengths, capacity)
+    performer.perform_round()
 
-    return knotHash.numbers[0] * knotHash.numbers[1]
+    return performer.numbers[0] * performer.numbers[1]
 
 
 def part2(input):
-    lengths = adjust_input(input)
-    knotHash = KnotHash(lengths, 256)
-    
-    return knotHash.hash()
+    return KnotHash.hash(input)
 
 
 def reverse(numbers: list, start_index: int, length: int):
