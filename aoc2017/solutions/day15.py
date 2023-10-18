@@ -7,16 +7,16 @@ LIMIT2 = 5_000_000
 
 def part1(input):
     init_a, init_b = parse(input)
-    a_values = generator_a(init_a)
-    b_values = generator_b(init_b)
+    a_values = value_generator(init_a, FACTOR_A)
+    b_values = value_generator(init_b, FACTOR_A)
 
     return count_matching_numbers(a_values, b_values, LIMIT)
 
 
 def part2(input):
     init_a, init_b = parse(input)
-    a_values = divisible_by(generator_a(init_a), 4)
-    b_values = divisible_by(generator_b(init_b), 8)
+    a_values = divisible_by(value_generator(init_a, FACTOR_A), 4)
+    b_values = divisible_by(value_generator(init_b, FACTOR_B), 8)
 
     return count_matching_numbers(a_values, b_values, LIMIT2)
 
@@ -37,18 +37,11 @@ def count_matching_numbers(a_values, b_values, limit: int) -> int:
     return count
 
 
-def generator_a(initial_a: int):
-    a = initial_a
+def value_generator(initial: int, factor: int):
+    value = initial
     while True:
-        yield a
-        a = (a * FACTOR_A) % DIVISOR
-
-
-def generator_b(initial_b: int):
-    b = initial_b
-    while True:
-        yield b
-        b = (b * FACTOR_B) % DIVISOR
+        yield value
+        value = (value * factor) % DIVISOR
 
 
 def divisible_by(numbers, d: int):
