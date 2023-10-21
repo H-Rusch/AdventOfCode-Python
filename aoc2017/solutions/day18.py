@@ -14,10 +14,7 @@ class SoundCard:
     def execute_program(self):
         while self.ic in range(len(self.instructions)) and not self.halt:
             instruction = self.instructions[self.ic]
-            try:
-                self.ic += self.execute_instruction(*instruction)
-            except Empty:
-                self.halt = True
+            self.ic += self.execute_instruction(*instruction)
 
     def execute_instruction(self, operation: str, arg1: str, arg2: str = None) -> int:
         match operation:
@@ -70,8 +67,11 @@ class ParallelSoundCard(SoundCard):
             case "mod":
                 self.registers[arg1] = self.registers[arg1] % self.get_value(arg2)
             case "rcv":
-                # This timeout is tested for my machine. It might need to be adjusted upwards on slower hadware
-                self.registers[arg1] = self.receiving.get(timeout=0.1)
+                try:
+                    # This timeout is tested for my machine. It might need to be adjusted upwards on slower hadware
+                    self.registers[arg1] = self.receiving.get(timeout=0.1)
+                except Empty:
+                    self.halt = True
             case "jgz":
                 if self.get_value(arg1) > 0:
                     return self.get_value(arg2)
