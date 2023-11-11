@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from . import download
+import logging
 
 
 def load_input(year: int, day: int) -> str:
@@ -9,9 +10,9 @@ def load_input(year: int, day: int) -> str:
     path = input_file_path(year, day)
 
     if not path.is_file():
-        print(f"Input file not found locally.")
+        logging.info(f"Input file for year {year} day {day} not found locally.")
         puzzle_input = download.download_input(year, day)
-        write_puzzle_input(path, puzzle_input)
+        cache_puzzle_input(path, puzzle_input)
 
     return read_puzzle_input(path)
 
@@ -41,11 +42,11 @@ def build_filename(day: int) -> str:
     return f"day{day:02d}.txt"
 
 
-def write_puzzle_input(path: Path, puzzle_input: str):
+def cache_puzzle_input(path: Path, puzzle_input: str):
     with open(path, "w") as file:
         file.write(puzzle_input.rstrip())
 
-    print(f"Input saved to file at {path}")
+    logging.info(f"Input saved to file at {path}")
 
 
 def read_puzzle_input(path: Path) -> str:

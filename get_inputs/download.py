@@ -1,11 +1,13 @@
 import requests
 import os
 from dotenv import load_dotenv
+import logging
 
 SESSION_KEY = "session"
 NOT_LOGGED_IN_TEXT = (
     "Puzzle inputs differ by user.  Please log in to get your puzzle input."
 )
+USER_AGENT_HEADER_BODY = "https://github.com/H-Rusch/AdventOfCode-Python contact @ https://github.com/H-Rusch/AdventOfCode-Python/issues/new"
 
 
 class AocDownloadException(Exception):
@@ -15,15 +17,16 @@ class AocDownloadException(Exception):
 
 
 def download_input(year: int, day: int) -> str:
-    print(f"Download input for year {year} day {day}...")
+    logging.info(f"Downloading input for year {year} day {day}...")
 
-    cookies = build_cookies()
     url = build_url(year, day)
+    cookies = build_cookies()
+    headers = build_headers()
 
-    response = requests.get(url, cookies=cookies)
+    response = requests.get(url, cookies=cookies, headers=headers)
 
     if not response.text.startswith(NOT_LOGGED_IN_TEXT):
-        print("Download finished successfully.")
+        logging.info("Download finished successfully.")
 
         return response.text
     else:
@@ -39,6 +42,8 @@ def build_url(year: int, day: int) -> str:
 def build_cookies() -> dict:
     return {SESSION_KEY: get_session_cookie()}
 
+def build_headers() -> dict:
+    return {"User-Agent": USER_AGENT_HEADER_BODY}
 
 def get_session_cookie() -> str:
     load_dotenv()
