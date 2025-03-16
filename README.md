@@ -24,3 +24,4 @@ https://github.com/H-Rusch/AdventOfCode-Python contact @ https://github.com/H-Ru
 - [2019](https://adventofcode.com/2019)
 - [2020](https://adventofcode.com/2020)
 - [2021](https://adventofcode.com/2021)
+- [2024](https://adventofcode.com/2024)

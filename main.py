@@ -8,8 +8,7 @@ from datetime import datetime
 from get_inputs.load import load_input
 
 
-# allow year values for events 2015 to 2022
-VIABLE_EVENTS = range(2015, 2023)
+VIABLE_EVENTS = [2017, 2018, 2019, 2020, 2021, 2024]
 VIABLE_DAYS = range(1, 26)
 
 
