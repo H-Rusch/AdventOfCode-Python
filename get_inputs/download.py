@@ -51,7 +51,6 @@ def get_session_cookie() -> str:
     load_dotenv()
 
     if SESSION_KEY in os.environ:
-        print(os.environ[SESSION_KEY])
         return os.environ[SESSION_KEY]
     else:
         raise AocDownloadException(
