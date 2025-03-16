@@ -1,4 +1,3 @@
-import functools
 from functools import cache
 
 

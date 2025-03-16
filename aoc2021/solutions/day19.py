@@ -1,6 +1,3 @@
-from functools import cache
-
-
 class Scanner:
     def __init__(self):
         self.beacons = set()

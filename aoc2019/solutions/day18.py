@@ -1,9 +1,9 @@
 import heapq
 import string
-from collections import defaultdict, deque
+from collections import defaultdict
 
 KEYS = string.ascii_lowercase + "@"
-DOORS = {l.upper() for l in KEYS[:-1]}
+DOORS = {ch.upper() for ch in KEYS[:-1]}
 
 
 def part1(input) -> int:

@@ -34,7 +34,7 @@ def perform_instructions(instructions: list) -> dict[str, int]:
     max_value = 0
 
     for instruction in instructions:
-        if eval(f"registers[instruction.condition_register] " + instruction.condition):
+        if eval("registers[instruction.condition_register] " + instruction.condition):
             registers[instruction.register] += instruction.value
 
             max_value = max(max_value, highest_register_value(registers))

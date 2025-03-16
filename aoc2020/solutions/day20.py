@@ -173,7 +173,7 @@ def get_top_left_corner(tiles: dict) -> tuple:
     for tile_id, data in tiles.items():
         for orientation in (0, 4):
             top, bottom, left, right = get_edges(data["tiles"][orientation])
-            t, b, l, r = False, False, False, False
+            t, b, lft, r = False, False, False, False
 
             for o_id, o_data in tiles.items():
                 if o_id == tile_id:
@@ -186,11 +186,11 @@ def get_top_left_corner(tiles: dict) -> tuple:
                     elif o_bottom == top:
                         t = True
                     elif o_right == left:
-                        l = True
+                        lft = True
                     elif o_left == right:
                         r = True
 
-            if not t and b and not l and r:
+            if not t and b and not lft and r:
                 return tile_id, orientation
 
 

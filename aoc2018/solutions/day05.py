@@ -6,7 +6,7 @@ def part1(polymer: str) -> int:
 
 
 def part2(polymer: str) -> int:
-    return min([react_and_measure(polymer, l) for l in string.ascii_lowercase])
+    return min([react_and_measure(polymer, ch) for ch in string.ascii_lowercase])
 
 
 def react_and_measure(polymer: str, ignore: str = None) -> int:

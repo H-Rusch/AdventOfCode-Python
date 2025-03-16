@@ -1,6 +1,5 @@
 import heapq
 import numpy as np
-from collections import deque
 
 
 def part1(input: str) -> int:

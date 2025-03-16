@@ -1,5 +1,4 @@
 from functools import total_ordering
-from copy import deepcopy
 
 
 @total_ordering

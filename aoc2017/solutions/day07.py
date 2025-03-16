@@ -106,5 +106,5 @@ def connect_nodes(programs: dict[str, Program], input: str):
 
 def find_root(programs: list[Program]) -> Program:
     for program in programs:
-        if program.parent == None:
+        if program.parent is None:
             return program

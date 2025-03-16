@@ -7,5 +7,5 @@ def test_part1_example():
     assert 5 == day06.part1(example_input)
 
 
-def test_part1_example():
+def test_part2_example():
     assert 4 == day06.part2(example_input)

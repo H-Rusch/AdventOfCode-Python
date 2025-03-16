@@ -1,6 +1,5 @@
 import numpy as np
 from typing import Generator
-import math
 
 
 START = np.array([[0, 1, 0], [0, 0, 1], [1, 1, 1]])

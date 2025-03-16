@@ -1,6 +1,5 @@
 import math
 import re
-from copy import deepcopy
 
 
 class Moon:

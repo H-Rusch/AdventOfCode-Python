@@ -74,8 +74,8 @@ def count_adj_categories(grid: list, x: int, y: int) -> tuple:
 
 
 def get_state_string(grid: list) -> str:
-    return "".join(["".join([l for l in line]) for line in grid])
+    return "".join(["".join([ch for ch in line]) for line in grid])
 
 
 def parse(input):
-    return [[l for l in line] for line in input.strip().splitlines()]
+    return [[ch for ch in line] for line in input.strip().splitlines()]
