@@ -29,10 +29,18 @@ class Cube:
         return f"({self.p.x}, {self.p.y}, {self.p.z}), size: {self.size}, in Range: {self.bots_in_range}"
 
     def __eq__(self, other):
-        return (self.size, self.bots_in_range, self.distance) == (other.size, other.bots_in_range, other.distance)
+        return (self.size, self.bots_in_range, self.distance) == (
+            other.size,
+            other.bots_in_range,
+            other.distance,
+        )
 
     def __lt__(self, other):
-        return (self.size, self.bots_in_range, self.distance) < (other.size, other.bots_in_range, other.distance)
+        return (self.size, self.bots_in_range, self.distance) < (
+            other.size,
+            other.bots_in_range,
+            other.distance,
+        )
 
 
 def part1(input: str) -> int:
@@ -72,7 +80,9 @@ def part2(input: str) -> int:
         for split in split_cube(cube):
             split.bots_in_range = intersect_count(split, bots)
 
-            heapq.heappush(expanded, (-split.bots_in_range, -split.size, split.distance, split))
+            heapq.heappush(
+                expanded, (-split.bots_in_range, -split.size, split.distance, split)
+            )
 
 
 def intersect_count(box: Cube, bots: list):
@@ -108,7 +118,9 @@ def split_cube(cube: Cube) -> list:
     split_cubes.append(Cube(cube.p.x + size, cube.p.y + size, cube.p.z, new_size))
     split_cubes.append(Cube(cube.p.x + size, cube.p.y, cube.p.z + size, new_size))
     split_cubes.append(Cube(cube.p.x, cube.p.y + size, cube.p.z + size, new_size))
-    split_cubes.append(Cube(cube.p.x + size, cube.p.y + size, cube.p.z + size, new_size))
+    split_cubes.append(
+        Cube(cube.p.x + size, cube.p.y + size, cube.p.z + size, new_size)
+    )
 
     return split_cubes
 

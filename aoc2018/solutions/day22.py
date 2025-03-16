@@ -9,7 +9,7 @@ def part1(input: str) -> int:
 
     target_x, target_y = target
 
-    return int(np.sum(risk_grid[0: target_y + 1, 0: target_x + 1]))
+    return int(np.sum(risk_grid[0 : target_y + 1, 0 : target_x + 1]))
 
 
 def part2(input: str) -> int:
@@ -38,16 +38,21 @@ def part2(input: str) -> int:
             heapq.heappush(expanded, (minutes + 7, (x, y), other_gear))
 
         # go to reachable adjacent tile
-        for (dx, dy) in get_adjacent(x, y, risk_grid, gear):
+        for dx, dy in get_adjacent(x, y, risk_grid, gear):
             if ((dx, dy), gear) not in visited:
                 heapq.heappush(expanded, (minutes + 1, (dx, dy), gear))
 
 
 def get_adjacent(x: int, y: int, grid: np.array, gear: str) -> list:
     adjacent = []
-    for (dx, dy) in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
         other_x, other_y = x + dx, y + dy
-        if other_x < 0 or len(grid[0]) <= other_x or other_y < 0 or len(grid) <= other_y:
+        if (
+            other_x < 0
+            or len(grid[0]) <= other_x
+            or other_y < 0
+            or len(grid) <= other_y
+        ):
             continue
 
         if gear == "T":

@@ -69,8 +69,9 @@ def combat_round(player1: list, player2: list, memory: list):
             player2.append(card2)
             player2.append(card1)
 
+
 def parse(input):
-    cards = [player_cards for player_cards in  input.split("\n\n")]
+    cards = [player_cards for player_cards in input.split("\n\n")]
 
     player_cards1 = [int(i) for i in cards[0].split("\n")[1:]]
     player_cards2 = [int(i) for i in cards[1].split("\n")[1:]]

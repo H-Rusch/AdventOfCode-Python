@@ -55,14 +55,23 @@ def calculate_ore_for_fuel(rules: dict, amount_of_fuel: int) -> int:
                     required_amount -= supply[chemical]
                     supply[chemical] = 0
 
-            creating_amount, ingredients = rules[chemical]["created"], rules[chemical]["ingredients"]
+            creating_amount, ingredients = (
+                rules[chemical]["created"],
+                rules[chemical]["ingredients"],
+            )
 
             mult = math.ceil(required_amount / creating_amount)
             if mult * creating_amount > required_amount:
                 supply[chemical] += mult * creating_amount - required_amount
 
-            needed.extend(list(
-                map(lambda i: {"amount": mult * i["amount"], "item": i["item"]}, ingredients)))
+            needed.extend(
+                list(
+                    map(
+                        lambda i: {"amount": mult * i["amount"], "item": i["item"]},
+                        ingredients,
+                    )
+                )
+            )
 
     return ore_count
 
@@ -79,10 +88,7 @@ def parse(input):
         inputs = [make_ingredient(c) for c in consumes.split(", ")]
         output = make_ingredient(produces)
 
-        rules[output["item"]] = {
-            "created": output["amount"],
-            "ingredients": inputs
-        }
+        rules[output["item"]] = {"created": output["amount"], "ingredients": inputs}
     return rules
 
 
@@ -90,7 +96,9 @@ if __name__ == "__main__":
     rule_dict = parse(input)
 
     print(
-        f"Part 1: The minimum amount of ore needed to produce one unit of fuel is {part1(rule_dict)}.")
+        f"Part 1: The minimum amount of ore needed to produce one unit of fuel is {part1(rule_dict)}."
+    )
 
     print(
-        f"Part 2: With 1 trillion ore, {part2(rule_dict)} units of fuel can be created.")
+        f"Part 2: With 1 trillion ore, {part2(rule_dict)} units of fuel can be created."
+    )

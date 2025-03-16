@@ -27,8 +27,15 @@ def enhance_loop(algorithm: list, img_coordinates: set, iterations: int) -> int:
         for x in range(start_x - 1, end_x + 3):
             for y in range(start_y - 1, end_y + 3):
                 coordinate = (x, y)
-                binary = get_binary(coordinate, img_coordinates,
-                                    start_x, end_x, start_y, end_y, background)
+                binary = get_binary(
+                    coordinate,
+                    img_coordinates,
+                    start_x,
+                    end_x,
+                    start_y,
+                    end_y,
+                    background,
+                )
 
                 symbol = algorithm[int(binary, 2)]
                 if symbol == "#":
@@ -39,10 +46,17 @@ def enhance_loop(algorithm: list, img_coordinates: set, iterations: int) -> int:
     return len(img_coordinates)
 
 
-def get_binary(coordinate: tuple, img_coordinates: set, start_x: int, end_x: int, start_y: int, end_y: int,
-               background: int) -> str:
+def get_binary(
+    coordinate: tuple,
+    img_coordinates: set,
+    start_x: int,
+    end_x: int,
+    start_y: int,
+    end_y: int,
+    background: int,
+) -> str:
     binary = ""
-    for (x, y) in get_adjacent(coordinate):
+    for x, y in get_adjacent(coordinate):
         if x < start_x or x > end_x or y < start_y or y > end_y:
             if background == 1:
                 binary += "1"
@@ -74,7 +88,11 @@ def print_image(img_coordinates: set):
 
 
 def get_adjacent(coordinate: tuple) -> list:
-    return [(coordinate[0] + dx, coordinate[1] + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)]
+    return [
+        (coordinate[0] + dx, coordinate[1] + dy)
+        for dx in (-1, 0, 1)
+        for dy in (-1, 0, 1)
+    ]
 
 
 def parse(input: str):

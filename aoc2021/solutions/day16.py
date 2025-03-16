@@ -15,19 +15,29 @@ class OperatorPacket(Packet):
 
     def calculate(self) -> int:
         if self.type_id == 0:
-            return reduce(lambda x, y: x + y, map(lambda p: p.calculate(), self.children))
+            return reduce(
+                lambda x, y: x + y, map(lambda p: p.calculate(), self.children)
+            )
         elif self.type_id == 1:
-            return reduce(lambda x, y: x * y, map(lambda p: p.calculate(), self.children))
+            return reduce(
+                lambda x, y: x * y, map(lambda p: p.calculate(), self.children)
+            )
         elif self.type_id == 2:
             return min(map(lambda p: p.calculate(), self.children))
         elif self.type_id == 3:
             return max(map(lambda p: p.calculate(), self.children))
         elif self.type_id == 5:
-            return 1 if self.children[0].calculate() > self.children[1].calculate() else 0
+            return (
+                1 if self.children[0].calculate() > self.children[1].calculate() else 0
+            )
         elif self.type_id == 6:
-            return 1 if self.children[0].calculate() < self.children[1].calculate() else 0
+            return (
+                1 if self.children[0].calculate() < self.children[1].calculate() else 0
+            )
         else:
-            return 1 if self.children[0].calculate() == self.children[1].calculate() else 0
+            return (
+                1 if self.children[0].calculate() == self.children[1].calculate() else 0
+            )
 
 
 class ValuePacket(Packet):
@@ -61,36 +71,38 @@ def summed_versions(packet: Packet) -> int:
         return int(packet.version, 2)
 
     if isinstance(packet, OperatorPacket):
-        return int(packet.version, 2) + sum(map(lambda c: summed_versions(c), packet.children))
+        return int(packet.version, 2) + sum(
+            map(lambda c: summed_versions(c), packet.children)
+        )
 
 
 def parse_packet(binary_representation: str, i: int) -> tuple:
-    version = binary_representation[i: i + 3]
+    version = binary_representation[i : i + 3]
     i += 3
-    type_id = int(binary_representation[i: i + 3], 2)
+    type_id = int(binary_representation[i : i + 3], 2)
     i += 3
 
     # literal value
     if type_id == 4:
-        i, node = create_literal_packet(
-            binary_representation, i, version, type_id)
+        i, node = create_literal_packet(binary_representation, i, version, type_id)
 
     # operator node
     else:
-        i, node = create_operator_packet(
-            binary_representation, i, version, type_id)
+        i, node = create_operator_packet(binary_representation, i, version, type_id)
 
     return i, node
 
 
-def create_operator_packet(bin_representation: str, i: int, version: str, type_id: int) -> tuple:
+def create_operator_packet(
+    bin_representation: str, i: int, version: str, type_id: int
+) -> tuple:
     length_type = bin_representation[i]
     i += 1
 
     children = []
 
     if length_type == "0":
-        total_length = int(bin_representation[i: i + 15], 2)
+        total_length = int(bin_representation[i : i + 15], 2)
         i += 15
 
         subpacket_size = 0
@@ -103,7 +115,7 @@ def create_operator_packet(bin_representation: str, i: int, version: str, type_i
             tmp_i = i
 
     else:
-        num_sub = int(bin_representation[i:i + 11], 2)
+        num_sub = int(bin_representation[i : i + 11], 2)
         i += 11
 
         for _ in range(num_sub):
@@ -115,11 +127,13 @@ def create_operator_packet(bin_representation: str, i: int, version: str, type_i
     return i, packet_created
 
 
-def create_literal_packet(bin_representation: str, i: int, version: str, type_id: int) -> tuple:
+def create_literal_packet(
+    bin_representation: str, i: int, version: str, type_id: int
+) -> tuple:
     value = ""
     size = 0
     while True:
-        part = bin_representation[i + size: i + size + 5]
+        part = bin_representation[i + size : i + size + 5]
         value += part[1:]
 
         size += 5

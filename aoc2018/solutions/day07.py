@@ -76,7 +76,11 @@ def part1(input: str) -> int:
     while len(steps.items()) > 0:
         # find steps with no prerequisite and order the candidates alphabetically
         for letter in string.ascii_uppercase:
-            if letter in steps and steps[letter] not in candidates and len(steps[letter].prereq) == 0:
+            if (
+                letter in steps
+                and steps[letter] not in candidates
+                and len(steps[letter].prereq) == 0
+            ):
                 candidates.append(steps[letter])
         candidates = sorted(candidates, key=lambda c: c.letter)
 
@@ -117,7 +121,9 @@ def parse(input):
     steps = dict()
 
     for line in input.splitlines():
-        l1, l2 = re.search(r"Step (.) must be finished before step (.) can begin.", line).groups()
+        l1, l2 = re.search(
+            r"Step (.) must be finished before step (.) can begin.", line
+        ).groups()
         step1, step2 = steps.get(l1, Step(l1)), steps.get(l2, Step(l2))
         step2.prereq.add(step1)
         step1.enables.add(step2)

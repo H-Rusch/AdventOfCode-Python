@@ -39,7 +39,9 @@ def check_valid(string):
 # passport is valid for the 2nd part if all fields are present apart from cid and the values are correct
 def check_valid2(string):
     passport = string.replace("\n", " ")
-    if not all(info in passport for info in ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]):
+    if not all(
+        info in passport for info in ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
+    ):
         return False
 
     # byr (Birth Year) - four digits; at least 1920 and at most 2002.
@@ -57,7 +59,7 @@ def check_valid2(string):
             hgt = int(hgt.group(1)) in range(150, 194)
         else:
             hgt = int(hgt.group(1)) in range(59, 79)
-    
+
     # hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
     hcl = hcl_regex.search(passport)
     # ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.

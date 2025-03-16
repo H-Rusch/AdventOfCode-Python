@@ -10,8 +10,9 @@ def part1(input: str) -> int:
     # calculate closest coordinate for each coordinate on the grid
     for x in range(edges[0], edges[1] + 1):
         for y in range(edges[2], edges[3] + 1):
-            distances = np.array([manhatten_distance(x, y, cx, cy)
-                                 for (cx, cy) in coordinates])
+            distances = np.array(
+                [manhatten_distance(x, y, cx, cy) for (cx, cy) in coordinates]
+            )
             closest_dict[(x, y)] = np.argmin(distances)
             if len(np.where(distances == np.min(distances))[0]) > 1:
                 closest_dict[(x, y)] = "."
@@ -34,8 +35,9 @@ def part2(input: str) -> int:
     n = 0
     for x in range(edges[0], edges[1] + 1):
         for y in range(edges[2], edges[3] + 1):
-            added_distances = sum([manhatten_distance(x, y, cx, cy)
-                                  for cx, cy in coordinates])
+            added_distances = sum(
+                [manhatten_distance(x, y, cx, cy) for cx, cy in coordinates]
+            )
             if added_distances < limit:
                 n += 1
 

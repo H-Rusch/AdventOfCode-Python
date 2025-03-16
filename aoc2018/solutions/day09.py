@@ -86,4 +86,9 @@ def play_game(player_count: int, limit: int) -> int:
 
 
 def parse(input):
-    return (int(s) for s in re.match(r"(\d+) players; last marble is worth (\d+) points", input).groups())
+    return (
+        int(s)
+        for s in re.match(
+            r"(\d+) players; last marble is worth (\d+) points", input
+        ).groups()
+    )

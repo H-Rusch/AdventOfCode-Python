@@ -3,8 +3,16 @@ from copy import deepcopy
 
 
 class Group:
-    def __init__(self, units: int, hp: int, attack: int, attack_type: str,
-                 initiative: int, immune: set, weak: set):
+    def __init__(
+        self,
+        units: int,
+        hp: int,
+        attack: int,
+        attack_type: str,
+        initiative: int,
+        immune: set,
+        weak: set,
+    ):
         self.units = units
         self.hp = hp
         self.attack = attack
@@ -17,17 +25,27 @@ class Group:
         return self.units * self.attack
 
     def calc_damage_to(self, other: "Group"):
-        mult = 0 if self.attack_type in other.immune else 2 if self.attack_type in other.weak else 1
+        mult = (
+            0
+            if self.attack_type in other.immune
+            else 2
+            if self.attack_type in other.weak
+            else 1
+        )
 
         return mult * self.calc_power()
 
     def __repr__(self):
-        return f"GROUP: (units: {self.units}, hp: {self.hp}, attack: {self.attack}, attack_type: {self.attack_type}" \
-               f", initiative: {self.initiative}, immune: {self.immune}, weak: {self.weak})"
+        return (
+            f"GROUP: (units: {self.units}, hp: {self.hp}, attack: {self.attack}, attack_type: {self.attack_type}"
+            f", initiative: {self.initiative}, immune: {self.immune}, weak: {self.weak})"
+        )
 
 
 class Event:
-    def __init__(self, attacker: Group, defender: Group, attackers: list, defenders: list):
+    def __init__(
+        self, attacker: Group, defender: Group, attackers: list, defenders: list
+    ):
         self.attacker = attacker
         self.defender = defender
         self.attackers = attackers
@@ -43,8 +61,10 @@ class Event:
                 self.defenders.remove(self.defender)
 
     def __repr__(self):
-        return f"EVENT: (attacker: {self.attacker}, defender: {self.defender}, damage: " \
-               f"{self.attacker.calc_damage_to(self.defender)})"
+        return (
+            f"EVENT: (attacker: {self.attacker}, defender: {self.defender}, damage: "
+            f"{self.attacker.calc_damage_to(self.defender)})"
+        )
 
 
 def part1(input: str) -> int:
@@ -60,8 +80,7 @@ def part2(input: str) -> int:
 
     boost = 1
     while True:
-        copy_immune, copy_infection = deepcopy(
-            immune_army), deepcopy(infection_army)
+        copy_immune, copy_infection = deepcopy(immune_army), deepcopy(infection_army)
         result = fight(copy_immune, copy_infection, boost)
 
         if result == 1:
@@ -82,8 +101,7 @@ def fight(immune: list, infection: list, boost: int = 0) -> int:
         events.extend(get_all_targetings(infection, immune))
         events.extend(get_all_targetings(immune, infection))
 
-        events = sorted(
-            events, key=lambda e: e.attacker.initiative, reverse=True)
+        events = sorted(events, key=lambda e: e.attacker.initiative, reverse=True)
         for event in events:
             before = event.defender.units
 
@@ -100,8 +118,9 @@ def fight(immune: list, infection: list, boost: int = 0) -> int:
 
 
 def get_all_targetings(attackers: list, defenders: list) -> list:
-    attackers = sorted(attackers, key=lambda g: (
-        g.calc_power(), g.initiative), reverse=True)
+    attackers = sorted(
+        attackers, key=lambda g: (g.calc_power(), g.initiative), reverse=True
+    )
     to_attack = defenders[:]
     events = []
 
@@ -119,8 +138,11 @@ def get_targeting(attacker: Group, to_attack: list) -> Group or None:
     if len(to_attack) == 0:
         return None
 
-    targets = sorted([defender for defender in to_attack if attacker.calc_damage_to(defender) > 0],
-                     key=lambda g: (attacker.calc_damage_to(g), g.calc_power(), g.initiative), reverse=True)
+    targets = sorted(
+        [defender for defender in to_attack if attacker.calc_damage_to(defender) > 0],
+        key=lambda g: (attacker.calc_damage_to(g), g.calc_power(), g.initiative),
+        reverse=True,
+    )
     if len(targets) > 0:
         return targets[0]
 
@@ -145,10 +167,10 @@ def parse(input: str):
 
         units, hp, extra, attack, attack_type, initiative = re.search(
             r"(\d+) units each with (\d+) hit points (?:\((.*?)\) )?with an attack that does (\d+) (.*?) damage at initiative (\d+)",
-            line).groups()
+            line,
+        ).groups()
 
-        units, hp, attack, initiative = tuple(
-            map(int, (units, hp, attack, initiative)))
+        units, hp, attack, initiative = tuple(map(int, (units, hp, attack, initiative)))
         if extra is not None:
             for part in extra.split("; "):
                 if part.startswith("immune to"):
@@ -158,8 +180,9 @@ def parse(input: str):
                     for weak in part[8:].split(", "):
                         weaknesses.add(weak)
 
-        group = Group(units, hp, attack, attack_type,
-                        initiative, immunities, weaknesses)
+        group = Group(
+            units, hp, attack, attack_type, initiative, immunities, weaknesses
+        )
         if team == 0:
             immune_system.append(group)
         else:

@@ -65,8 +65,13 @@ def part2(input) -> int:
             assembled[(x, y)] = tile
 
     # build the big image
-    rows = [reduce(lambda t1, t2: np.append(t1, t2, axis=1), [assembled[(x, y)] for x in range(N)])
-            for y in range(N)]
+    rows = [
+        reduce(
+            lambda t1, t2: np.append(t1, t2, axis=1),
+            [assembled[(x, y)] for x in range(N)],
+        )
+        for y in range(N)
+    ]
     full = reduce(lambda t1, t2: np.append(t1, t2, axis=0), rows)
 
     return calculate_monster_count(full)
@@ -120,10 +125,23 @@ def count_for_orientation(fm) -> int:
     count = 0
     for y in range(len(fm) - 2):
         for x in range(len(fm) - 19):
-            if fm[y + 1][x] and fm[y + 2][x + 1] and fm[y + 2][x + 4] and fm[y + 1][x + 5] and fm[y + 1][x + 6] \
-                    and fm[y + 2][x + 7] and fm[y + 2][x + 10] and fm[y + 1][x + 11] and fm[y + 1][x + 12] \
-                    and fm[y + 2][x + 13] and fm[y + 2][x + 16] and fm[y + 1][x + 17] and fm[y + 1][x + 18] \
-                    and fm[y + 0][x + 18] and fm[y + 1][x + 19]:
+            if (
+                fm[y + 1][x]
+                and fm[y + 2][x + 1]
+                and fm[y + 2][x + 4]
+                and fm[y + 1][x + 5]
+                and fm[y + 1][x + 6]
+                and fm[y + 2][x + 7]
+                and fm[y + 2][x + 10]
+                and fm[y + 1][x + 11]
+                and fm[y + 1][x + 12]
+                and fm[y + 2][x + 13]
+                and fm[y + 2][x + 16]
+                and fm[y + 1][x + 17]
+                and fm[y + 1][x + 18]
+                and fm[y + 0][x + 18]
+                and fm[y + 1][x + 19]
+            ):
                 count += 1
 
     return count
@@ -177,19 +195,24 @@ def get_top_left_corner(tiles: dict) -> tuple:
 
 
 def get_edges(tile: list) -> tuple:
-    return "".join(str(n) for n in tile[0]), \
-           "".join(str(n) for n in tile[-1]), \
-           "".join(str(line[0]) for line in tile), \
-           "".join(str(line[-1]) for line in tile)
+    return (
+        "".join(str(n) for n in tile[0]),
+        "".join(str(n) for n in tile[-1]),
+        "".join(str(line[0]) for line in tile),
+        "".join(str(line[-1]) for line in tile),
+    )
 
 
 def parse(input):
     tiles = defaultdict(dict)
     for fragment in input.split("\n\n"):
-        tile_id = int(fragment[fragment.find(" ") + 1:fragment.find(":")])
+        tile_id = int(fragment[fragment.find(" ") + 1 : fragment.find(":")])
         tile = fragment.split("\n")[1:]
 
-        tile = [[1 if tile[j][i] == "#" else 0 for i in range(len(tile[j]))] for j in range(len(tile))]
+        tile = [
+            [1 if tile[j][i] == "#" else 0 for i in range(len(tile[j]))]
+            for j in range(len(tile))
+        ]
 
         # cut the tile to the size needed for part 2
         tile = [list(row) for row in tile]
@@ -213,6 +236,8 @@ def parse(input):
 if __name__ == "__main__":
     tile_dict = parse(input)
 
-    print(f"Part 1: If you multiply the ID numbers of the edges, you get {part1(tile_dict)}.")
+    print(
+        f"Part 1: If you multiply the ID numbers of the edges, you get {part1(tile_dict)}."
+    )
 
     print(f"Part 2: There are {part2(tile_dict)} sea-monsters visible.")

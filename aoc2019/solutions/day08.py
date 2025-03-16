@@ -23,8 +23,14 @@ def part2(input) -> int:
     visible_image = [get_value_at_index(i, layers) for i in range(LAYER_SIZE)]
 
     for y in range(HEIGHT):
-        print("".join(
-            ["█ " if n == 1 else "  " for n in visible_image[y * WIDTH: (y + 1) * WIDTH]]))
+        print(
+            "".join(
+                [
+                    "█ " if n == 1 else "  "
+                    for n in visible_image[y * WIDTH : (y + 1) * WIDTH]
+                ]
+            )
+        )
 
 
 def get_value_at_index(index: int, image_layers: list) -> int:
@@ -36,6 +42,8 @@ def get_value_at_index(index: int, image_layers: list) -> int:
 
 
 def parse(input):
-    layers = [input[i * LAYER_SIZE: (i + 1) * LAYER_SIZE]
-              for i in range(len(input) // LAYER_SIZE)]
+    layers = [
+        input[i * LAYER_SIZE : (i + 1) * LAYER_SIZE]
+        for i in range(len(input) // LAYER_SIZE)
+    ]
     return [[int(d) for d in layer] for layer in layers]

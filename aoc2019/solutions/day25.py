@@ -14,8 +14,11 @@ def part1(puzzle_input) -> int:
         program = ""
         while True:
             program = input()
-            if program in ["north", "east", "west", "south", "inv"] or program.startswith("drop ") or \
-                    program.startswith("take "):
+            if (
+                program in ["north", "east", "west", "south", "inv"]
+                or program.startswith("drop ")
+                or program.startswith("take ")
+            ):
                 break
         program = [ord(c) for c in program + "\n"]
         computer.input = program

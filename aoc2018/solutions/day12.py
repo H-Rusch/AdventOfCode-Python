@@ -11,7 +11,7 @@ def part1(input: str) -> int:
         pots = "...." + pots + "...."
 
         for i in range(2, len(pots) - 2):
-            part = pots[i - 2:i + 3]
+            part = pots[i - 2 : i + 3]
             next_pots.append(transitions[part])
 
         pots = "".join(next_pots)
@@ -34,7 +34,7 @@ def sum_pots(pots: str, start_length: int) -> int:
 
     for i, pot in enumerate(pots):
         if pot == "#":
-            summed += (i - expansion)
+            summed += i - expansion
 
     return summed
 
@@ -49,7 +49,7 @@ def find_constant_growth(pots: str, transitions: dict, start_length: int) -> tup
         next_pots = []
         pots = "...." + pots + "...."
         for i in range(2, len(pots) - 2):
-            part = pots[i - 2:i + 3]
+            part = pots[i - 2 : i + 3]
             next_pots.append(transitions[part])
         pots = "".join(next_pots)
         # --- same as part 1
@@ -65,7 +65,7 @@ def find_constant_growth(pots: str, transitions: dict, start_length: int) -> tup
 
 def parse(input):
     start, instructions = input.split("\n\n")
-    start = start[start.index(":") + 2:]
+    start = start[start.index(":") + 2 :]
 
     transitions = defaultdict(lambda: ".")
     for instr in instructions.splitlines():

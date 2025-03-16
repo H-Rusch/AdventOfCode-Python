@@ -92,7 +92,7 @@ def part2exec(my_ticket: str, tickets: list, rule_dict: dict):
     for i in range(len(assignment)):
         if assignment[i][0].startswith("departure "):
             multiply_departure *= my_ticket[i]
-    
+
     return multiply_departure
 
 

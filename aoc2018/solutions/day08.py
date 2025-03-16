@@ -48,7 +48,7 @@ def part2(input: str) -> int:
 
 
 def build_node(numbers: list, index: CountHolder) -> Node:
-    """ Build nodes recursively. Index holds reference to the current position in the list of numbers. """
+    """Build nodes recursively. Index holds reference to the current position in the list of numbers."""
     node = Node()
     num_children = numbers[index.num]
     num_metadata = numbers[index.num]

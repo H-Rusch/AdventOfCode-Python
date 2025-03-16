@@ -63,7 +63,7 @@ def part2(input) -> int:
     tiles[(start_x + 1, start_y + 1)] = "4"
     key_positions["4"] = (start_x + 1, start_y + 1)
 
-    for (dx, dy) in [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)]:
+    for dx, dy in [(0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)]:
         del tiles[(start_x + dx, start_y + dy)]
 
     number_of_keys = len(key_positions) - 4
@@ -94,7 +94,13 @@ def part2(input) -> int:
                     new_keys = keys_owned.union(frozenset(key))
                     if (key, new_keys) not in visited:
                         heapq.heappush(
-                            expanded, (cost + path_cost, positions[:i] + key + positions[i + 1:], new_keys))
+                            expanded,
+                            (
+                                cost + path_cost,
+                                positions[:i] + key + positions[i + 1 :],
+                                new_keys,
+                            ),
+                        )
 
 
 def find_reachable(tiles: dict, x: int, y: int) -> dict:
@@ -111,15 +117,18 @@ def find_reachable(tiles: dict, x: int, y: int) -> dict:
         visited.add((coordinate, passing_doors))
 
         if tiles[coordinate] in string.ascii_lowercase and tiles[coordinate] != start:
-            reachable[tiles[coordinate]] = (
-                {door for door in passing_doors}, cost)
+            reachable[tiles[coordinate]] = ({door for door in passing_doors}, cost)
 
-        for (dx, dy) in get_adjacent(tiles, coordinate[0], coordinate[1]):
+        for dx, dy in get_adjacent(tiles, coordinate[0], coordinate[1]):
             symbol = tiles[(dx, dy)]
             if symbol in DOORS and symbol not in passing_doors:
                 passing_doors = passing_doors.union(frozenset({symbol}))
 
-            if symbol not in reachable and ((dx, dy), passing_doors) not in visited and symbol != start:
+            if (
+                symbol not in reachable
+                and ((dx, dy), passing_doors) not in visited
+                and symbol != start
+            ):
                 expanded.append((cost + 1, (dx, dy), passing_doors))
 
     return reachable
@@ -128,7 +137,7 @@ def find_reachable(tiles: dict, x: int, y: int) -> dict:
 def get_adjacent(tiles: dict, x: int, y: int) -> list:
     adjacent = []
 
-    for (dx, dy) in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
         if (x + dx, y + dy) in tiles:
             adjacent.append((x + dx, y + dy))
 

@@ -38,6 +38,7 @@ def part1(input: str) -> int:
 
     return len(clusters)
 
+
 def part2(_):
     return "No second puzzle ☺️"
 

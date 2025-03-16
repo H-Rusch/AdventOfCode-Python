@@ -4,6 +4,7 @@ from copy import deepcopy
 
 # this one was no fun at all
 
+
 @dataclass
 class Unit:
     team: int
@@ -35,7 +36,9 @@ def part2(input: str) -> int:
         boost += 1
 
 
-def fight(grid: list, units: list, elfs_cant_die: bool = False, boost: int = 0) -> tuple:
+def fight(
+    grid: list, units: list, elfs_cant_die: bool = False, boost: int = 0
+) -> tuple:
     for unit in units:
         if unit.team == 0:
             unit.attack += boost
@@ -59,8 +62,11 @@ def fight(grid: list, units: list, elfs_cant_die: bool = False, boost: int = 0) 
             target = get_adjacent_target(grid, unit, units)
             if target is None:
                 # move if not next to a pootential target
-                next_to_target = {adj_to_target for target_x, target_y in target_positions
-                                  for adj_to_target in get_adjacent(grid, target_x, target_y)}
+                next_to_target = {
+                    adj_to_target
+                    for target_x, target_y in target_positions
+                    for adj_to_target in get_adjacent(grid, target_x, target_y)
+                }
                 blocked = {u.pos for u in units if u.alive}
                 next_to_target = next_to_target.difference(blocked)
 
@@ -127,7 +133,11 @@ def bfs(grid: list, units: list, start_pos: tuple, targets: set) -> list:
         return []
 
     min_steps = min(map(lambda t: t[1], solutions))
-    return [(pos, steps, first_pos) for (pos, steps, first_pos) in solutions if steps == min_steps]
+    return [
+        (pos, steps, first_pos)
+        for (pos, steps, first_pos) in solutions
+        if steps == min_steps
+    ]
 
 
 def where_to_move(best_moves: list) -> tuple:
@@ -147,8 +157,10 @@ def calc_score(rounds: int, units: list) -> int:
 
 def get_adjacent_target(grid: list, unit: Unit, units: list) -> Unit:
     adj = get_adjacent(grid, unit.pos[0], unit.pos[1])
-    adjacent_units = sorted([u for u in units if u.pos in adj and u.alive and u.team != unit.team],
-                            key=lambda u: u.hp)
+    adjacent_units = sorted(
+        [u for u in units if u.pos in adj and u.alive and u.team != unit.team],
+        key=lambda u: u.hp,
+    )
 
     if len(adjacent_units) > 0:
         return adjacent_units[0]
@@ -165,7 +177,9 @@ def get_adjacent(grid: list, x: int, y: int) -> list:
 
 
 def identifiy_targets(units: list, attacker: Unit) -> list:
-    return [u for u in units if u.team != attacker.team and u is not attacker and u.alive]
+    return [
+        u for u in units if u.team != attacker.team and u is not attacker and u.alive
+    ]
 
 
 def to_reading_order(u: Unit) -> tuple:

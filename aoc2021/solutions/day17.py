@@ -19,7 +19,9 @@ def part2(input: str) -> int:
     return len(velocities)
 
 
-def falls_into_target(start_x: int, start_y: int, x0: int, x1: int, y0: int, y1: int) -> bool:
+def falls_into_target(
+    start_x: int, start_y: int, x0: int, x1: int, y0: int, y1: int
+) -> bool:
     x, y = 0, 0
 
     momentum_x, momentum_y = start_x, start_y

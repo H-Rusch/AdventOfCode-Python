@@ -1,5 +1,5 @@
-
 from .intcode import intcode
+
 
 def part1(input):
     instructions = parse(input)
@@ -15,7 +15,7 @@ def part1(input):
         x, y, cost = expanded.pop(0)
         visited.add((x, y))
 
-        for (ad_x, ad_y) in get_adjacent(x, y):
+        for ad_x, ad_y in get_adjacent(x, y):
             if (ad_x, ad_y) not in visited and tiles.get((ad_x, ad_y), 0) != 0:
                 expanded.append((ad_x, ad_y, cost + 1))
 
@@ -25,7 +25,7 @@ def part1(input):
 
 def part2(input):
     instructions = parse(input)
-    
+
     """ Pretty much the same algorithm from part 1,
     except now we start at the 'end' and we stop when all tiles have been visited.
     """
@@ -45,7 +45,7 @@ def part2(input):
         visited.add((x, y))
         tiles[(x, y)] = 4
 
-        for (ad_x, ad_y) in get_adjacent(x, y):
+        for ad_x, ad_y in get_adjacent(x, y):
             if (ad_x, ad_y) not in visited and tiles.get((ad_x, ad_y), 0) != 0:
                 expanded.append((ad_x, ad_y, time + 1))
 

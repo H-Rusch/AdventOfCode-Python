@@ -31,9 +31,12 @@ def part2(searching: str) -> int:
 
     while True:
         if len(recipe.state) > len(searching):
-            if "".join([str(r) for r in recipe.state[-len(searching) - 1:-1]]) == searching:
+            if (
+                "".join([str(r) for r in recipe.state[-len(searching) - 1 : -1]])
+                == searching
+            ):
                 return len(recipe.state) - len(searching) - 1
-            if "".join([str(r) for r in recipe.state[-len(searching):]]) == searching:
+            if "".join([str(r) for r in recipe.state[-len(searching) :]]) == searching:
                 return len(recipe.state) - len(searching)
 
         recipe.make_new_recipe()

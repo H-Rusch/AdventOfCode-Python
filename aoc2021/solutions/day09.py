@@ -21,7 +21,12 @@ def get_low_points(matrix: list) -> list:
     points = []
     for y in range(len(matrix)):
         for x in range(len(matrix[y])):
-            if all([matrix[y][x] < matrix[adj[1]][adj[0]] for adj in get_adjacent_coordinates(x, y, matrix)]):
+            if all(
+                [
+                    matrix[y][x] < matrix[adj[1]][adj[0]]
+                    for adj in get_adjacent_coordinates(x, y, matrix)
+                ]
+            ):
                 points.append((x, y))
 
     return points
@@ -62,8 +67,11 @@ def get_basin_sizes(point_list: list, matrix: list) -> list:
             # point (i.e. they do not have a height of 9), they are added to the coordinates to check list.
             # also do not look at a coordinate which has already been looked at
             for coordinate in get_adjacent_coordinates(current[0], current[1], matrix):
-                if matrix[coordinate[1]][coordinate[0]] != 9 and coordinate not in coordinates_to_check and \
-                        coordinate not in checked_coordinates:
+                if (
+                    matrix[coordinate[1]][coordinate[0]] != 9
+                    and coordinate not in coordinates_to_check
+                    and coordinate not in checked_coordinates
+                ):
                     coordinates_to_check.append(coordinate)
 
         basin_sizes.append(len(depths))

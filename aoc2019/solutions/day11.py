@@ -25,8 +25,14 @@ def print_hull(tiles_painted: dict):
     max_y = max(map(lambda t: t[1], tiles_painted.keys()))
 
     for y in reversed(range(min_y, max_y + 1)):
-        print(" ".join(["█" if tiles_painted.get((x, y), 0) ==
-              1 else " " for x in range(min_x, max_x + 1)]))
+        print(
+            " ".join(
+                [
+                    "█" if tiles_painted.get((x, y), 0) == 1 else " "
+                    for x in range(min_x, max_x + 1)
+                ]
+            )
+        )
 
 
 def paint(program: list, start_on_white: bool = False) -> dict:

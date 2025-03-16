@@ -18,7 +18,7 @@ def calculate_after_iterations(template: str, insertion_dict: dict, n: int) -> i
     # make a dict from the polymer template, mapping how many times each combination appeared
     polymer = defaultdict(int)
     for i in range(len(template) - 1):
-        polymer[template[i:i + 2]] += 1
+        polymer[template[i : i + 2]] += 1
 
     # make a dict from the letters, mapping how often each letter appeared
     quantity_dict = defaultdict(int)

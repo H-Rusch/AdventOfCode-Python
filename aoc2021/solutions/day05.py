@@ -13,8 +13,9 @@ def part1(input: str) -> int:
 
     coordinate_dict = defaultdict(int)
     for line in points:
-        for x, y in get_coordinates_between_points(Point(int(line[0]), int(line[1])),
-                                                   Point(int(line[2]), int(line[3]))):
+        for x, y in get_coordinates_between_points(
+            Point(int(line[0]), int(line[1])), Point(int(line[2]), int(line[3]))
+        ):
             coordinate_dict[(x, y)] = coordinate_dict[(x, y)] + 1
 
     return len(list(filter(lambda entry: entry[1] > 1, coordinate_dict.items())))
@@ -25,15 +26,19 @@ def part2(input: str) -> int:
 
     coordinate_dict = defaultdict(int)
     for line in points:
-        for x, y in get_coordinates_between_points(Point(int(line[0]), int(line[1])),
-                                                   Point(int(line[2]), int(line[3])),
-                                                   diagonal=True):
+        for x, y in get_coordinates_between_points(
+            Point(int(line[0]), int(line[1])),
+            Point(int(line[2]), int(line[3])),
+            diagonal=True,
+        ):
             coordinate_dict[(x, y)] = coordinate_dict[(x, y)] + 1
 
     return len(list(filter(lambda entry: entry[1] > 1, coordinate_dict.items())))
 
 
-def get_coordinates_between_points(p1: Point, p2: Point, diagonal: bool = False) -> list:
+def get_coordinates_between_points(
+    p1: Point, p2: Point, diagonal: bool = False
+) -> list:
     # on a vertical line
     if p1.x == p2.x:
         lower, higher = (p1.y, p2.y) if p1.y < p2.y else (p2.y, p1.y)

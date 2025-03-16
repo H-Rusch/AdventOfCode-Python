@@ -10,7 +10,12 @@ def part1(input: str) -> str:
     x_cord, y_cord = 0, 0
     for y in range(300 - 2):
         for x in range(300 - 2):
-            summed_power = np.sum(grid[x:x + 3, y:y + 3, ])
+            summed_power = np.sum(
+                grid[
+                    x : x + 3,
+                    y : y + 3,
+                ]
+            )
             if summed_power > max_summed_power:
                 max_summed_power = summed_power
                 x_cord, y_cord = x, y
@@ -21,13 +26,12 @@ def part1(input: str) -> str:
 def part2(input: str) -> str:
     grid = generate_grid(int(input))
 
-
     max_summed_power = -math.inf
     x_cord, y_cord, n_val = 0, 0, 0
     for y in range(300):
         for x in range(300):
             for n in range(300 - max(x, y)):
-                summed_power = np.sum(grid[x:x + n, y:y + n])
+                summed_power = np.sum(grid[x : x + n, y : y + n])
                 if summed_power > max_summed_power:
                     max_summed_power = summed_power
                     x_cord, y_cord, n_val = x, y, n

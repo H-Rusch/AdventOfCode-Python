@@ -35,7 +35,7 @@ def part2(input: str) -> str:
         if (box_id, index) in substrings:
             return substrings[(box_id, index)]
 
-        substring = box_id[:index] + box_id[index + 1:]
+        substring = box_id[:index] + box_id[index + 1 :]
         substrings[(box_id, index)] = substring
 
         return substring

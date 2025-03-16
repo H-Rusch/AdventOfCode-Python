@@ -1,4 +1,3 @@
-
 from .intcode import intcode
 
 
@@ -36,7 +35,6 @@ def part2(input):
         # render_game(generate_tile_map(computer.output))
         i = 0
         while i < len(tiles):
-
             if tiles[i + 2] == 4:
                 ball_x = tiles[i]
             elif tiles[i + 2] == 3:

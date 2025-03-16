@@ -206,7 +206,7 @@ def create_tree(line: list, parent: Node = None):
 
     node = Node(parent=parent)
     left_part = line[:comma]
-    right_part = line[comma + 1:]
+    right_part = line[comma + 1 :]
 
     if opening is not None:
         left_part.pop("".join(left_part).find("["))

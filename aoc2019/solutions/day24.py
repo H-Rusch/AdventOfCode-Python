@@ -49,25 +49,21 @@ def part2(input) -> int:
 
 def count_adjacent_2(grids: dict, x: int, y: int, level: int) -> int:
     count = 0
-    for (dx, dy) in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
         new_x, new_y = x + dx, y + dy
         if new_x == new_y == 2:
             # adjacent is middle of the grid -> go one level deeper
             other_level = grids[level + 1]
             if x == 2:
                 if y < 2:
-                    count += len([1 for i in range(5)
-                                 if (i, 0) in other_level])
+                    count += len([1 for i in range(5) if (i, 0) in other_level])
                 else:
-                    count += len([1 for i in range(5)
-                                 if (i, 4) in other_level])
+                    count += len([1 for i in range(5) if (i, 4) in other_level])
             elif y == 2:
                 if x < 2:
-                    count += len([1 for i in range(5)
-                                 if (0, i) in other_level])
+                    count += len([1 for i in range(5) if (0, i) in other_level])
                 else:
-                    count += len([1 for i in range(5)
-                                 if (4, i) in other_level])
+                    count += len([1 for i in range(5) if (4, i) in other_level])
 
         elif new_x < 0 or new_x > 4 or new_y < 0 or new_y > 4:
             # adjacent is outside the own grid -> go one level higher
@@ -89,7 +85,7 @@ def count_adjacent_2(grids: dict, x: int, y: int, level: int) -> int:
 
 def count_adjacent_1(bugs: set, x: int, y: int) -> int:
     count = 0
-    for (dx, dy) in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+    for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
         if (x + dx, y + dy) in bugs:
             count += 1
 
@@ -116,4 +112,9 @@ def unique_repr(bugs: set) -> str:
 def parse(input: str):
     lines = input.splitlines()
 
-    return {(x, y) for y in range(len(lines)) for x in range(len(lines[y])) if lines[y][x] == "#"}
+    return {
+        (x, y)
+        for y in range(len(lines))
+        for x in range(len(lines[y]))
+        if lines[y][x] == "#"
+    }

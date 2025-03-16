@@ -6,10 +6,24 @@ class Device:
         self.registers = registers
         self.ip = 0
         self.bound = bound
-        self.lookup = {"eqir": self.eqir, "addi": self.addi, "gtir": self.gtir, "setr": self.setr,
-                       "mulr": self.mulr, "seti": self.seti, "muli": self.muli, "eqri": self.eqri,
-                       "bori": self.bori, "bani": self.bani, "gtrr": self.gtrr, "eqrr": self.eqrr,
-                       "addr": self.addr, "gtri": self.gtri, "borr": self.borr, "banr": self.banr}
+        self.lookup = {
+            "eqir": self.eqir,
+            "addi": self.addi,
+            "gtir": self.gtir,
+            "setr": self.setr,
+            "mulr": self.mulr,
+            "seti": self.seti,
+            "muli": self.muli,
+            "eqri": self.eqri,
+            "bori": self.bori,
+            "bani": self.bani,
+            "gtrr": self.gtrr,
+            "eqrr": self.eqrr,
+            "addr": self.addr,
+            "gtri": self.gtri,
+            "borr": self.borr,
+            "banr": self.banr,
+        }
         self.instructions = instructions
 
     def run(self):
@@ -81,8 +95,8 @@ def part1(input: str) -> int:
 
 
 def part2(_) -> int:
-    """ Program decoded from the input (see input_decoded.txt). Initial steps for reverse engineering came from
-    https://www.reddit.com/r/adventofcode/comments/a7j9zc/2018_day_19_solutions/ec3v5ud/ by /u/Stan-It. """
+    """Program decoded from the input (see input_decoded.txt). Initial steps for reverse engineering came from
+    https://www.reddit.com/r/adventofcode/comments/a7j9zc/2018_day_19_solutions/ec3v5ud/ by /u/Stan-It."""
 
     r5 = 10_550_400 + 967
     r0 = r5 + 1

@@ -51,8 +51,11 @@ def parse(input) -> (str, int, dict):
     parts = input.split("\n\n")
     preamble = parts[0].splitlines()
     initial_state = preamble[0][15]
-    steps = int(preamble[1].removeprefix(
-        "Perform a diagnostic checksum after ").removesuffix(" steps."))
+    steps = int(
+        preamble[1]
+        .removeprefix("Perform a diagnostic checksum after ")
+        .removesuffix(" steps.")
+    )
 
     for part in parts[1:]:
         parse_state(transitions, part)
@@ -66,7 +69,9 @@ def parse_state(transitions: dict, part: str):
 
     size = 4
     for i in (0, 1):
-        current_value, write, move, next_state = groups[1 + i * size:1 + size + i * size]
+        current_value, write, move, next_state = groups[
+            1 + i * size : 1 + size + i * size
+        ]
         current_value = int(current_value)
         write = int(write)
         move = move_value(move)

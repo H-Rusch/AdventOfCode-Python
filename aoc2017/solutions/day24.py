@@ -24,7 +24,7 @@ class BridgeGenerator:
         self.adjust_longest(bridge)
 
     def possible_pieces(self, open_port: int, visited: set) -> Iterator[(int, int)]:
-        for (port1, port2) in self.components - visited:
+        for port1, port2 in self.components - visited:
             if port1 == open_port or port2 == open_port:
                 yield (port1, port2)
 

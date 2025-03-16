@@ -15,7 +15,7 @@ def part1(input) -> int:
             return steps
 
         visited.add(current)
-        for (x, y) in get_walkable(tiles, portal_links, current):
+        for x, y in get_walkable(tiles, portal_links, current):
             if (x, y) not in visited:
                 expanded.append(((x, y), steps + 1))
 
@@ -50,14 +50,17 @@ def part2(input) -> int:
             else:
                 reachable.append((portal_links[(x, y)], level + 1))
 
-        for (dx, dy) in get_adjacent(x, y):
+        for dx, dy in get_adjacent(x, y):
             if (dx, dy) in tiles:
                 reachable.append(((dx, dy), level))
 
         for coordinate, new_level in reachable:
             # prevent many useless cycles into deeper areas from happening by disallowing too deep levels.
             # this cut the execution time from ~4min to ~3s
-            if new_level <= len(portal_links) and (coordinate, new_level) not in visited:
+            if (
+                new_level <= len(portal_links)
+                and (coordinate, new_level) not in visited
+            ):
                 expanded.append((coordinate, steps + 1, new_level))
 
 
@@ -67,7 +70,7 @@ def get_walkable(tiles: set, portal_links: dict, coordinate: tuple) -> list:
     if coordinate in portal_links:
         reachable.append(portal_links[coordinate])
 
-    for (dx, dy) in get_adjacent(x, y):
+    for dx, dy in get_adjacent(x, y):
         if (dx, dy) in tiles:
             reachable.append((dx, dy))
 
@@ -124,13 +127,12 @@ def find_portal(tile_map: dict, x_in: int, y_in: int) -> tuple[str, tuple[int, i
     code, coordinate = None, None
 
     adjacent = get_adjacent(x_in, y_in)
-    for (dx, dy) in adjacent:
+    for dx, dy in adjacent:
         if tile_map.get((dx, dy), " ") not in ["#", ".", " "]:
-            code = "".join(
-                sorted([tile_map[(x_in, y_in)], tile_map[(dx, dy)]]))
+            code = "".join(sorted([tile_map[(x_in, y_in)], tile_map[(dx, dy)]]))
 
             adjacent_2 = get_adjacent(dx, dy)
-            for (dx2, dy2) in adjacent_2:
+            for dx2, dy2 in adjacent_2:
                 if tile_map.get((dx2, dy2)) == ".":
                     coordinate = (dx2, dy2)
 

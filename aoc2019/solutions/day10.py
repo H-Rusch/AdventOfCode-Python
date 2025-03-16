@@ -5,8 +5,10 @@ from collections import defaultdict, deque
 def part1(input) -> int:
     coordinates = parse(input)
 
-    visible_coordinates = {(x, y): number_of_visible_coordinates(x, y, coordinates)
-                           for (x, y) in coordinates}
+    visible_coordinates = {
+        (x, y): number_of_visible_coordinates(x, y, coordinates)
+        for (x, y) in coordinates
+    }
 
     return max(visible_coordinates.values())
 
@@ -14,16 +16,20 @@ def part1(input) -> int:
 def part2(input) -> int:
     coordinates = parse(input)
 
-    visible_coordinates = {(x, y): number_of_visible_coordinates(x, y, coordinates)
-                           for (x, y) in coordinates}
+    visible_coordinates = {
+        (x, y): number_of_visible_coordinates(x, y, coordinates)
+        for (x, y) in coordinates
+    }
     # best_location = max(visible_coordinates, key=visible_coordinates.get)  # both work
-    best_location = max(visible_coordinates,
-                        key=lambda key: visible_coordinates.get(key))
+    best_location = max(
+        visible_coordinates, key=lambda key: visible_coordinates.get(key)
+    )
 
     coordinates.remove(best_location)
 
     enhanced_coordinates = coordinates_at_angle(
-        best_location[0], best_location[1], coordinates)
+        best_location[0], best_location[1], coordinates
+    )
     coordinate_queue = deque(sorted(enhanced_coordinates.keys(), reverse=True))
 
     for _ in range(199):
@@ -60,7 +66,8 @@ def coordinates_at_angle(x1: int, y1: int, coordinate_list: list) -> dict:
         # append coordinate and distance to the entries for this angle. Then sort the entries based on their distance
         coordinate_dict[angle].append(((x2, y2), distance))
         coordinate_dict[angle] = list(
-            sorted(coordinate_dict[angle], key=lambda entry: entry[1]))
+            sorted(coordinate_dict[angle], key=lambda entry: entry[1])
+        )
 
     return coordinate_dict
 

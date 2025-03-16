@@ -18,14 +18,14 @@ class Instruction:
 def part1(input):
     instructions = parse(input)
     registers, _ = perform_instructions(instructions)
-    
+
     return highest_register_value(registers)
 
 
 def part2(input):
     instructions = parse(input)
     _, max_value = perform_instructions(instructions)
-    
+
     return max_value
 
 
@@ -49,11 +49,15 @@ def highest_register_value(registers: dict[str, int]) -> int:
 def parse(input: str) -> list[Instruction]:
     instructions = []
     for line in input.splitlines():
-        register, operation, value, condition_register, condition = INSTRUCTION_PATTERN.match(line).groups()
+        register, operation, value, condition_register, condition = (
+            INSTRUCTION_PATTERN.match(line).groups()
+        )
 
-        match (operation):
-            case "inc": value = int(value)
-            case "dec": value = -int(value)
+        match operation:
+            case "inc":
+                value = int(value)
+            case "dec":
+                value = -int(value)
 
         instructions.append(Instruction(register, value, condition_register, condition))
 

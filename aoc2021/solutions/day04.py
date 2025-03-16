@@ -1,7 +1,10 @@
 class BingoBoard:
     def __init__(self, number_list: list):
         self.bingo_board = number_list
-        self.marked = [[False for _ in range(len(self.bingo_board))] for _ in range(len(self.bingo_board))]
+        self.marked = [
+            [False for _ in range(len(self.bingo_board))]
+            for _ in range(len(self.bingo_board))
+        ]
 
     def mark_number(self, number: str) -> bool:
         """
@@ -20,7 +23,9 @@ class BingoBoard:
         Check whether the bingo board has all numbers marked in any column or row.
         """
         for i in range(len(self.marked)):
-            if all(self.marked[i]) or all([self.marked[j][i] for j in range(len(self.marked))]):
+            if all(self.marked[i]) or all(
+                [self.marked[j][i] for j in range(len(self.marked))]
+            ):
                 return True
 
         return False
@@ -85,6 +90,9 @@ def parse(input: str):
 
     draw_input = lines[0].split(",")
     board_input = [line.split("\n") for line in lines[1:]]
-    board_input = [[line.replace("  ", " ").split() for line in board_input[i]] for i in range(len(board_input))]
+    board_input = [
+        [line.replace("  ", " ").split() for line in board_input[i]]
+        for i in range(len(board_input))
+    ]
 
     return draw_input, board_input

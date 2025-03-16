@@ -60,7 +60,13 @@ def count_adj_categories(grid: list, x: int, y: int) -> tuple:
     for dy in [-1, 0, 1]:
         for dx in [-1, 0, 1]:
             other_x, other_y = x + dx, y + dy
-            if dy == dx == 0 or other_y < 0 or other_y >= len(grid) or other_x < 0 or other_x >= len(grid[other_y]):
+            if (
+                dy == dx == 0
+                or other_y < 0
+                or other_y >= len(grid)
+                or other_x < 0
+                or other_x >= len(grid[other_y])
+            ):
                 continue
             counts[grid[y + dy][x + dx]] += 1
 

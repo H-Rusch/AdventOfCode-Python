@@ -4,7 +4,9 @@ from collections import defaultdict
 def part1(input) -> int:
     orbit_dict = parse(input)
 
-    return sum([len(body_orbits_bodies(body, orbit_dict)) for body in orbit_dict.keys()])
+    return sum(
+        [len(body_orbits_bodies(body, orbit_dict)) for body in orbit_dict.keys()]
+    )
 
 
 def body_orbits_bodies(body: str, orbit_dict: dict) -> list:
@@ -31,8 +33,7 @@ def part2(input) -> int:
     numbers_of_transfers = []
     for i in range(len(start_orbits)):
         if start_orbits[i] in target_orbits:
-            numbers_of_transfers.append(
-                i + target_orbits.index(start_orbits[i]) + 2)
+            numbers_of_transfers.append(i + target_orbits.index(start_orbits[i]) + 2)
 
     return min(numbers_of_transfers)
 
@@ -41,6 +42,6 @@ def parse(input):
     # return dictionary with entries 'A': 'B' which means 'A' orbits around 'B'
     orbit_dict = defaultdict(None)
     for line in input.splitlines():
-        orbit_dict[line[line.find(")") + 1:]] = line[:line.find(")")]
+        orbit_dict[line[line.find(")") + 1 :]] = line[: line.find(")")]
 
     return orbit_dict

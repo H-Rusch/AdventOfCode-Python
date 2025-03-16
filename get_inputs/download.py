@@ -42,8 +42,10 @@ def build_url(year: int, day: int) -> str:
 def build_cookies() -> dict:
     return {SESSION_KEY: get_session_cookie()}
 
+
 def build_headers() -> dict:
     return {"User-Agent": USER_AGENT_HEADER_BODY}
+
 
 def get_session_cookie() -> str:
     load_dotenv()

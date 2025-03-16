@@ -53,8 +53,14 @@ def both_parts(octopus_dict: dict) -> tuple:
 
 
 def get_adjacent(coordinate: tuple, octopus_dict: dict) -> list:
-    adj = set([(coordinate[0] + x, coordinate[1] + y)
-              for x in (-1, 0, 1) for y in (-1, 0, 1) if not (x == y == 0)])
+    adj = set(
+        [
+            (coordinate[0] + x, coordinate[1] + y)
+            for x in (-1, 0, 1)
+            for y in (-1, 0, 1)
+            if not (x == y == 0)
+        ]
+    )
 
     return list(set(octopus_dict.keys()).intersection(adj))
 

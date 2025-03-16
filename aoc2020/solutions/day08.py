@@ -1,6 +1,7 @@
 def part1(input):
     return run_instructions(input.splitlines())[1]
 
+
 def part2(input):
     instructions = input.splitlines()
     change_instructions(instructions)
@@ -29,7 +30,7 @@ def run_instructions(instructions) -> (bool, int):
 
         # handle different instructions
         match instruction:
-            case "nop": 
+            case "nop":
                 program_counter += 1
             case "acc":
                 program_counter += 1
@@ -47,11 +48,10 @@ def change_instructions(instructions):
         prefix = original_inst[:3]
         if prefix in replacements:
             instructions[i] = replacements[prefix] + original_inst[3:]
-            
+
             # try running those instructions
             if run_instructions(instructions)[0]:
-                
                 break
-        
+
         # change the instruction back and move forward
         instructions[i] = original_inst

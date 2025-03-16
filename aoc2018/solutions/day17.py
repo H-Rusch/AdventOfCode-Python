@@ -7,14 +7,22 @@ def part1(input: str) -> int:
     coords, min_y, max_y = parse(input)
     fill(coords, max_y)
 
-    return len([True for (x, y), tile in coords.items() if (tile == "|" or tile == "~") and min_y <= y <= max_y])
+    return len(
+        [
+            True
+            for (x, y), tile in coords.items()
+            if (tile == "|" or tile == "~") and min_y <= y <= max_y
+        ]
+    )
 
 
 def part2(input: str) -> int:
     coords, min_y, max_y = parse(input)
     fill(coords, max_y)
 
-    return len([True for (x, y), tile in coords.items() if tile == "~" and min_y <= y <= max_y])
+    return len(
+        [True for (x, y), tile in coords.items() if tile == "~" and min_y <= y <= max_y]
+    )
 
 
 def fill(coords: dict, max_y: int):
@@ -30,7 +38,9 @@ def fill(coords: dict, max_y: int):
 
         down = (x, y + 1)
         if down not in coords:
-            stack.append((x, y))  # append current coordinate in order to raise water eventually
+            stack.append(
+                (x, y)
+            )  # append current coordinate in order to raise water eventually
             stack.append(down)
         else:
             if coords[down] == "#" or coords[down] == "~":

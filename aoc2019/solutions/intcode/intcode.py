@@ -23,6 +23,7 @@ class IntcodeV1:
     def mult(self, adr1: int, adr2: int, destination: int):
         self.memory[destination] = self.memory[adr1] * self.memory[adr2]
 
+
 #####
 
 
@@ -99,15 +100,23 @@ class IntcodeV2:
             raise Exception("Instruction unknown:", opcode)
 
     def add(self, parameters: list, parameter_modes: list):
-        value1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        value2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        value1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        value2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         destination = parameters[2]
 
         self.memory[destination] = value1 + value2
 
     def mult(self, parameters: list, parameter_modes: list):
-        value1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        value2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        value1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        value2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         destination = parameters[2]
 
         self.memory[destination] = value1 * value2
@@ -119,24 +128,36 @@ class IntcodeV2:
         self.output = value if parameter_mode == "1" else self.memory[value]
 
     def jump_if_true(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         if param1 != 0:
             self.pc = param2
         else:
             self.pc += 3
 
     def jump_if_false(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         if param1 == 0:
             self.pc = param2
         else:
             self.pc += 3
 
     def less_than(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         dest = parameters[2]
 
         if param1 < param2:
@@ -145,14 +166,19 @@ class IntcodeV2:
             self.memory[dest] = 0
 
     def equals(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         dest = parameters[2]
 
         if param1 == param2:
             self.memory[dest] = 1
         else:
             self.memory[dest] = 0
+
 
 ######
 
@@ -201,7 +227,11 @@ class IntcodeV2_5:
             if op == 3:
                 # the first time the input is made, the phase setting is set
                 # after that, the value fed into the amplifier is set
-                user_input = self.phase_setting if self.phase_setting_needed else self.input_value
+                user_input = (
+                    self.phase_setting
+                    if self.phase_setting_needed
+                    else self.input_value
+                )
                 self.phase_setting_needed = False
 
                 self.save_value(user_input, parameter)
@@ -239,15 +269,23 @@ class IntcodeV2_5:
             raise Exception("Instruction unknown:", opcode)
 
     def add(self, parameters: list, parameter_modes: list):
-        value1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        value2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        value1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        value2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         destination = parameters[2]
 
         self.memory[destination] = value1 + value2
 
     def mult(self, parameters: list, parameter_modes: list):
-        value1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        value2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        value1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        value2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         destination = parameters[2]
 
         self.memory[destination] = value1 * value2
@@ -265,24 +303,36 @@ class IntcodeV2_5:
         # print("Diagnostic output:", output)
 
     def jump_if_true(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         if param1 != 0:
             self.pc = param2
         else:
             self.pc += 3
 
     def jump_if_false(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         if param1 == 0:
             self.pc = param2
         else:
             self.pc += 3
 
     def less_than(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         dest = parameters[2]
 
         if param1 < param2:
@@ -291,14 +341,19 @@ class IntcodeV2_5:
             self.memory[dest] = 0
 
     def equals(self, parameters: list, parameter_modes: list):
-        param1 = parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
-        param2 = parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        param1 = (
+            parameters[0] if parameter_modes[0] == "1" else self.memory[parameters[0]]
+        )
+        param2 = (
+            parameters[1] if parameter_modes[1] == "1" else self.memory[parameters[1]]
+        )
         dest = parameters[2]
 
         if param1 == param2:
             self.memory[dest] = 1
         else:
             self.memory[dest] = 0
+
 
 ########
 
@@ -329,10 +384,17 @@ class IntcodeV3:
 
         # add and mult
         elif op in [1, 2]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 1:
                 self.add(parameters)
@@ -346,14 +408,21 @@ class IntcodeV3:
         elif op in [3, 4]:
             if op == 3:
                 user_input = self.input
-                parameters = [user_input,
-                              self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    user_input,
+                    self.parse_parameter_restricted(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    ),
+                ]
 
                 self.write_value(parameters)
 
             else:
-                parameters = [self.parse_parameter_freely(
-                    parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    self.parse_parameter_freely(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    )
+                ]
 
                 self.output_value(parameters)
 
@@ -361,8 +430,14 @@ class IntcodeV3:
 
         # jumps
         elif op in [5, 6]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(parameter_modes[1], self.memory[self.pc + 2])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+            ]
 
             if op == 5:
                 self.jump_if_true(parameters)
@@ -372,10 +447,17 @@ class IntcodeV3:
 
         # comparisons
         elif op in [7, 8]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 7:
                 self.less_than(parameters)
@@ -387,8 +469,11 @@ class IntcodeV3:
 
         # adjust relative base
         elif op == 9:
-            parameters = [self.parse_parameter_freely(
-                parameter_modes[0], self.memory[self.pc + 1])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                )
+            ]
 
             self.adjust_relative_base(parameters)
 
@@ -411,7 +496,7 @@ class IntcodeV3:
             raise Exception("Parameter Mode unknown")
 
     def parse_parameter_restricted(self, parameter_mode: str, value: int) -> int:
-        """ To be used when an address value should be given for a parameter. """
+        """To be used when an address value should be given for a parameter."""
         if parameter_mode in ["0", "1"]:
             return value
 
@@ -489,6 +574,7 @@ class IntcodeV3:
 
         self.relative_base += value
 
+
 ############
 
 
@@ -520,10 +606,17 @@ class IntcodeV3_1:
 
         # add and mult
         elif op in [1, 2]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 1:
                 self.add(parameters)
@@ -538,14 +631,21 @@ class IntcodeV3_1:
             if op == 3:
                 user_input = self.input
                 # user_input = int(input("Which value to save?: "))
-                parameters = [user_input,
-                              self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    user_input,
+                    self.parse_parameter_restricted(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    ),
+                ]
 
                 self.write_value(parameters)
 
             else:
-                parameters = [self.parse_parameter_freely(
-                    parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    self.parse_parameter_freely(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    )
+                ]
 
                 self.output_value(parameters)
 
@@ -553,8 +653,14 @@ class IntcodeV3_1:
 
         # jumps
         elif op in [5, 6]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(parameter_modes[1], self.memory[self.pc + 2])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+            ]
 
             if op == 5:
                 self.jump_if_true(parameters)
@@ -564,10 +670,17 @@ class IntcodeV3_1:
 
         # comparisons
         elif op in [7, 8]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 7:
                 self.less_than(parameters)
@@ -579,8 +692,11 @@ class IntcodeV3_1:
 
         # adjust relative base
         elif op == 9:
-            parameters = [self.parse_parameter_freely(
-                parameter_modes[0], self.memory[self.pc + 1])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                )
+            ]
 
             self.adjust_relative_base(parameters)
 
@@ -603,7 +719,7 @@ class IntcodeV3_1:
             raise Exception("Parameter Mode unknown")
 
     def parse_parameter_restricted(self, parameter_mode: str, value: int) -> int:
-        """ To be used when an address value should be given for a parameter. """
+        """To be used when an address value should be given for a parameter."""
         if parameter_mode in ["0", "1"]:
             return value
 
@@ -712,10 +828,17 @@ class IntcodeV3_2:
 
         # add and mult
         elif op in [1, 2]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 1:
                 self.add(parameters)
@@ -735,14 +858,21 @@ class IntcodeV3_2:
                     self.running = 2
                     return
                 # user_input = int(input("Which value to save?: "))
-                parameters = [user_input,
-                              self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    user_input,
+                    self.parse_parameter_restricted(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    ),
+                ]
 
                 self.write_value(parameters)
 
             else:
-                parameters = [self.parse_parameter_freely(
-                    parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    self.parse_parameter_freely(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    )
+                ]
 
                 self.output_value(parameters)
 
@@ -750,8 +880,14 @@ class IntcodeV3_2:
 
         # jumps
         elif op in [5, 6]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(parameter_modes[1], self.memory[self.pc + 2])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+            ]
 
             if op == 5:
                 self.jump_if_true(parameters)
@@ -761,10 +897,17 @@ class IntcodeV3_2:
 
         # comparisons
         elif op in [7, 8]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 7:
                 self.less_than(parameters)
@@ -776,8 +919,11 @@ class IntcodeV3_2:
 
         # adjust relative base
         elif op == 9:
-            parameters = [self.parse_parameter_freely(
-                parameter_modes[0], self.memory[self.pc + 1])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                )
+            ]
 
             self.adjust_relative_base(parameters)
 
@@ -801,7 +947,7 @@ class IntcodeV3_2:
             raise Exception("Parameter Mode unknown")
 
     def parse_parameter_restricted(self, parameter_mode: str, value: int) -> int:
-        """ To be used when an address value should be given for a parameter. """
+        """To be used when an address value should be given for a parameter."""
         if parameter_mode in ["0", "1"]:
             return value
 
@@ -881,6 +1027,7 @@ class IntcodeV3_2:
 
 #########
 
+
 class IntcodeV3_21:
     def __init__(self, program: list):
         self.memory = program[:]
@@ -909,10 +1056,17 @@ class IntcodeV3_21:
 
         # add and mult
         elif op in [1, 2]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 1:
                 self.add(parameters)
@@ -932,14 +1086,21 @@ class IntcodeV3_21:
                     self.running = 2
                     return
                 # user_input = int(input("Which value to save?: "))
-                parameters = [user_input,
-                              self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    user_input,
+                    self.parse_parameter_restricted(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    ),
+                ]
 
                 self.write_value(parameters)
 
             else:
-                parameters = [self.parse_parameter_freely(
-                    parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    self.parse_parameter_freely(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    )
+                ]
 
                 self.output_value(parameters)
 
@@ -947,8 +1108,14 @@ class IntcodeV3_21:
 
         # jumps
         elif op in [5, 6]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(parameter_modes[1], self.memory[self.pc + 2])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+            ]
 
             if op == 5:
                 self.jump_if_true(parameters)
@@ -958,10 +1125,17 @@ class IntcodeV3_21:
 
         # comparisons
         elif op in [7, 8]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 7:
                 self.less_than(parameters)
@@ -973,8 +1147,11 @@ class IntcodeV3_21:
 
         # adjust relative base
         elif op == 9:
-            parameters = [self.parse_parameter_freely(
-                parameter_modes[0], self.memory[self.pc + 1])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                )
+            ]
 
             self.adjust_relative_base(parameters)
 
@@ -998,7 +1175,7 @@ class IntcodeV3_21:
             raise Exception("Parameter Mode unknown")
 
     def parse_parameter_restricted(self, parameter_mode: str, value: int) -> int:
-        """ To be used when an address value should be given for a parameter. """
+        """To be used when an address value should be given for a parameter."""
         if parameter_mode in ["0", "1"]:
             return value
 
@@ -1107,10 +1284,17 @@ class IntcodeV3_3:
 
         # add and mult
         elif op in [1, 2]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 1:
                 self.add(parameters)
@@ -1130,14 +1314,21 @@ class IntcodeV3_3:
                     self.running = 2
                     return
                 # user_input = int(input("Which value to save?: "))
-                parameters = [user_input,
-                              self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    user_input,
+                    self.parse_parameter_restricted(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    ),
+                ]
 
                 self.write_value(parameters)
 
             else:
-                parameters = [self.parse_parameter_freely(
-                    parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    self.parse_parameter_freely(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    )
+                ]
 
                 self.output_value(parameters)
 
@@ -1145,8 +1336,14 @@ class IntcodeV3_3:
 
         # jumps
         elif op in [5, 6]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(parameter_modes[1], self.memory[self.pc + 2])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+            ]
 
             if op == 5:
                 self.jump_if_true(parameters)
@@ -1156,10 +1353,17 @@ class IntcodeV3_3:
 
         # comparisons
         elif op in [7, 8]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 7:
                 self.less_than(parameters)
@@ -1171,8 +1375,11 @@ class IntcodeV3_3:
 
         # adjust relative base
         elif op == 9:
-            parameters = [self.parse_parameter_freely(
-                parameter_modes[0], self.memory[self.pc + 1])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                )
+            ]
 
             self.adjust_relative_base(parameters)
 
@@ -1196,7 +1403,7 @@ class IntcodeV3_3:
             raise Exception("Parameter Mode unknown")
 
     def parse_parameter_restricted(self, parameter_mode: str, value: int) -> int:
-        """ To be used when an address value should be given for a parameter. """
+        """To be used when an address value should be given for a parameter."""
         if parameter_mode in ["0", "1"]:
             return value
 
@@ -1274,6 +1481,7 @@ class IntcodeV3_3:
 
         self.relative_base += value
 
+
 #########################
 
 
@@ -1305,10 +1513,17 @@ class IntcodeV3_4:
 
         # add and mult
         elif op in [1, 2]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 1:
                 self.add(parameters)
@@ -1327,14 +1542,21 @@ class IntcodeV3_4:
                     self.running = 2
                     return
                 # user_input = int(input("Which value to save?: "))
-                parameters = [user_input,
-                              self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    user_input,
+                    self.parse_parameter_restricted(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    ),
+                ]
 
                 self.write_value(parameters)
 
             else:
-                parameters = [self.parse_parameter_freely(
-                    parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    self.parse_parameter_freely(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    )
+                ]
 
                 self.output_value(parameters)
 
@@ -1342,8 +1564,14 @@ class IntcodeV3_4:
 
         # jumps
         elif op in [5, 6]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(parameter_modes[1], self.memory[self.pc + 2])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+            ]
 
             if op == 5:
                 self.jump_if_true(parameters)
@@ -1353,10 +1581,17 @@ class IntcodeV3_4:
 
         # comparisons
         elif op in [7, 8]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 7:
                 self.less_than(parameters)
@@ -1368,8 +1603,11 @@ class IntcodeV3_4:
 
         # adjust relative base
         elif op == 9:
-            parameters = [self.parse_parameter_freely(
-                parameter_modes[0], self.memory[self.pc + 1])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                )
+            ]
 
             self.adjust_relative_base(parameters)
 
@@ -1393,7 +1631,7 @@ class IntcodeV3_4:
             raise Exception("Parameter Mode unknown")
 
     def parse_parameter_restricted(self, parameter_mode: str, value: int) -> int:
-        """ To be used when an address value should be given for a parameter. """
+        """To be used when an address value should be given for a parameter."""
         if parameter_mode in ["0", "1"]:
             return value
 
@@ -1474,6 +1712,7 @@ class IntcodeV3_4:
 
 #######################
 
+
 class IntcodeV3_5:
     def __init__(self, program: list):
         self.memory = program[:]
@@ -1502,10 +1741,17 @@ class IntcodeV3_5:
 
         # add and mult
         elif op in [1, 2]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 1:
                 self.add(parameters)
@@ -1524,14 +1770,21 @@ class IntcodeV3_5:
                     user_input = -1
                     self.running = 2
                 # user_input = int(input("Which value to save?: "))
-                parameters = [user_input,
-                              self.parse_parameter_restricted(parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    user_input,
+                    self.parse_parameter_restricted(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    ),
+                ]
 
                 self.write_value(parameters)
 
             else:
-                parameters = [self.parse_parameter_freely(
-                    parameter_modes[0], self.memory[self.pc + 1])]
+                parameters = [
+                    self.parse_parameter_freely(
+                        parameter_modes[0], self.memory[self.pc + 1]
+                    )
+                ]
 
                 self.output_value(parameters)
 
@@ -1539,8 +1792,14 @@ class IntcodeV3_5:
 
         # jumps
         elif op in [5, 6]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(parameter_modes[1], self.memory[self.pc + 2])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+            ]
 
             if op == 5:
                 self.jump_if_true(parameters)
@@ -1550,10 +1809,17 @@ class IntcodeV3_5:
 
         # comparisons
         elif op in [7, 8]:
-            parameters = [self.parse_parameter_freely(parameter_modes[0], self.memory[self.pc + 1]),
-                          self.parse_parameter_freely(
-                              parameter_modes[1], self.memory[self.pc + 2]),
-                          self.parse_parameter_restricted(parameter_modes[2], self.memory[self.pc + 3])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                ),
+                self.parse_parameter_freely(
+                    parameter_modes[1], self.memory[self.pc + 2]
+                ),
+                self.parse_parameter_restricted(
+                    parameter_modes[2], self.memory[self.pc + 3]
+                ),
+            ]
 
             if op == 7:
                 self.less_than(parameters)
@@ -1565,8 +1831,11 @@ class IntcodeV3_5:
 
         # adjust relative base
         elif op == 9:
-            parameters = [self.parse_parameter_freely(
-                parameter_modes[0], self.memory[self.pc + 1])]
+            parameters = [
+                self.parse_parameter_freely(
+                    parameter_modes[0], self.memory[self.pc + 1]
+                )
+            ]
 
             self.adjust_relative_base(parameters)
 
@@ -1590,7 +1859,7 @@ class IntcodeV3_5:
             raise Exception("Parameter Mode unknown")
 
     def parse_parameter_restricted(self, parameter_mode: str, value: int) -> int:
-        """ To be used when an address value should be given for a parameter. """
+        """To be used when an address value should be given for a parameter."""
         if parameter_mode in ["0", "1"]:
             return value
 

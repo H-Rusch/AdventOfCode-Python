@@ -1,5 +1,5 @@
 def part1(_) -> int:
-    """Code decompiled from input. See 'input_decoded.txt'. """
+    """Code decompiled from input. See 'input_decoded.txt'."""
     r4 = 0
     while True:
         r5 = r4 | 65536
@@ -18,7 +18,7 @@ def part1(_) -> int:
 
 
 def part2(_) -> int:
-    """Code decompiled from input. See 'input_decoded.txt'. """
+    """Code decompiled from input. See 'input_decoded.txt'."""
     seen = set()
     last = 0
 

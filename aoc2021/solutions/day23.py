@@ -32,8 +32,7 @@ def part1(_):
 
 
 def part2(_):
-    initial_state = [".", ".", "ADDC", ".",
-                     "DCBD", ".", "ABAB", ".", "CACB", ".", "."]
+    initial_state = [".", ".", "ADDC", ".", "DCBD", ".", "ABAB", ".", "CACB", ".", "."]
     end = [".", ".", "AAAA", ".", "BBBB", ".", "CCCC", ".", "DDDD", ".", "."]
 
     return solve(initial_state, end)
@@ -75,11 +74,12 @@ def get_legal_states(cost: int, state: list) -> list:
                     continue
 
                 free_index = room.index(".")
-                move_cost = (abs(i - TARGET[letter]) +
-                             free_index + 1) * ENERGY_COST[letter]
+                move_cost = (abs(i - TARGET[letter]) + free_index + 1) * ENERGY_COST[
+                    letter
+                ]
                 new_state = state[:]
                 new_state[i] = "."
-                new_room = room[:free_index] + letter + room[free_index + 1:]
+                new_room = room[:free_index] + letter + room[free_index + 1 :]
 
                 new_state[TARGET[letter]] = new_room[::-1]
 
@@ -110,10 +110,9 @@ def get_legal_states(cost: int, state: list) -> list:
 
         for j in [0, 1, 3, 5, 7, 9, 10]:
             if can_reach(i, j, state):
-                move_cost = (abs(i - j) + letter_index + 1) * \
-                    ENERGY_COST[letter]
+                move_cost = (abs(i - j) + letter_index + 1) * ENERGY_COST[letter]
                 new_state = state[:]
-                new_room = room[:letter_index] + "." + room[letter_index + 1:]
+                new_room = room[:letter_index] + "." + room[letter_index + 1 :]
                 new_state[i] = new_room
                 new_state[j] = letter
                 legal_states.append((cost + move_cost, new_state))

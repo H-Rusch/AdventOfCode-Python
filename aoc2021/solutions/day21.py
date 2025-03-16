@@ -53,7 +53,9 @@ def parse(input: str) -> (int, int):
 
 
 @cache
-def play_from_state(this_position: int, other_position: int, this_score: int, other_score: int) -> tuple:
+def play_from_state(
+    this_position: int, other_position: int, this_score: int, other_score: int
+) -> tuple:
     if this_score >= 21:
         return 1, 0
     if other_score >= 21:
@@ -69,7 +71,9 @@ def play_from_state(this_position: int, other_position: int, this_score: int, ot
                     new_position = 10
                 new_score = this_score + new_position
 
-                other_wins, this_wins = play_from_state(other_position, new_position, other_score, new_score)
+                other_wins, this_wins = play_from_state(
+                    other_position, new_position, other_score, new_score
+                )
 
                 total_wins_this += this_wins
                 total_wins_other += other_wins

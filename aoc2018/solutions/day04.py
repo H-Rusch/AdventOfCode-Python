@@ -49,8 +49,8 @@ def process_data(events: list) -> tuple:
         if event.event.startswith("falls asleep"):
             sleep_start = event.date
         elif event.event.startswith("wakes up"):
-            sleep_count[guard_id] += (event.date.minute - sleep_start.minute)
-            guard_sleeps[guard_id][sleep_start.minute:event.date.minute] += 1
+            sleep_count[guard_id] += event.date.minute - sleep_start.minute
+            guard_sleeps[guard_id][sleep_start.minute : event.date.minute] += 1
             # for m in range(sleep_start.minute, event.date.minute + 1):
             #    guard_sleeps[guard_id][m] += 1
         else:

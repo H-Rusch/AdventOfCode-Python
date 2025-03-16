@@ -1,5 +1,6 @@
 from functools import cache
 
+
 class Scanner:
     def __init__(self):
         self.beacons = set()
@@ -26,7 +27,9 @@ class Beacon:
             return Beacon(self.y, -self.x, self.z)
 
     def calculate_distance(self, other: "Beacon") -> int:
-        return (self.x - other.x) ** 2 + (self.y - other.y) ** 2 + (self.z - other.z) ** 2
+        return (
+            (self.x - other.x) ** 2 + (self.y - other.y) ** 2 + (self.z - other.z) ** 2
+        )
 
     def __eq__(self, other: "Beacon") -> bool:
         return self.x == other.x and self.y == other.y and self.z == other.z
@@ -37,11 +40,13 @@ class Beacon:
     def __repr__(self):
         return f"({self.x}, {self.y}, {self.z})"
 
+
 def part1(input: str):
     scanner_list = parse(input)
     num_beacons, _ = both_parts(scanner_list)
 
     return num_beacons
+
 
 def part2(input: str):
     scanner_list = parse(input)
@@ -78,7 +83,9 @@ def both_parts(scanners: list):
     max_dist = 0
     for i in range(len(finished)):
         for j in range(i + 1, len(finished)):
-            max_dist = max([max_dist, manhatten_distance(finished[i].origin, finished[j].origin)])
+            max_dist = max(
+                [max_dist, manhatten_distance(finished[i].origin, finished[j].origin)]
+            )
 
     return len(known.beacons), max_dist
 

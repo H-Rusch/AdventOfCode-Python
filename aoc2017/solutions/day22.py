@@ -190,8 +190,7 @@ def parse(input: str, simple: bool) -> (set[(int, int)], (int, int)):
                 state = create_infected(simple)
                 nodes[(x, y)] = Node(state)
 
-    start_position = (
-        len(input.splitlines()[0]) // 2, len(input.splitlines()) // 2)
+    start_position = (len(input.splitlines()[0]) // 2, len(input.splitlines()) // 2)
 
     return nodes, start_position
 

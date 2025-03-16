@@ -47,8 +47,13 @@ def check_valid_password_part2(password: int) -> bool:
             return False
 
     # one pair of two numbers that is not in a group of more than two of the same numbers
-    return (ab and not bc) or (not ab and bc and not cd) or (not bc and cd and not de) or \
-           (not cd and de and not ef) or (not de and ef)
+    return (
+        (ab and not bc)
+        or (not ab and bc and not cd)
+        or (not bc and cd and not de)
+        or (not cd and de and not ef)
+        or (not de and ef)
+    )
 
     # cool alternative I found online to check if there is a pair of values next to each other which does not belong to
     # a bigger group:

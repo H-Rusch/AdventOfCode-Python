@@ -8,12 +8,7 @@ def part1(input) -> int:
     computer.execute_program()
     computer.output = []
 
-    program = ["OR A T\n",
-               "AND B T\n",
-               "AND C T\n",
-               "NOT T J\n",
-               "AND D J\n",
-               "WALK\n"]
+    program = ["OR A T\n", "AND B T\n", "AND C T\n", "NOT T J\n", "AND D J\n", "WALK\n"]
     program = [ord(c) for c in "".join(program)]
     computer.input = program
     computer.execute_program()
@@ -33,18 +28,18 @@ def part2(input) -> int:
 
     # first part: 4 spaces in front is ground. in the 3 spaces in front is a hole
     # second part: 8 spaces in front is ground or 5 spaces in front is ground to continue after jumping.
-    program = ["OR A T\n",
-               "AND B T\n",
-               "AND C T\n",
-               "NOT T J\n",
-               "AND D J\n",
-
-               "AND J T\n",
-               "OR E T\n",
-               "OR H T\n",
-               "AND T J\n",
-
-               "RUN\n"]
+    program = [
+        "OR A T\n",
+        "AND B T\n",
+        "AND C T\n",
+        "NOT T J\n",
+        "AND D J\n",
+        "AND J T\n",
+        "OR E T\n",
+        "OR H T\n",
+        "AND T J\n",
+        "RUN\n",
+    ]
     program = [ord(c) for c in "".join(program)]
     computer.input = program
     computer.execute_program()

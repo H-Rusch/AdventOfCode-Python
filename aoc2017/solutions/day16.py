@@ -9,7 +9,10 @@ class Dance:
         self.programs = self.programs[-x:] + self.programs[:-x]
 
     def exchange(self, index1: int, index2: int):
-        self.programs[index1], self.programs[index2] = self.programs[index2], self.programs[index1]
+        self.programs[index1], self.programs[index2] = (
+            self.programs[index2],
+            self.programs[index1],
+        )
 
     def partner(self, program1: str, program2: str):
         index1 = self.programs.index(program1)

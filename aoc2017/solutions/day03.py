@@ -135,7 +135,19 @@ def manhatten_distance(point1: (int, int), point2: (int, int)) -> int:
 def get_all_adjacent(coordinate: (int, int)) -> list[(int, int)]:
     x, y = coordinate
 
-    return [(x + dx, y + dy) for (dx, dy) in [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (1, -1), (-1, 1), (-1, -1)]]
+    return [
+        (x + dx, y + dy)
+        for (dx, dy) in [
+            (1, 0),
+            (-1, 0),
+            (0, 1),
+            (0, -1),
+            (1, 1),
+            (1, -1),
+            (-1, 1),
+            (-1, -1),
+        ]
+    ]
 
 
 def find_first_larger_than_input(n: int, spiral: AdjacentSummer) -> int:

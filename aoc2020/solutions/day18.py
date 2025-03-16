@@ -11,11 +11,12 @@ class DifferentInteger:
     def __sub__(self, other):
         return DifferentInteger(self.value * other.value)
 
+
 def part1(input) -> int:
     """Use the fact that + and - have the same precedence in normal math.
     With this knowledge the - operator can be redefined to do multiplication.
     The numbers (which are all single digits) have to be replaced by the custom type
-    and then the eval-function can be used to calculate the result of each equation. """
+    and then the eval-function can be used to calculate the result of each equation."""
     total = 0
     for equation in input.splitlines():
         equation = equation.replace("*", "-")

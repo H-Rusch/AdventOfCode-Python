@@ -1,22 +1,24 @@
 class Device:
     def __init__(self, registers: list):
         self.registers = registers
-        self.lookup = {0: self.eqir,
-                       1: self.addi,
-                       2: self.gtir,
-                       3: self.setr,
-                       4: self.mulr,
-                       5: self.seti,
-                       6: self.muli,
-                       7: self.eqri,
-                       8: self.bori,
-                       9: self.bani,
-                       10: self.gtrr,
-                       11: self.eqrr,
-                       12: self.addr,
-                       13: self.gtri,
-                       14: self.borr,
-                       15: self.banr}
+        self.lookup = {
+            0: self.eqir,
+            1: self.addi,
+            2: self.gtir,
+            3: self.setr,
+            4: self.mulr,
+            5: self.seti,
+            6: self.muli,
+            7: self.eqri,
+            8: self.bori,
+            9: self.bani,
+            10: self.gtrr,
+            11: self.eqrr,
+            12: self.addr,
+            13: self.gtri,
+            14: self.borr,
+            15: self.banr,
+        }
 
     def execute(self, opcode: int, A: int, B: int, C: int):
         self.lookup[opcode](A, B, C)
@@ -93,7 +95,6 @@ def part1(input: str) -> int:
     return sample_count
 
 
-
 def part2(input: str) -> int:
     _, instructions = parse(input)
 
@@ -114,7 +115,6 @@ def extract_num_list(list_repr: str) -> list:
 
 def extract_params(instruction_str: str) -> list:
     return [int(s) for s in instruction_str.split()]
-
 
 
 def helper(samples: str):

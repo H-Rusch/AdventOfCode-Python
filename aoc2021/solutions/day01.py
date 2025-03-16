@@ -14,7 +14,7 @@ def part2(input: str) -> int:
     times_increasing = 0
 
     for i in range(3, len(numbers)):
-        if sum(numbers[i - 4:i - 1]) < sum(numbers[i - 3:i]):
+        if sum(numbers[i - 4 : i - 1]) < sum(numbers[i - 3 : i]):
             times_increasing += 1
 
     return times_increasing

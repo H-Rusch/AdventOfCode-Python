@@ -37,11 +37,15 @@ def part2(input: str) -> int:
         to_remove = []
         for (old_x0, old_x1, old_y0, old_y1, old_z0, old_z1), old_sign in cubes.items():
             # existing cube is fully enveloped into the new cube, so the existing cube is removed
-            if old_x0 >= new_x0 and old_x1 <= new_x1 and \
-                    old_y0 >= new_y0 and old_y1 <= new_y1 and \
-                    old_z0 >= new_z0 and old_z1 <= new_z1:
-                to_remove.append(
-                    (old_x0, old_x1, old_y0, old_y1, old_z0, old_z1))
+            if (
+                old_x0 >= new_x0
+                and old_x1 <= new_x1
+                and old_y0 >= new_y0
+                and old_y1 <= new_y1
+                and old_z0 >= new_z0
+                and old_z1 <= new_z1
+            ):
+                to_remove.append((old_x0, old_x1, old_y0, old_y1, old_z0, old_z1))
             else:
                 # i := intersection
                 i_x0 = max(new_x0, old_x0)
@@ -69,7 +73,10 @@ def part2(input: str) -> int:
         for remove in to_remove:
             cubes.pop(remove)
 
-    return sum((x1 - x0 + 1) * (y1 - y0 + 1) * (z1 - z0 + 1) * sign for (x0, x1, y0, y1, z0, z1), sign in cubes.items())
+    return sum(
+        (x1 - x0 + 1) * (y1 - y0 + 1) * (z1 - z0 + 1) * sign
+        for (x0, x1, y0, y1, z0, z1), sign in cubes.items()
+    )
 
 
 def parse(input: str):
@@ -77,8 +84,10 @@ def parse(input: str):
 
     for line in input.splitlines():
         inst, x0, x1, y0, y1, z0, z1 = re.search(
-            r"(on|off) x=(-?\d+)..(-?\d+),y=(-?\d+)..(-?\d+),z=(-?\d+)..(-?\d+)", line).groups()
+            r"(on|off) x=(-?\d+)..(-?\d+),y=(-?\d+)..(-?\d+),z=(-?\d+)..(-?\d+)", line
+        ).groups()
         instructions.append(
-            (inst, int(x0), int(x1), int(y0), int(y1), int(z0), int(z1)))
+            (inst, int(x0), int(x1), int(y0), int(y1), int(z0), int(z1))
+        )
 
     return instructions

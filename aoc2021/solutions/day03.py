@@ -1,8 +1,10 @@
 def part1(input: str) -> int:
     diagnostic_data = parse(input)
 
-    common_bits = [most_common_bit_at_position(
-        diagnostic_data, i) for i in range(len(diagnostic_data[0]))]
+    common_bits = [
+        most_common_bit_at_position(diagnostic_data, i)
+        for i in range(len(diagnostic_data[0]))
+    ]
 
     gamma_rate = "".join([str(i) for i in common_bits])
     epsilon_rate = complement(gamma_rate)
@@ -13,12 +15,15 @@ def part1(input: str) -> int:
 def part2(input: str) -> int:
     diagnostic_data = parse(input)
 
-    return calculate_oxygen_rating(diagnostic_data) * calculate_co2_rating(diagnostic_data)
+    return calculate_oxygen_rating(diagnostic_data) * calculate_co2_rating(
+        diagnostic_data
+    )
 
 
 def complement(binary_string: str) -> str:
     complement_string = "".join(
-        ["1" if binary_string[i] == "0" else "0" for i in range(len(binary_string))])
+        ["1" if binary_string[i] == "0" else "0" for i in range(len(binary_string))]
+    )
     return complement_string
 
 
@@ -30,8 +35,14 @@ def calculate_oxygen_rating(diagnostic_data: list) -> int:
             break
         bit_value = str(most_common_bit_at_position(oxygen_list, i))
         oxygen_list = list(
-            filter(lambda bin_number, iteration=i, bit_string=bit_value: bin_number[iteration] == bit_string,
-                   oxygen_list))
+            filter(
+                lambda bin_number, iteration=i, bit_string=bit_value: bin_number[
+                    iteration
+                ]
+                == bit_string,
+                oxygen_list,
+            )
+        )
 
     return int(oxygen_list[0], 2)
 
@@ -44,15 +55,22 @@ def calculate_co2_rating(diagnostic_data: list) -> int:
             break
         bit_value = str(least_common_bit_at_position(co2_list, i))
         co2_list = list(
-            filter(lambda bin_number, iteration=i, bit_string=bit_value: bin_number[iteration] == bit_string,
-                   co2_list))
+            filter(
+                lambda bin_number, iteration=i, bit_string=bit_value: bin_number[
+                    iteration
+                ]
+                == bit_string,
+                co2_list,
+            )
+        )
 
     return int(co2_list[0], 2)
 
 
 def most_common_bit_at_position(diagnostic_data: list, position: int) -> int:
-    number_of_ones = [diagnostic_data[i][position]
-                      for i in range(len(diagnostic_data))].count("1")
+    number_of_ones = [
+        diagnostic_data[i][position] for i in range(len(diagnostic_data))
+    ].count("1")
 
     if number_of_ones > len(diagnostic_data) / 2:
         return 1

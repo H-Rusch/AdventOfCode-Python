@@ -27,7 +27,9 @@ def part2(input):
     """
     instructions[0] = 2
     computer = intcode.IntcodeV3_3(instructions)
-    movement = "A,B,B,A,C,B,C,C,B,A\nR,10,R,8,L,10,L,10\nR,8,L,6,L,6\nL,10,R,10,L,6\nn\n"
+    movement = (
+        "A,B,B,A,C,B,C,C,B,A\nR,10,R,8,L,10,L,10\nR,8,L,6,L,6\nL,10,R,10,L,6\nn\n"
+    )
     i = 0
 
     # computer.execute_program()
@@ -167,7 +169,12 @@ def find_intersections(tiles: dict):
     scaffold_symbols = ["#", "^", "v", "<", ">"]
     for (x, y), tile in tiles.items():
         if tile in scaffold_symbols:
-            if all([tiles.get((dx, dy), "") in scaffold_symbols for (dx, dy) in get_adjacent(x, y)]):
+            if all(
+                [
+                    tiles.get((dx, dy), "") in scaffold_symbols
+                    for (dx, dy) in get_adjacent(x, y)
+                ]
+            ):
                 intersections.append((x, y))
 
     return intersections

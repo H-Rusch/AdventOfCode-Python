@@ -21,26 +21,32 @@ def part2(input: str) -> int:
     for i in range(len(input_entries)):
         translation = deduction(input_entries[i])
 
-        sum_outputs += int("".join([translate_digits(translation, entry)
-                           for entry in output_entries[i]]))
+        sum_outputs += int(
+            "".join(
+                [translate_digits(translation, entry) for entry in output_entries[i]]
+            )
+        )
 
     return sum_outputs
 
 
 def translate_digits(translation_dict: dict, randomized_entry: str) -> str:
     correct_letters = "".join(
-        sorted([translation_dict[letter] for letter in randomized_entry]))
+        sorted([translation_dict[letter] for letter in randomized_entry])
+    )
 
-    letter_to_digit_dict = {"abcefg": "0",
-                            "cf": "1",
-                            "acdeg": "2",
-                            "acdfg": "3",
-                            "bcdf": "4",
-                            "abdfg": "5",
-                            "abdefg": "6",
-                            "acf": "7",
-                            "abcdefg": "8",
-                            "abcdfg": "9"}
+    letter_to_digit_dict = {
+        "abcefg": "0",
+        "cf": "1",
+        "acdeg": "2",
+        "acdfg": "3",
+        "bcdf": "4",
+        "abdfg": "5",
+        "abdefg": "6",
+        "acf": "7",
+        "abcdefg": "8",
+        "abcdfg": "9",
+    }
 
     return letter_to_digit_dict[correct_letters]
 
@@ -56,8 +62,12 @@ def deduction(input_entries: list):
         4. Find the input representing '0', '6' or '9' in any order. They are defined by all but one segment. This means
          the missing letter is the fitting letter for the segment which the number does not define.
     """
-    input_entries = list(sorted(
-        list(filter(lambda input_entry: len(input_entry) != 5, input_entries)), key=len))
+    input_entries = list(
+        sorted(
+            list(filter(lambda input_entry: len(input_entry) != 5, input_entries)),
+            key=len,
+        )
+    )
     all_letters = set([letter for letter in "abcdefg"])
 
     # dict of possible randomized letters for each segment
@@ -68,7 +78,7 @@ def deduction(input_entries: list):
         "d": all_letters.copy(),
         "e": all_letters.copy(),
         "f": all_letters.copy(),
-        "g": all_letters.copy()
+        "g": all_letters.copy(),
     }
 
     # '1'
@@ -80,8 +90,7 @@ def deduction(input_entries: list):
 
     # '7'
     entry = input_entries[1]
-    letter_possibilities["a"] = set(
-        entry).difference(letter_possibilities["c"])
+    letter_possibilities["a"] = set(entry).difference(letter_possibilities["c"])
 
     remove_option(letter_possibilities, ["a"], letter_possibilities["a"])
 
@@ -118,12 +127,15 @@ def remove_option(possible_letters: dict, keys_to_filter: list, value_to_filter:
     for letter in possible_letters.keys():
         if all([letter != key for key in keys_to_filter]):
             possible_letters[letter] = possible_letters[letter].difference(
-                value_to_filter)
+                value_to_filter
+            )
 
 
 def parse(input: str):
     data = input.splitlines()
-    data = [[[pattern for pattern in part.split()] for part in entry.split("|")]
-            for entry in data]
+    data = [
+        [[pattern for pattern in part.split()] for part in entry.split("|")]
+        for entry in data
+    ]
 
     return data

@@ -46,7 +46,7 @@ def part1(input):
 
 
 def part2(input):
-    """I did not deconstruct the assembly code myself. I found out from the subreddit what the program is doing and implemented that. """
+    """I did not deconstruct the assembly code myself. I found out from the subreddit what the program is doing and implemented that."""
     h = 0
 
     b = c = int(input.split()[2])

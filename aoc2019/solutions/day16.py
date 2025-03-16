@@ -1,4 +1,3 @@
-
 def part1(input) -> str:
     numbers = parse(input)
 
@@ -9,7 +8,7 @@ def part1(input) -> str:
             number = 0
             for j, v in enumerate(numbers):
                 number += v * pattern[j % len(pattern)]
-            new_numbers[i] = (abs(number) % 10)
+            new_numbers[i] = abs(number) % 10
 
         numbers = new_numbers
 
@@ -25,8 +24,7 @@ def part2(input) -> str:
     for _ in range(100):
         summed_from_index = numbers[-1]
         for i in range(len(numbers) - 2, -1, -1):
-            numbers[i] = summed_from_index = (
-                summed_from_index + numbers[i]) % 10
+            numbers[i] = summed_from_index = (summed_from_index + numbers[i]) % 10
 
     return "".join([str(n) for n in numbers][:8])
 
@@ -46,7 +44,9 @@ if __name__ == "__main__":
     number_list = parse(input)
 
     print(
-        f"Part 1: The first eight digits after 100 iterations are {part1(number_list)}.")
+        f"Part 1: The first eight digits after 100 iterations are {part1(number_list)}."
+    )
 
     print(
-        f"Part 2: The eight-digit message embedded in the final output list is {part2(number_list)}.")
+        f"Part 2: The eight-digit message embedded in the final output list is {part2(number_list)}."
+    )

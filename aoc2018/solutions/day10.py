@@ -1,5 +1,6 @@
 import math
 import re
+
 # import cv2
 import numpy as np
 
@@ -92,8 +93,12 @@ def parse(input):
     points = []
     for line in input.splitlines():
         line = line.replace(" ", "")
-        values = [int(d) for d in re.match(
-            r"position=<(-?\d+),(-?\d+)>velocity=<(-?\d+),(-?\d+)", line).groups()]
+        values = [
+            int(d)
+            for d in re.match(
+                r"position=<(-?\d+),(-?\d+)>velocity=<(-?\d+),(-?\d+)", line
+            ).groups()
+        ]
         points.append(Point(*values))
     return points
 

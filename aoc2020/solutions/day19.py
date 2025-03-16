@@ -30,8 +30,7 @@ def build_regex_string(rules: str, recursive=False) -> str:
             elif lit == "11":
                 # the full group is named "pumping" with the "?P<pumping>" in the beginning.
                 # this group can recursively be repeated with the "(?P&pumping)?" near the middle
-                return f'(?P<pumping>{dfs("42")}(?P&pumping)?{dfs("31")})'
-
+                return f"(?P<pumping>{dfs('42')}(?P&pumping)?{dfs('31')})"
 
         # list comprehension of the following loop found below
         # s = ""
@@ -41,7 +40,10 @@ def build_regex_string(rules: str, recursive=False) -> str:
         #    s += "|"
         # s = s[:-1]
         branches = "|".join(
-            ["".join([dfs(part) for part in alt.split()]) for alt in grammar[lit].split("|")]
+            [
+                "".join([dfs(part) for part in alt.split()])
+                for alt in grammar[lit].split("|")
+            ]
         )
         return "(" + branches + ")"
 

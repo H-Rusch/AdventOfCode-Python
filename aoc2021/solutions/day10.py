@@ -13,6 +13,7 @@ def part2(input: str):
 
     return answer_2
 
+
 def both_parts(line_list: list) -> tuple:
     bracket_pairs = {"(": ")", "[": "]", "{": "}", "<": ">"}
     corrupted_points = {")": 3, "]": 57, "}": 1197, ">": 25137}

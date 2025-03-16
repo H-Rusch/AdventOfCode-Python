@@ -11,7 +11,7 @@ def part1(input: str) -> int:
 def part2(input: str) -> int:
     matrix = parse(input)
     matrix = make_big(matrix)
-    
+
     return get_shortest_path_risk_dijkstra(matrix)
 
 
@@ -20,7 +20,9 @@ def get_shortest_path_risk_dijkstra(matrix: list) -> int:
     limit = len(matrix) - 1
     end = (limit, limit)
 
-    node_costs = {(x, y): math.inf for x in range(len(matrix)) for y in range(len(matrix))}
+    node_costs = {
+        (x, y): math.inf for x in range(len(matrix)) for y in range(len(matrix))
+    }
 
     expanded = PriorityQueue()
     expanded.put((0, (0, 0)))
@@ -80,6 +82,7 @@ def make_big(matrix):
                     big_matrix[y + offset_y][x + offset_x] = value
 
     return big_matrix
+
 
 def parse(input: str):
     return [[int(n) for n in row] for row in input.splitlines()]

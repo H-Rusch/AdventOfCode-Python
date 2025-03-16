@@ -1,5 +1,6 @@
 from functools import reduce
 
+
 class KnotHash:
     ROUNDS = 64
     CAPACITY = 256
@@ -14,12 +15,11 @@ class KnotHash:
 
         return KnotHash.dense_hash_repr(dense_hash)
 
-
     @classmethod
     def dense_hash_repr(cls, dense_hash: list[int]) -> str:
         def num_to_hex(number: int) -> str:
             return hex(number)[2:].zfill(2)
-        
+
         return "".join(map(num_to_hex, dense_hash))
 
 
@@ -43,8 +43,14 @@ class KnotHashPerformer:
             self.skip_size += 1
 
     def dense_hash(self):
-        blocks = [self.numbers[i * KnotHashPerformer.BLOCK_SIZE: (i + 1) * KnotHashPerformer.BLOCK_SIZE] for i in range(KnotHashPerformer.BLOCK_SIZE)]
-        return list(map(lambda block: reduce(lambda v1, v2: v1^v2, block), blocks))
+        blocks = [
+            self.numbers[
+                i * KnotHashPerformer.BLOCK_SIZE : (i + 1)
+                * KnotHashPerformer.BLOCK_SIZE
+            ]
+            for i in range(KnotHashPerformer.BLOCK_SIZE)
+        ]
+        return list(map(lambda block: reduce(lambda v1, v2: v1 ^ v2, block), blocks))
 
 
 def part1(input):
@@ -70,7 +76,10 @@ def reverse(numbers: list, start_index: int, length: int):
         current_index = (start_index + offset) % len(numbers)
         target_index = (start_index + length - offset - 1) % len(numbers)
 
-        numbers[current_index], numbers[target_index] = numbers[target_index], numbers[current_index]
+        numbers[current_index], numbers[target_index] = (
+            numbers[target_index],
+            numbers[current_index],
+        )
 
         offset += 1
 

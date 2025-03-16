@@ -61,8 +61,10 @@ def part2(input) -> int:
                 moon.change_position(i)
             steps_till_cycle[i] += 1
 
-            if all(moon.pos[i] == starting_positions[index][i] for index, moon in enumerate(moons)) and \
-                    all(moon.vel[i] == 0 for moon in moons):
+            if all(
+                moon.pos[i] == starting_positions[index][i]
+                for index, moon in enumerate(moons)
+            ) and all(moon.vel[i] == 0 for moon in moons):
                 break
 
     return math.lcm(*steps_till_cycle)

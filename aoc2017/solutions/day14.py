@@ -55,7 +55,7 @@ def find_region(used_coordinates: set, start: (int, int)) -> set[(int, int)]:
         visited.add(current)
 
         for adjacent in get_adjacent(*current):
-            if adjacent in used_coordinates:# and adjacent not in visited:
+            if adjacent in used_coordinates:  # and adjacent not in visited:
                 expanded.append(adjacent)
 
     return visited
