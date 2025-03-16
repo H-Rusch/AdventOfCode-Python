@@ -31,7 +31,7 @@ def download_input(year: int, day: int) -> str:
         return response.text
     else:
         raise AocDownloadException(
-            "Session to the website has expire. Please log in again and update the session value."
+            "Session to the website has expired. Please log in again and update the session value."
         )
 
 
@@ -49,6 +49,7 @@ def get_session_cookie() -> str:
     load_dotenv()
 
     if SESSION_KEY in os.environ:
+        print(os.environ[SESSION_KEY])
         return os.environ[SESSION_KEY]
     else:
         raise AocDownloadException(
