@@ -5,7 +5,7 @@ import importlib
 from types import ModuleType
 from datetime import datetime
 
-from get_inputs.load import load_input
+from get_inputs.load_input import load_input
 
 
 VIABLE_EVENTS = [2017, 2018, 2019, 2020, 2021, 2024]
@@ -62,7 +62,7 @@ def import_module(year: int, day: int) -> ModuleType:
 
 
 def get_module_name(year: int, day: int) -> str:
-    return f"aoc{year}.solutions.day{day:02d}"
+    return f"aoc.aoc{year}.solutions.day{day:02d}"
 
 
 def perform_parts(module: ModuleType, puzzle_input: str):

@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-from . import download
+from . import download_input
 import logging
 
 
@@ -11,7 +11,7 @@ def load_input(year: int, day: int) -> str:
 
     if not path.is_file():
         logging.info(f"Input file for year {year} day {day} not found locally.")
-        puzzle_input = download.download_input(year, day)
+        puzzle_input = download_input.download_input(year, day)
         cache_puzzle_input(path, puzzle_input)
 
     return read_puzzle_input(path)
@@ -26,7 +26,7 @@ def create_inputs_dir(year: int):
 
 def input_dir_path(year: int) -> Path:
     cwd = os.getcwd()
-    path_to_dir = f"aoc{year}/inputs"
+    path_to_dir = f"aoc/aoc{year}/inputs"
 
     return Path(cwd, path_to_dir)
 
