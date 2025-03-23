@@ -19,7 +19,7 @@ def part2(input: str):
 
 
 def fold(coordinates: set, instruction: str) -> set:
-    direction, cutoff = re.search(r"([xy])=(\d+)", instruction).groups()
+    axis, cutoff = re.search(r"([xy])=(\d+)", instruction).groups()
     cutoff = int(cutoff)
 
     folding_set = set()
@@ -27,9 +27,9 @@ def fold(coordinates: set, instruction: str) -> set:
         x = coordinate[0]
         y = coordinate[1]
 
-        if direction == "x" and x > cutoff:
+        if axis == "x" and x > cutoff:
             x = cutoff - abs(cutoff - x)
-        elif direction == "y" and y > cutoff:
+        elif axis == "y" and y > cutoff:
             y = cutoff - abs(cutoff - y)
 
         folding_set.add((x, y))

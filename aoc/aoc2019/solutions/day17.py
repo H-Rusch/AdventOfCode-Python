@@ -1,10 +1,10 @@
+from aoc.util.direction import Direction
 from .intcode import intcode
 
 
 def part1(input):
     instructions = parse(input)
     tiles = generate_tile_map(instructions)
-    # print_scaffold(tiles)
     intersections = find_intersections(tiles)
 
     return sum(map(lambda c: c[0] * c[1], intersections))
@@ -13,7 +13,6 @@ def part1(input):
 def part2(input):
     instructions = parse(input)
     tiles = generate_tile_map(instructions)
-    # print_scaffold(tiles)
     movement = find_path(tiles)[1:]
     """
     manually compressing the instruction list:
@@ -32,7 +31,6 @@ def part2(input):
     )
     i = 0
 
-    # computer.execute_program()
     while i < len(movement):
         computer.input = ord(movement[i])
         i += 1
@@ -47,93 +45,44 @@ def part2(input):
 
 
 def find_path(tiles: dict) -> list:
-    x, y = 0, 0
-    # 0: up, 1: down, 2: left, 3: right
-    direction = 0
+    position = (0, 0)
+    direction = Direction.UP
     for (dx, dy), tile in tiles.items():
         if tile in ["^", "v", "<", ">"]:
-            x, y = dx, dy
-            direction = ["^", "v", "<", ">"].index(tile)
+            position = dx, dy
+            direction = Direction.from_str(tile)
             break
 
     instructions = []
     steps = 0
     while True:
         # try to go forward
-        dx, dy = get_forward(x, y, direction)
-        if tiles.get((dx, dy), ".") == "#":
+        if tiles.get(forward := direction.steps(position), ".") == "#":
             steps += 1
-            x, y = dx, dy
+            position = forward
         else:
             instructions.append(str(steps))
             # if forward is empty, try right and if that fails try left
-            if tiles.get(get_right(x, y, direction), ".") == "#":
+            if tiles.get(get_right(position, direction), ".") == "#":
                 steps = 0
                 instructions.append("R")
-                direction = clockwise(direction)
-            elif tiles.get(get_left(x, y, direction), ".") == "#":
+                direction = direction.turn_right()
+            elif tiles.get(get_left(position, direction), ".") == "#":
                 steps = 0
                 instructions.append("L")
-                direction = counter_clockwise(direction)
+                direction = direction.turn_left()
             else:
                 break
 
     return instructions
 
 
-def get_forward(x: int, y: int, direction: int) -> tuple[int, int]:
-    if direction == 0:
-        return x, y - 1
-    elif direction == 1:
-        return x, y + 1
-    elif direction == 2:
-        return x - 1, y
-    elif direction == 3:
-        return x + 1, y
+def get_right(position: tuple[int, int], direction: Direction) -> tuple[int, int]:
+    return direction.turn_right().steps(position)
 
 
-def get_right(x: int, y: int, direction: int) -> tuple[int, int]:
-    if direction == 0:
-        return x + 1, y
-    elif direction == 1:
-        return x - 1, y
-    elif direction == 2:
-        return x, y - 1
-    elif direction == 3:
-        return x, y + 1
-
-
-def get_left(x: int, y: int, direction: int) -> tuple[int, int]:
-    if direction == 0:
-        return x - 1, y
-    elif direction == 1:
-        return x + 1, y
-    elif direction == 2:
-        return x, y + 1
-    elif direction == 3:
-        return x, y - 1
-
-
-def clockwise(d: int) -> int:
-    if d == 0:
-        return 3
-    if d == 1:
-        return 2
-    if d == 2:
-        return 0
-    if d == 3:
-        return 1
-
-
-def counter_clockwise(d: int) -> int:
-    if d == 0:
-        return 2
-    if d == 1:
-        return 3
-    if d == 2:
-        return 1
-    if d == 3:
-        return 0
+def get_left(position: tuple[int, int], direction: Direction) -> tuple[int, int]:
+    return direction.turn_right().steps(position)
 
 
 def get_adjacent(x: int, y: int) -> list:

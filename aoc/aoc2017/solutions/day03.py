@@ -1,5 +1,6 @@
-from enum import Enum
 from collections import defaultdict
+
+from aoc.util.direction import Direction
 
 
 class Spiral:
@@ -9,11 +10,11 @@ class Spiral:
         self.edges = Edge()
 
     def spiral_movement(self):
-        self.coordinate = Direction.next_position(self.direction, self.coordinate)
+        self.coordinate = self.direction.steps(self.coordinate)
 
         # change direction upon exceeding edge
         if self.edges.adjust_edge(self.coordinate):
-            self.direction = Direction.next_direction(self.direction)
+            self.direction = self.direction.turn_left()
 
 
 class NumberToCoordinate(Spiral):
@@ -61,7 +62,7 @@ class Edge:
         self.left = 0
         self.bottom = 0
 
-    def adjust_edge(self, coordinate: (int, int)) -> bool:
+    def adjust_edge(self, coordinate: tuple[int, int]) -> bool:
         x, y = coordinate
         result = x < self.left or x > self.right or y < self.bottom or y > self.top
 
@@ -71,38 +72,6 @@ class Edge:
         self.bottom = min(self.bottom, y)
 
         return result
-
-
-class Direction(Enum):
-    RIGHT = 0
-    UP = 1
-    LEFT = 2
-    DOWN = 3
-
-    @classmethod
-    def next_direction(cls, dir: "Direction") -> "Direction":
-        match dir:
-            case Direction.RIGHT:
-                return Direction.UP
-            case Direction.UP:
-                return Direction.LEFT
-            case Direction.LEFT:
-                return Direction.DOWN
-            case Direction.DOWN:
-                return Direction.RIGHT
-
-    @classmethod
-    def next_position(cls, dir: "Direction", coordinate: (int, int)) -> (int, int):
-        x, y = coordinate
-        match dir:
-            case Direction.RIGHT:
-                return (x + 1, y)
-            case Direction.UP:
-                return (x, y - 1)
-            case Direction.LEFT:
-                return (x - 1, y)
-            case Direction.DOWN:
-                return (x, y + 1)
 
 
 def part1(input):
@@ -128,11 +97,11 @@ def build_spiral(n: int) -> NumberToCoordinate:
     return spiral
 
 
-def manhatten_distance(point1: (int, int), point2: (int, int)) -> int:
+def manhatten_distance(point1: tuple[int, int], point2: tuple[int, int]) -> int:
     return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
 
 
-def get_all_adjacent(coordinate: (int, int)) -> list[(int, int)]:
+def get_all_adjacent(coordinate: tuple[int, int]) -> list[tuple[int, int]]:
     x, y = coordinate
 
     return [

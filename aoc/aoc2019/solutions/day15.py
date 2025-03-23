@@ -1,3 +1,4 @@
+from aoc.util.direction import Direction
 from .intcode import intcode
 
 
@@ -64,66 +65,41 @@ def generate_tile_map(instructions: list) -> dict:
     If the robot walked against a wall, it turns left and tries to move forward.
     """
 
-    def clockwise(d):
-        if d == 1:
-            return 4
-        if d == 2:
-            return 3
-        if d == 3:
-            return 1
-        if d == 4:
-            return 2
-
-    def counter_clockwise(d):
-        if d == 1:
-            return 3
-        if d == 2:
-            return 4
-        if d == 3:
-            return 2
-        if d == 4:
-            return 1
+    def to_intcode_value(direction: Direction) -> int:
+        match direction:
+            case Direction.UP:
+                return 1
+            case Direction.RIGHT:
+                return 4
+            case Direction.DOWN:
+                return 2
+            case Direction.LEFT:
+                return 3
 
     computer = intcode.IntcodeV3_2(instructions)
-    direction = 1
-    x, y = 0, 0
+    direction = Direction.UP
+    position = (0, 0)
 
     coordinates = dict()
-    to_check, checked = set(), set()
+    to_check = {(0, 0, dir) for dir in Direction}
 
     while computer.running != 0:
-        computer.input = direction
+        computer.input = to_intcode_value(direction)
         computer.execute_program()
-
         status = computer.output
 
-        if (x, y) not in checked:
-            for d in [1, 2, 3, 4]:
-                to_check.add((x, y, d))
-
         # calculate the coordinate of the tile which is examined
-        examining_x, examining_y = x, y
-        if direction == 1:
-            examining_y -= 1
-        elif direction == 2:
-            examining_y += 1
-        elif direction == 3:
-            examining_x -= 1
-        elif direction == 4:
-            examining_x += 1
-
-        coordinates[(examining_x, examining_y)] = status
+        examining = direction.steps(position)
+        coordinates[examining] = status
 
         # turn left when hitting a wall, turn right otherwise
         if status == 0:
-            direction = counter_clockwise(direction)
+            direction = direction.turn_left()
         else:
-            direction = clockwise(direction)
-            x, y = examining_x, examining_y
+            direction = direction.turn_right()
+            position = examining
 
-        to_check.discard((x, y, direction))
-        checked.add((x, y))
-
+        to_check.discard((*position, direction))
         if len(to_check) == 0:
             break
 

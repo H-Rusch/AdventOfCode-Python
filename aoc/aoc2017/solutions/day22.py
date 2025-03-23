@@ -1,5 +1,6 @@
-from enum import Enum
 from abc import ABC, abstractmethod
+
+from aoc.util.direction import Direction
 
 """
 Implementing this task in with the state pattern really lead to much more code than I anticipated.
@@ -7,24 +8,8 @@ Source for pattern implementation: https://refactoring.guru/design-patterns/stat
 """
 
 
-class Direction(Enum):
-    RIGHT = 0
-    UP = 1
-    LEFT = 2
-    DOWN = 3
-
-    def turn_right(self):
-        return Direction((self.value - 1) % len(Direction))
-
-    def turn_left(self):
-        return Direction((self.value + 1) % len(Direction))
-
-    def turn_back(self):
-        return Direction((self.value + 2) % len(Direction))
-
-
 class Carrier:
-    def __init__(self, position: (int, int)) -> None:
+    def __init__(self, position: tuple[int, int]) -> None:
         self.coordinate = position
         self.direction = Direction.UP
         self.infections_caused = 0
@@ -137,7 +122,7 @@ class InfectedState(State, Infected):
 
 class FlaggedState(State):
     def next_direction(self, direction: Direction) -> Direction:
-        return direction.turn_back()
+        return direction.turn_around()
 
     def transition(self) -> None:
         self.context.transition_to(CleanState())
@@ -182,7 +167,7 @@ def perform_bursts(nodes: dict, carrier: Carrier, n: int):
         carrier.burst(nodes)
 
 
-def parse(input: str, simple: bool) -> (set[(int, int)], (int, int)):
+def parse(input: str, simple: bool) -> tuple[set[(int, int)], (int, int)]:
     nodes = NodeDict(simple)
     for y, line in enumerate(input.splitlines()):
         for x, c in enumerate(line):

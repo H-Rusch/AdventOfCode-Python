@@ -1,88 +1,79 @@
 import math
 
+from aoc.util.direction import Direction
+
 
 def part1(input):
-    directions = parse(input)
+    instructions = parse(input)
 
-    # (x, y) - position of the ship. Positive x-values mean east, positive y-values mean north
-    ship_position = [0, 0]
-    orientation = 0
+    ship_position = (0, 0)
+    direction = Direction.RIGHT
 
-    for direct in directions:
-        # move the ship directly in a compass direction
-        if direct[0] == "N":
-            ship_position[0] += int(direct[1:])
-        elif direct[0] == "E":
-            ship_position[1] += int(direct[1:])
-        elif direct[0] == "S":
-            ship_position[0] -= int(direct[1:])
-        elif direct[0] == "W":
-            ship_position[1] -= int(direct[1:])
-        # move the ship forwards in the direction it is currently facing
-        elif direct[0] == "F":
-            if orientation == 0:
-                ship_position[1] += int(direct[1:])
-            elif orientation == 90:
-                ship_position[0] += int(direct[1:])
-            elif orientation == 180:
-                ship_position[1] -= int(direct[1:])
-            elif orientation == 270:
-                ship_position[0] -= int(direct[1:])
-        # rotate the ship
-        elif direct[0] == "L":
-            orientation = (orientation + int(direct[1:])) % 360
-        elif direct[0] == "R":
-            orientation = (orientation - int(direct[1:])) % 360
+    for action, amount in instructions:
+        match action:
+            # move the ship directly in a compass direction
+            case "N" | "E" | "S" | "W":
+                movement_direction = Direction.from_str(action)
+                ship_position = movement_direction.steps(ship_position, amount)
+            # move the ship forwards in the direction it is currently facing
+            case "F":
+                ship_position = direction.steps(ship_position, amount)
+            # rotate the ship
+            case "L":
+                times = amount // 90
+                direction = direction.turn_left(times)
+            case "R":
+                times = amount // 90
+                direction = direction.turn_right(times)
 
-    return abs(ship_position[0]) + abs(ship_position[1])
+    return manhatten_distance(ship_position)
 
 
 def part2(input):
     directions = parse(input)
 
-    # (x, y) - positions. Positive x-values mean east, positive y-values mean north
-    position_ship = [0, 0]
-    position_waypoint = [10, 1]
+    ship_position = (0, 0)
+    waypoint_position = (10, 1)
 
-    for direct in directions:
-        # move the waypoint directly in a compass direction
-        if direct[0] == "N":
-            position_waypoint[1] += int(direct[1:])
-        elif direct[0] == "E":
-            position_waypoint[0] += int(direct[1:])
-        elif direct[0] == "S":
-            position_waypoint[1] -= int(direct[1:])
-        elif direct[0] == "W":
-            position_waypoint[0] -= int(direct[1:])
-        # move towards the relative position of the waypoint
-        elif direct[0] == "F":
-            position_ship[0] += position_waypoint[0] * int(direct[1:])
-            position_ship[1] += position_waypoint[1] * int(direct[1:])
-        elif direct[0] == "L":
-            # rotate the relative position of the waypoint counter - clockwise
-            degree = int(direct[1:]) / 180 * math.pi
-            x_new = position_waypoint[0] * int(math.cos(degree)) - position_waypoint[
-                1
-            ] * int(math.sin(degree))
-            y_new = position_waypoint[1] * int(math.cos(degree)) + position_waypoint[
-                0
-            ] * int(math.sin(degree))
-            position_waypoint[0] = x_new
-            position_waypoint[1] = y_new
-        elif direct[0] == "R":
-            # rotate the relative position of the waypoint clockwise
-            degree = int(direct[1:]) / 180 * math.pi
-            x_new = position_waypoint[0] * int(math.cos(degree)) + position_waypoint[
-                1
-            ] * int(math.sin(degree))
-            y_new = position_waypoint[1] * int(math.cos(degree)) - position_waypoint[
-                0
-            ] * int(math.sin(degree))
-            position_waypoint[0] = x_new
-            position_waypoint[1] = y_new
+    for action, amount in directions:
+        match action:
+            # move the waypoint directly in a compass direction
+            case "N" | "E" | "S" | "W":
+                if action in ("N", "S"):
+                    # direction class has north := -1. This puzzle needs north := 1 though.
+                    amount *= -1
+                movement_direction = Direction.from_str(action)
+                waypoint_position = movement_direction.steps(waypoint_position, amount)
+            # move towards the relative position of the waypoint
+            case "F":
+                offset = tuple(map(lambda x: x * amount, waypoint_position))
+                ship_position = tuple(map(sum, zip(ship_position, offset)))
+            # rotate the relative position of the waypoint
+            case "L":
+                degree = amount / 180 * math.pi
+                x_new = waypoint_position[0] * int(
+                    math.cos(degree)
+                ) - waypoint_position[1] * int(math.sin(degree))
+                y_new = waypoint_position[1] * int(
+                    math.cos(degree)
+                ) + waypoint_position[0] * int(math.sin(degree))
+                waypoint_position = (x_new, y_new)
+            case "R":
+                degree = amount / 180 * math.pi
+                x_new = waypoint_position[0] * int(
+                    math.cos(degree)
+                ) + waypoint_position[1] * int(math.sin(degree))
+                y_new = waypoint_position[1] * int(
+                    math.cos(degree)
+                ) - waypoint_position[0] * int(math.sin(degree))
+                waypoint_position = (x_new, y_new)
 
-    return abs(position_ship[0]) + abs(position_ship[1])
+    return manhatten_distance(ship_position)
 
 
-def parse(input):
-    return [direction for direction in input.splitlines()]
+def manhatten_distance(position: tuple[int, int]) -> int:
+    return sum(map(abs, position))
+
+
+def parse(input: str) -> list[tuple[str, int]]:
+    return [(line[0], int(line[1:])) for line in input.splitlines()]

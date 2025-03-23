@@ -1,22 +1,4 @@
-from enum import Enum
-
-
-class Direction(Enum):
-    RIGHT = 0
-    UP = 1
-    LEFT = 2
-    DOWN = 3
-
-    def opposite(self):
-        match self:
-            case Direction.RIGHT:
-                return Direction.LEFT
-            case Direction.LEFT:
-                return Direction.RIGHT
-            case Direction.UP:
-                return Direction.DOWN
-            case Direction.DOWN:
-                return Direction.UP
+from aoc.util.direction import Direction
 
 
 def part1(input):
@@ -35,7 +17,7 @@ def part2(input):
     return steps
 
 
-def follow_to_end(coordinates: dict, start: (int, int)) -> (str, int):
+def follow_to_end(coordinates: dict, start: tuple[int, int]) -> tuple[str, int]:
     result = ""
     direction = Direction.DOWN
     current = start
@@ -49,7 +31,7 @@ def follow_to_end(coordinates: dict, start: (int, int)) -> (str, int):
         elif current_tile not in ("|", "-"):
             result += current_tile
 
-        current = get_next(*current, direction)
+        current = direction.steps(current)
         steps += 1
         if current not in coordinates:
             break
@@ -58,29 +40,17 @@ def follow_to_end(coordinates: dict, start: (int, int)) -> (str, int):
 
 
 def turn(
-    coordinates: dict, coordinate: (int, int), starting_direction: Direction
+    coordinates: dict, coordinate: tuple[int, int], starting_direction: Direction
 ) -> Direction:
     possible = {Direction.RIGHT, Direction.UP, Direction.LEFT, Direction.DOWN}
-    possible -= {starting_direction, starting_direction.opposite()}
+    possible -= {starting_direction, starting_direction.turn_around()}
 
     for direction in possible:
-        if get_next(*coordinate, direction) in coordinates:
+        if direction.steps(coordinate) in coordinates:
             return direction
 
 
-def get_next(x: int, y: int, direction: Direction) -> (int, int):
-    match direction:
-        case Direction.RIGHT:
-            return (x + 1, y)
-        case Direction.UP:
-            return (x, y - 1)
-        case Direction.LEFT:
-            return (x - 1, y)
-        case Direction.DOWN:
-            return (x, y + 1)
-
-
-def parse(input: str) -> (dict[(int, int), str], (int, int)):
+def parse(input: str) -> tuple[dict[(int, int), str], (int, int)]:
     coordinates = {}
     start = None
 
