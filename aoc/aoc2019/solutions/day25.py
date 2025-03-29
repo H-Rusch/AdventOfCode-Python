@@ -1,29 +1,31 @@
-from .intcode import intcode
+from aoc.aoc2019.intcode.intcode import Intcode
 
 
 def part1(puzzle_input) -> int:
     instructions = parse(puzzle_input)
 
-    computer = intcode.IntcodeV3_4(instructions)
+    computer = Intcode(instructions)
 
     while True:
-        computer.execute_program()
-        print_output(computer.output)
-        computer.output = []
+        computer.run()
+        print_output(computer.outputs)
+        computer.outputs.clear()
 
-        program = ""
-        while True:
-            program = input()
-            if (
-                program in ["north", "east", "west", "south", "inv"]
-                or program.startswith("drop ")
-                or program.startswith("take ")
-            ):
-                break
-        program = [ord(c) for c in program + "\n"]
-        computer.input = program
+        user_input = read_in_user_input()
+        computer.inputs.extend([ord(c) for c in user_input + "\n"])
 
     # The password for the main airlock is 319815680 found by playing part 1.
+
+
+def read_in_user_input() -> str:
+    while True:
+        user_input = input()
+        if (
+            user_input in ["north", "east", "west", "south", "inv"]
+            or user_input.startswith("drop ")
+            or user_input.startswith("take ")
+        ):
+            return user_input
 
 
 def part2(_):

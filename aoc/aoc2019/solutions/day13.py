@@ -1,38 +1,36 @@
-from .intcode import intcode
+from aoc.aoc2019.intcode.intcode import Intcode
+from aoc.aoc2019.intcode.state import ExecutionState
 
 
 def part1(input):
     instructions = parse(input)
 
-    computer = intcode.IntcodeV3_21(instructions)
-    computer.execute_program()
+    computer = Intcode(instructions)
+    computer.run()
 
-    return computer.output[2::3].count(2)
+    return list(computer.outputs)[2::3].count(2)
 
 
 def part2(input):
     instructions = parse(input)
     instructions[0] = 2
 
-    computer = intcode.IntcodeV3_21(instructions)
-    computer.execute_program()
+    computer = Intcode(instructions)
+    tiles = computer.outputs
 
-    tiles = computer.output
+    computer.run()
 
     ball_x = tiles.index(4) - 2
     paddle_x = tiles.index(3) - 2
     score = 0
 
-    while computer.running != 0:
-        if ball_x > paddle_x:
-            computer.input = 1
-        elif ball_x < paddle_x:
-            computer.input = -1
-        else:
-            computer.input = 0
-        computer.execute_program()
+    while computer.state != ExecutionState.HALTED:
+        tiles.clear()
+        computer.add_input(determine_paddle_input(ball_x, paddle_x))
+        computer.run()
 
         # render_game(generate_tile_map(computer.output))
+
         i = 0
         while i < len(tiles):
             if tiles[i + 2] == 4:
@@ -44,6 +42,14 @@ def part2(input):
             i += 3
 
     return score
+
+
+def determine_paddle_input(ball_x: int, paddle_x: int) -> int:
+    if ball_x > paddle_x:
+        return 1
+    elif ball_x < paddle_x:
+        return -1
+    return 0
 
 
 def generate_tile_map(output: list) -> dict:

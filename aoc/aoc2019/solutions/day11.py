@@ -1,4 +1,5 @@
-from .intcode import intcode
+from aoc.aoc2019.intcode.intcode import Intcode
+from aoc.aoc2019.intcode.state import ExecutionState
 from aoc.util.direction import Direction
 
 
@@ -16,7 +17,7 @@ def part2(input):
     tiles_painted = paint(instructions, start_on_white=True)
 
     print(
-        "Output is flipped on its head after refactoring. But that doesn't bother me, so I wont fix it"
+        "The letters in the output are flipped on their head after rafactoring direction uil class. But that doesn't bother me, so I wont fix it"
     )
     print_hull(tiles_painted)
 
@@ -40,29 +41,23 @@ def print_hull(tiles_painted: dict):
 
 
 def paint(program: list, start_on_white: bool = False) -> dict:
-    computer = intcode.IntcodeV3_1(program)
+    computer = Intcode(program)
 
-    tiles_painted = dict()
-    direction = Direction.UP
     position = (0, 0)
-    # x, y = 0, 0
+    direction = Direction.UP
+    tiles_painted = {position: int(start_on_white)}
 
-    if start_on_white:
-        tiles_painted[position] = 1
-
-    while computer.running in [1, 2]:
+    while computer.state != ExecutionState.HALTED:
         # input the color the robot stands on
-        computer.input = tiles_painted.get(position, 0)
-        computer.execute_program()
+        computer.add_input(tiles_painted.get(position, 0))
+        computer.run()
 
-        # robot outputs the color to paint with
-        tiles_painted[position] = computer.output
-        computer.execute_program()
+        tiles_painted[position] = computer.outputs[-2]
 
-        # turn the robot
-        if computer.output == 0:
+        # turn the robot according to the latest output
+        if computer.get_latest_output() == 0:
             direction = direction.turn_left()
-        elif computer.output == 1:
+        elif computer.get_latest_output() == 1:
             direction = direction.turn_right()
         else:
             raise Exception("Output is not a valid direction")
