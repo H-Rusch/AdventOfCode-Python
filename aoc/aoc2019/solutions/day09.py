@@ -1,25 +1,25 @@
-from .intcode import intcode
+from aoc.aoc2019.intcode.intcode import Intcode
 
 
-def part1(input):
+def part1(input: str) -> int:
     instructions = parse(input)
 
-    computer = intcode.IntcodeV3(instructions)
-    computer.input = 1
-    computer.execute_program()
+    computer = Intcode(instructions)
+    computer.add_input(1)
+    computer.run()
 
-    return computer.output
+    return computer.get_latest_output()
 
 
-def part2(input):
+def part2(input: str) -> int:
     instructions = parse(input)
 
-    computer = intcode.IntcodeV3(instructions)
-    computer.input = 2
-    computer.execute_program()
+    computer = Intcode(instructions)
+    computer.add_input(2)
+    computer.run()
 
-    return computer.output
+    return computer.get_latest_output()
 
 
-def parse(input):
+def parse(input: str) -> list[int]:
     return [int(n) for n in input.split(",")]

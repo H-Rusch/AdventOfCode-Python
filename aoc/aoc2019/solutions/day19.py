@@ -1,4 +1,4 @@
-from .intcode import intcode
+from aoc.aoc2019.intcode.intcode import Intcode
 
 
 def part1(input) -> int:
@@ -38,13 +38,12 @@ def part2(input) -> int:
 
 
 def test_coordinate(instructions: list, x: int, y: int) -> bool:
-    computer = intcode.IntcodeV3_3(instructions)
-    computer.input = x
-    computer.execute_program()
-    computer.input = y
-    computer.execute_program()
+    computer = Intcode(instructions)
+    computer.add_input(x)
+    computer.add_input(y)
+    computer.run()
 
-    return computer.output == 1
+    return computer.get_latest_output() == 1
 
 
 def parse(input: str):

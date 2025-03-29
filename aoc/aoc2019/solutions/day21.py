@@ -1,30 +1,25 @@
-from .intcode import intcode
+from aoc.aoc2019.intcode.intcode import Intcode
 
 
 def part1(input) -> int:
     instructions = parse(input)
-    computer = intcode.IntcodeV3_4(instructions)
-
-    computer.execute_program()
-    computer.output = []
+    computer = Intcode(instructions)
+    computer.run()
+    computer.outputs.clear()
 
     program = ["OR A T\n", "AND B T\n", "AND C T\n", "NOT T J\n", "AND D J\n", "WALK\n"]
-    program = [ord(c) for c in "".join(program)]
-    computer.input = program
-    computer.execute_program()
+    computer.inputs.extend([ord(c) for c in "".join(program)])
+    computer.run()
 
-    last = computer.output.pop()
-    print_output(computer.output)
-
-    return last
+    return computer.get_latest_output()
 
 
 def part2(input) -> int:
     instructions = parse(input)
-    computer = intcode.IntcodeV3_4(instructions)
+    computer = Intcode(instructions)
+    computer.run()
 
-    computer.execute_program()
-    computer.output = []
+    computer.outputs.clear()
 
     # first part: 4 spaces in front is ground. in the 3 spaces in front is a hole
     # second part: 8 spaces in front is ground or 5 spaces in front is ground to continue after jumping.
@@ -40,18 +35,10 @@ def part2(input) -> int:
         "AND T J\n",
         "RUN\n",
     ]
-    program = [ord(c) for c in "".join(program)]
-    computer.input = program
-    computer.execute_program()
+    computer.inputs.extend([ord(c) for c in "".join(program)])
+    computer.run()
 
-    last = computer.output.pop()
-    print_output(computer.output)
-
-    return last
-
-
-def print_output(numbers: list):
-    print("".join([chr(n) for n in numbers]))
+    return computer.get_latest_output()
 
 
 def parse(input):

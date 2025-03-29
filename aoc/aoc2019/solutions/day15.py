@@ -1,5 +1,6 @@
+from aoc.aoc2019.intcode.intcode import Intcode
+from aoc.aoc2019.intcode.state import ExecutionState
 from aoc.util.direction import Direction
-from .intcode import intcode
 
 
 def part1(input):
@@ -76,24 +77,23 @@ def generate_tile_map(instructions: list) -> dict:
             case Direction.LEFT:
                 return 3
 
-    computer = intcode.IntcodeV3_2(instructions)
+    computer = Intcode(instructions)
     direction = Direction.UP
     position = (0, 0)
 
     coordinates = dict()
     to_check = {(0, 0, dir) for dir in Direction}
 
-    while computer.running != 0:
-        computer.input = to_intcode_value(direction)
-        computer.execute_program()
-        status = computer.output
+    while computer.state != ExecutionState.HALTED:
+        computer.add_input(to_intcode_value(direction))
+        computer.run()
 
         # calculate the coordinate of the tile which is examined
         examining = direction.steps(position)
-        coordinates[examining] = status
+        coordinates[examining] = computer.get_latest_output()
 
         # turn left when hitting a wall, turn right otherwise
-        if status == 0:
+        if computer.get_latest_output() == 0:
             direction = direction.turn_left()
         else:
             direction = direction.turn_right()

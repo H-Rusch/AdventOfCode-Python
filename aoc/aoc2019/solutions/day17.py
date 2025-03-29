@@ -1,5 +1,6 @@
+from collections import deque
+from aoc.aoc2019.intcode.intcode import Intcode
 from aoc.util.direction import Direction
-from .intcode import intcode
 
 
 def part1(input):
@@ -25,23 +26,32 @@ def part2(input):
     C: L, 10, R, 10, L, 6
     """
     instructions[0] = 2
-    computer = intcode.IntcodeV3_3(instructions)
+    computer = Intcode(instructions)
     movement = (
         "A,B,B,A,C,B,C,C,B,A\nR,10,R,8,L,10,L,10\nR,8,L,6,L,6\nL,10,R,10,L,6\nn\n"
     )
-    i = 0
 
-    while i < len(movement):
-        computer.input = ord(movement[i])
-        i += 1
-        computer.execute_program()
-        while computer.running == 3:
-            computer.execute_program()
+    computer.inputs = deque([ord(ch) for ch in movement])
+    computer.run()
 
-    while computer.running != 0:
-        computer.execute_program()
+    return computer.get_latest_output()
 
-    return computer.output
+
+def generate_tile_map(instructions: list) -> dict:
+    computer = Intcode(instructions)
+    computer.run()
+
+    x, y = 0, 0
+    coordinates = dict()
+    for tile in [chr(code) for code in computer.outputs]:
+        if tile in ["^", "v", "<", ">", "#", "."]:
+            coordinates[(x, y)] = tile
+            x += 1
+        elif tile == "\n":
+            x = 0
+            y += 1
+
+    return coordinates
 
 
 def find_path(tiles: dict) -> list:
@@ -87,30 +97,6 @@ def get_left(position: tuple[int, int], direction: Direction) -> tuple[int, int]
 
 def get_adjacent(x: int, y: int) -> list:
     return [(x + dx, y + dy) for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]]
-
-
-def generate_tile_map(instructions: list) -> dict:
-    computer = intcode.IntcodeV3_3(instructions)
-    x, y = 0, 0
-
-    coordinates = dict()
-
-    while computer.running != 0:
-        computer.execute_program()
-
-        code = computer.output
-
-        # 95: ^, 118: v, 60: <, 62: >
-        if code in [35, 46, 94, 118, 60, 62]:
-            coordinates[(x, y)] = chr(code)
-            x += 1
-        elif code == 10:
-            x = 0
-            y += 1
-        else:
-            print(code)
-
-    return coordinates
 
 
 def find_intersections(tiles: dict):
