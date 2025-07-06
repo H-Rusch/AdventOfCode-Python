@@ -14,7 +14,7 @@ class File(Block):
 
     def score_of_full_file(self, offset: int) -> int:
         return sum((offset + n) * self.id for n in range(self.amount))
-    
+
     def __repr__(self):
         return " ".join([str(self.id) for _ in range(self.amount)])
 
@@ -120,6 +120,7 @@ def find_first_fitting_empty(blocks: list[Block], file_index: int) -> int | None
 
 def print_blocks(blocks):
     print(" ".join(map(str, blocks)))
+
 
 def parse(input: str) -> deque[Block]:
     def parse_block(i: int, digit: str) -> Block:
