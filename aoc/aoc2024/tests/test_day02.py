@@ -1,5 +1,5 @@
-from .get_examples.load import load_example
 from ..solutions import day02
+from .get_examples.load import load_example
 
 input = load_example("day02.txt")
 
@@ -33,8 +33,8 @@ def test_can_be_safe():
 
 
 def test_part1_example():
-    assert 2 == day02.part1(input)
+    assert day02.part1(input) == 2
 
 
 def test_part2_example():
-    assert 4 == day02.part2(input)
+    assert day02.part2(input) == 4

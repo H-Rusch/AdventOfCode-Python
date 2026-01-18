@@ -22,7 +22,7 @@ class NumberToCoordinate(Spiral):
         super().__init__()
         self.square_number = 1
         # square_number -> coordinate
-        self.matrix = dict()
+        self.matrix = {}
 
     def generate_up_to(self, n: int):
         while self.square_number <= n:
@@ -48,10 +48,7 @@ class AdjacentSummer(Spiral):
 
     def sum_all_adjacent(self):
         return sum(
-            map(
-                lambda coord: self.adjacent_sums[coord],
-                get_all_adjacent(self.coordinate),
-            )
+            self.adjacent_sums[coord] for coord in get_all_adjacent(self.coordinate)
         )
 
 

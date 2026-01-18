@@ -1,6 +1,7 @@
-from datetime import datetime
-from collections import defaultdict
 import re
+from collections import defaultdict
+from datetime import datetime
+
 import numpy as np
 
 
@@ -54,7 +55,7 @@ def process_data(events: list) -> tuple:
             # for m in range(sleep_start.minute, event.date.minute + 1):
             #    guard_sleeps[guard_id][m] += 1
         else:
-            guard_id = int(re.search("(\d+)", event.event).group(0))
+            guard_id = int(re.search(r"(\d+)", event.event).group(0))
 
     return sleep_count, guard_sleeps
 

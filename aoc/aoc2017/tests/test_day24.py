@@ -11,8 +11,8 @@ EXAMPLE_INPUT = """0/2
 
 
 def test_part1_example():
-    assert 31 == day24.part1(EXAMPLE_INPUT)
+    assert day24.part1(EXAMPLE_INPUT) == 31
 
 
 def test_part2_example():
-    assert 19 == day24.part2(EXAMPLE_INPUT)
+    assert day24.part2(EXAMPLE_INPUT) == 19

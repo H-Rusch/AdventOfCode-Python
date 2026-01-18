@@ -1,5 +1,5 @@
-from itertools import permutations
 from collections import defaultdict
+from itertools import permutations
 
 
 # trying out complex numbers as coordintes

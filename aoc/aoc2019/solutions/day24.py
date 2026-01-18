@@ -44,7 +44,7 @@ def part2(input) -> int:
 
         level_dict = next_level_dict
 
-    return sum(map(lambda d: len(d), level_dict.values()))
+    return sum(len(d) for d in level_dict.values())
 
 
 def count_adjacent_2(grids: dict, x: int, y: int, level: int) -> int:
@@ -106,7 +106,7 @@ def calculate_biodiversity(bugs: set) -> int:
 
 
 def unique_repr(bugs: set) -> str:
-    return "".join([str(t) for t in sorted(list(bugs))])
+    return "".join([str(t) for t in sorted(bugs)])
 
 
 def parse(input: str):

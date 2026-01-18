@@ -9,8 +9,8 @@ def test_translation_to_binary():
 
 
 def test_part1_example():
-    assert 8108 == day14.part1("flqrgnkx")
+    assert day14.part1("flqrgnkx") == 8108
 
 
 def test_part2_example():
-    assert 1242 == day14.part2("flqrgnkx")
+    assert day14.part2("flqrgnkx") == 1242

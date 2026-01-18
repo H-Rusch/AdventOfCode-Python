@@ -1,6 +1,3 @@
-from typing import List
-
-
 def part1(input):
     instructions = parse(input)
     instruction_count = 0
@@ -34,5 +31,5 @@ def part2(input):
     return steps
 
 
-def parse(input: str) -> List[int]:
+def parse(input: str) -> list[int]:
     return [int(n) for n in input.splitlines()]

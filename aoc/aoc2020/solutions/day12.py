@@ -46,8 +46,8 @@ def part2(input):
                 waypoint_position = movement_direction.steps(waypoint_position, amount)
             # move towards the relative position of the waypoint
             case "F":
-                offset = tuple(map(lambda x: x * amount, waypoint_position))
-                ship_position = tuple(map(sum, zip(ship_position, offset)))
+                offset = tuple(x * amount for x in waypoint_position)
+                ship_position = tuple(map(sum, zip(ship_position, offset, strict=True)))
             # rotate the relative position of the waypoint
             case "L":
                 degree = amount / 180 * math.pi

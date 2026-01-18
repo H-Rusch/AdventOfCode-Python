@@ -14,16 +14,16 @@ class Carrier:
         self.direction = Direction.UP
         self.infections_caused = 0
 
-    def burst(self, nodes: "NodeDict"):
+    def burst(self, nodes: NodeDict):
         current = nodes[self.coordinate]
         self.turn(current)
         self.manipulate_node(current)
         self.move_forward()
 
-    def turn(self, node: "Node"):
+    def turn(self, node: Node):
         self.direction = node.next_direction(self.direction)
 
-    def manipulate_node(self, node: "Node"):
+    def manipulate_node(self, node: Node):
         node.manipulate()
         if isinstance(node.state, Infected):
             self.infections_caused += 1
@@ -48,10 +48,10 @@ class Infected:
 class Node:
     state = None
 
-    def __init__(self, state: "State") -> None:
+    def __init__(self, state: State) -> None:
         self.transition_to(state)
 
-    def transition_to(self, state: "State"):
+    def transition_to(self, state: State):
         self.state = state
         self.state.context = self
 

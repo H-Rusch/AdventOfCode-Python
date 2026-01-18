@@ -1,4 +1,5 @@
 import heapq
+
 import numpy as np
 
 
@@ -91,9 +92,7 @@ def create_grid(depth: int, target: tuple) -> np.array:
     grid = np.zeros((target_y + 1 + 100, target_x + 1 + 100), dtype=int)
     for y in range(len(grid)):
         for x in range(len(grid[0])):
-            if x == y == 0:
-                gi = 0
-            elif x == target_x and y == target_y:
+            if x == y == 0 or (x == target_x and y == target_y):
                 gi = 0
             elif y == 0:
                 gi = x * 16807
@@ -105,7 +104,7 @@ def create_grid(depth: int, target: tuple) -> np.array:
             grid[y, x] = (gi + depth) % 20183
 
     # convert to risk grid
-    grid = np.array(list(map(lambda e: e % 3, grid)))
+    grid = np.array([e % 3 for e in grid])
 
     return grid
 
@@ -113,6 +112,6 @@ def create_grid(depth: int, target: tuple) -> np.array:
 def parse(input):
     depth, target = input.splitlines()
     depth = int(depth[7:])
-    target = tuple(map(lambda n: int(n), target[8:].split(",")))
+    target = tuple(int(n) for n in target[8:].split(","))
 
     return depth, target

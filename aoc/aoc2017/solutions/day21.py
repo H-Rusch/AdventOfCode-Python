@@ -1,6 +1,6 @@
-import numpy as np
-from typing import Generator
+from collections.abc import Generator
 
+import numpy as np
 
 START = np.array([[0, 1, 0], [0, 0, 1], [1, 1, 1]])
 
@@ -86,7 +86,7 @@ def define_transformations(transformations: dict, matrix: np.array, result: np.a
         transformations[key_from_matrix(rotated)] = result
 
 
-def matrix_rotations(matrix: np.array) -> Generator[np.array, None, None]:
+def matrix_rotations(matrix: np.array) -> Generator[np.array]:
     yield np.transpose(matrix)
     matrix = np.rot90(matrix)
     yield matrix

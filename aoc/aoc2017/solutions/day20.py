@@ -1,7 +1,6 @@
-from dataclasses import dataclass
-from collections import defaultdict
 import re
-
+from collections import defaultdict
+from dataclasses import dataclass
 
 PARTICLE_PATTERN = re.compile(
     r"p=<(-?\d+,-?\d+,-?\d+)>, v=<(-?\d+,-?\d+,-?\d+)>, a=<(-?\d+,-?\d+,-?\d+)>"

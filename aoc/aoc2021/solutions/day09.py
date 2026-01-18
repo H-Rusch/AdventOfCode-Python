@@ -5,7 +5,7 @@ def part1(input: str) -> int:
     matrix = parse(input)
     points = get_low_points(matrix)
 
-    return sum(map(lambda n: n + 1, [matrix[y][x] for (x, y) in points]))
+    return sum(n + 1 for n in [matrix[y][x] for (x, y) in points])
 
 
 def part2(input: str) -> int:
@@ -22,10 +22,8 @@ def get_low_points(matrix: list) -> list:
     for y in range(len(matrix)):
         for x in range(len(matrix[y])):
             if all(
-                [
-                    matrix[y][x] < matrix[adj[1]][adj[0]]
-                    for adj in get_adjacent_coordinates(x, y, matrix)
-                ]
+                matrix[y][x] < matrix[adj[1]][adj[0]]
+                for adj in get_adjacent_coordinates(x, y, matrix)
             ):
                 points.append((x, y))
 

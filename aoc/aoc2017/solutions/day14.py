@@ -1,6 +1,6 @@
-from .day10 import KnotHash
 import random
 
+from .day10 import KnotHash
 
 ROWS = 128
 
@@ -28,7 +28,7 @@ def part2(input):
 def build_grid(input: str) -> set[(int, int)]:
     used_coordinates = set()
     for y in range(ROWS):
-        hashed = KnotHash.hash(f"{input}-{str(y)}")
+        hashed = KnotHash.hash(f"{input}-{y!s}")
         for x, c in enumerate(convert_knot_hash_to_binary(hashed)):
             if c == "1":
                 used_coordinates.add((x, y))

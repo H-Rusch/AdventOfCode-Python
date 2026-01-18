@@ -20,9 +20,11 @@ def part1(input):
                         for dy in [-1, 0, 1]:
                             for dz in [-1, 0, 1]:
                                 # don't check the same cube as its own neighbour
-                                if not (dx == 0 and dy == 0 and dz == 0):
-                                    if (x + dx, y + dy, z + dz) in active:
-                                        neighbour_count += 1
+                                if (
+                                    not (dx == 0 and dy == 0 and dz == 0)
+                                    and (x + dx, y + dy, z + dz) in active
+                                ):
+                                    neighbour_count += 1
                     # keep a cube active or activate an inactive cube based on the given rules
                     if (x, y, z) in active and neighbour_count in [2, 3]:
                         active_copy.add((x, y, z))
@@ -58,16 +60,17 @@ def part2(input):
                                 for dz in [-1, 0, 1]:
                                     for dw in [-1, 0, 1]:
                                         # don't check the same cube as it's own neighbour
-                                        if not (
-                                            dx == 0 and dy == 0 and dz == 0 and dw == 0
+                                        if (
+                                            not (
+                                                dx == 0
+                                                and dy == 0
+                                                and dz == 0
+                                                and dw == 0
+                                            )
+                                            and (x + dx, y + dy, z + dz, w + dw)
+                                            in active
                                         ):
-                                            if (
-                                                x + dx,
-                                                y + dy,
-                                                z + dz,
-                                                w + dw,
-                                            ) in active:
-                                                neighbour_count += 1
+                                            neighbour_count += 1
                         # keep a cube active or activate an inactive cube based on the given rules
                         if (x, y, z, w) in active and neighbour_count in [2, 3]:
                             active_copy.add((x, y, z, w))
@@ -79,7 +82,7 @@ def part2(input):
 
 
 def parse(input):
-    return [direct for direct in input.splitlines()]
+    return list(input.splitlines())
 
 
 def build_3d(config):

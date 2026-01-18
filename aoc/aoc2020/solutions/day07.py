@@ -1,6 +1,5 @@
 import re
 
-
 BAG_NUMBER_PATTERN = re.compile(r"(no|\d) (\w* \w*) bag")
 
 

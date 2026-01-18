@@ -1,38 +1,36 @@
 from collections import deque
 
-
+from aoc.aoc2019.intcode.ip import InstructionPointer
+from aoc.aoc2019.intcode.memory import Memory
 from aoc.aoc2019.intcode.operation import (
-    AdjustRelativeBase,
-    Operation,
-    Halt,
     Add,
+    AdjustRelativeBase,
+    Equals,
+    Halt,
+    JumpIfFalse,
+    JumpIfTrue,
+    LessThan,
     Mult,
+    Operation,
     ReadIn,
     WriteOut,
-    JumpIfTrue,
-    JumpIfFalse,
-    LessThan,
-    Equals,
 )
 from aoc.aoc2019.intcode.parameter import (
+    Immediate,
     Parameter,
     Position,
-    Immediate,
     Relative,
 )
-
-from aoc.aoc2019.intcode.ip import InstructionPointer
 from aoc.aoc2019.intcode.relative_base import RelativeBase
 from aoc.aoc2019.intcode.state import ExecutionState
-from aoc.aoc2019.intcode.memory import Memory
 
 
 class Intcode:
     def __init__(
         self,
         program: list[int],
-        inputs: deque[int] = None,
-        outputs: deque[int] = None,
+        inputs: deque[int] | None = None,
+        outputs: deque[int] | None = None,
     ):
         self.memory = Memory(program)
         self.ip = InstructionPointer()
@@ -113,7 +111,9 @@ class Intcode:
         return [
             parse_parameter(mode, value)
             for value, mode in zip(
-                self.memory[self.ip.value + 1 : self.ip.value + 1 + amount], modes
+                self.memory[self.ip.value + 1 : self.ip.value + 1 + amount],
+                modes,
+                strict=False,
             )
         ]
 

@@ -9,7 +9,7 @@ def part2(polymer: str) -> int:
     return min([react_and_measure(polymer, ch) for ch in string.ascii_lowercase])
 
 
-def react_and_measure(polymer: str, ignore: str = None) -> int:
+def react_and_measure(polymer: str, ignore: str | None = None) -> int:
     stack = []
     for c in polymer:
         # ignoring specific letters instead of removing them for part 2

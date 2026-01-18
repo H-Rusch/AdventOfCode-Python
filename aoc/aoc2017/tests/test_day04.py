@@ -19,4 +19,4 @@ def test_no_anagrams():
 def test_part2_combined_example():
     input = load_example("day04.txt")
 
-    assert 3 == day04.part2(input)
+    assert day04.part2(input) == 3

@@ -2,7 +2,7 @@ class LinkedList:
     def __init__(self, elements=None):
         self.start = None
         self.last = None  # last to append faster
-        self.element_lookup = dict()  # dictionary to get the element for a value fast
+        self.element_lookup = {}  # dictionary to get the element for a value fast
         if elements is not None:
             self.start = LinkedListElement(elements.pop(0))
             current = self.start

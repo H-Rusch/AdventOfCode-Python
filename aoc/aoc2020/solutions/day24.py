@@ -3,14 +3,14 @@ board_size = 50
 
 
 def part1(input):
-    instructions = [instructions for instructions in input.splitlines()]
+    instructions = list(input.splitlines())
     board = prepare_board(instructions)
 
     return sum(row.count(True) for row in board)
 
 
 def part2(input):
-    instructions = [instructions for instructions in input.splitlines()]
+    instructions = list(input.splitlines())
     board = prepare_board(instructions)
 
     black_tiles = get_black_tiles(board)

@@ -1,6 +1,6 @@
 from collections import deque
-from dataclasses import dataclass
 from copy import deepcopy
+from dataclasses import dataclass
 
 # this one was no fun at all
 
@@ -132,7 +132,7 @@ def bfs(grid: list, units: list, start_pos: tuple, targets: set) -> list:
     if len(solutions) == 0:
         return []
 
-    min_steps = min(map(lambda t: t[1], solutions))
+    min_steps = min(t[1] for t in solutions)
     return [
         (pos, steps, first_pos)
         for (pos, steps, first_pos) in solutions
@@ -152,7 +152,7 @@ def where_to_move(best_moves: list) -> tuple:
 
 
 def calc_score(rounds: int, units: list) -> int:
-    return rounds * sum(map(lambda u: u.hp, [u for u in units if u.alive]))
+    return rounds * sum(u.hp for u in [u for u in units if u.alive])
 
 
 def get_adjacent_target(grid: list, unit: Unit, units: list) -> Unit:
@@ -195,7 +195,7 @@ def print_grid(grid: list, units: list):
     for y, line in enumerate(grid):
         s = []
         e = []
-        for x, sign in enumerate(line):
+        for x, _sign in enumerate(line):
             if (x, y) in positions and positions[(x, y)].alive:
                 a = "G" if positions[(x, y)].team == 1 else "E"
                 s.append(a)

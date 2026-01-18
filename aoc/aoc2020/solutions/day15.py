@@ -20,7 +20,7 @@ def get_most_recent_at_n(numbers, n):
         if current_count == n:
             return most_recently
 
-        if most_recently not in memory.keys():
+        if most_recently not in memory:
             memory[most_recently] = current_count
             most_recently = 0
         else:

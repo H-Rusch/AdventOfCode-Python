@@ -65,8 +65,8 @@ def coordinates_at_angle(x1: int, y1: int, coordinate_list: list) -> dict:
 
         # append coordinate and distance to the entries for this angle. Then sort the entries based on their distance
         coordinate_dict[angle].append(((x2, y2), distance))
-        coordinate_dict[angle] = list(
-            sorted(coordinate_dict[angle], key=lambda entry: entry[1])
+        coordinate_dict[angle] = sorted(
+            coordinate_dict[angle], key=lambda entry: entry[1]
         )
 
     return coordinate_dict

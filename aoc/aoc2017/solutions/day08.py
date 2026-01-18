@@ -1,7 +1,6 @@
-from dataclasses import dataclass
-from collections import defaultdict
 import re
-
+from collections import defaultdict
+from dataclasses import dataclass
 
 INSTRUCTION_PATTERN = re.compile(r"(.*?) (dec|inc) (-?\d+) if (.*?) (.*)")
 

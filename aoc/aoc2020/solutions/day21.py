@@ -18,16 +18,16 @@ def part2(input):
 
 
 def build_allergen_dict(ingredient_list):
-    important_ingredients = list()
+    important_ingredients = []
     # create a dictionary which maps in which ingredients the different allergens are
-    allergen_dict = dict()
+    allergen_dict = {}
     for entry in ingredient_list:
         allergens = entry[entry.find("(contains ") + 10 : entry.find(")")]
         ingredients = entry[: entry.find("(") - 1].split(" ")
         important_ingredients.extend(ingredients)
 
         for allergen in allergens.split(", "):
-            if allergen in allergen_dict.keys():
+            if allergen in allergen_dict:
                 allergen_dict[allergen].append(ingredients)
             else:
                 allergen_dict[allergen] = [ingredients]
@@ -68,4 +68,4 @@ def build_allergen_dict(ingredient_list):
 
 
 def parse(input):
-    return [ingredients for ingredients in input.splitlines()]
+    return list(input.splitlines())

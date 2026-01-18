@@ -1,10 +1,10 @@
-from collections import deque
 from abc import ABC, abstractmethod
+from collections import deque
 
 from aoc.aoc2019.intcode.ip import InstructionPointer
+from aoc.aoc2019.intcode.parameter import Parameter
 from aoc.aoc2019.intcode.relative_base import RelativeBase
 from aoc.aoc2019.intcode.state import ExecutionState
-from aoc.aoc2019.intcode.parameter import Parameter
 
 
 class Operation(ABC):

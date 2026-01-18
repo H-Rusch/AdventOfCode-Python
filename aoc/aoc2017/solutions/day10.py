@@ -27,7 +27,7 @@ class KnotHashPerformer:
     BLOCK_SIZE = 16
 
     def __init__(self, lengths: list[int], capacity: int = 256) -> None:
-        self.numbers = [n for n in range(capacity)]
+        self.numbers = list(range(capacity))
         self.lengths = lengths
         self.index = 0
         self.skip_size = 0
@@ -50,7 +50,7 @@ class KnotHashPerformer:
             ]
             for i in range(KnotHashPerformer.BLOCK_SIZE)
         ]
-        return list(map(lambda block: reduce(lambda v1, v2: v1 ^ v2, block), blocks))
+        return [reduce(lambda v1, v2: v1 ^ v2, block) for block in blocks]
 
 
 def part1(input):

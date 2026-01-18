@@ -1,5 +1,5 @@
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable
 
 
 @dataclass
@@ -8,7 +8,7 @@ class Equation:
     values: list[int]
 
     @staticmethod
-    def from_str(line: str) -> "Equation":
+    def from_str(line: str) -> Equation:
         result, values = line.split(": ")
 
         return Equation(int(result), list(map(int, values.split())))
@@ -41,10 +41,8 @@ class Equation:
         # using any() here is about 100% slower thatn just using plain or operations (1,1s -> 2,4s)
         # my goal was to reduce duplication though
         return any(
-            (
-                self._helper(operation(current, value), index + 1, operations)
-                for operation in operations
-            )
+            self._helper(operation(current, value), index + 1, operations)
+            for operation in operations
         )
 
 
@@ -52,14 +50,14 @@ def part1(input: str) -> int:
     equations = parse(input)
 
     fulfillable_equations = filter(Equation.can_be_fulfilled, equations)
-    return sum(map(lambda x: x.result, fulfillable_equations))
+    return sum(x.result for x in fulfillable_equations)
 
 
 def part2(input: str) -> int:
     equations = parse(input)
 
     fulfillable_equations = filter(Equation.can_be_fulfilled_complex, equations)
-    return sum(map(lambda x: x.result, fulfillable_equations))
+    return sum(x.result for x in fulfillable_equations)
 
 
 def parse(input: str) -> list[Equation]:

@@ -22,7 +22,7 @@ def both_parts(octopus_dict: dict) -> tuple:
         flashing = set()
         flashed = set()
         # increment all octopuses by 1
-        for coordinate in octopus_dict.keys():
+        for coordinate in octopus_dict:
             octopus_dict[coordinate] += 1
             if octopus_dict[coordinate] == 10:
                 flashing.add(coordinate)
@@ -46,21 +46,19 @@ def both_parts(octopus_dict: dict) -> tuple:
 
         steps += 1
 
-        if sum([octopus_dict[cord] for cord in octopus_dict.keys()]) == 0:
+        if sum([octopus_dict[cord] for cord in octopus_dict]) == 0:
             break
 
     return number_of_flashes, steps
 
 
 def get_adjacent(coordinate: tuple, octopus_dict: dict) -> list:
-    adj = set(
-        [
-            (coordinate[0] + x, coordinate[1] + y)
-            for x in (-1, 0, 1)
-            for y in (-1, 0, 1)
-            if not (x == y == 0)
-        ]
-    )
+    adj = {
+        (coordinate[0] + x, coordinate[1] + y)
+        for x in (-1, 0, 1)
+        for y in (-1, 0, 1)
+        if not (x == y == 0)
+    }
 
     return list(set(octopus_dict.keys()).intersection(adj))
 

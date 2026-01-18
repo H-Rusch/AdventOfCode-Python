@@ -1,5 +1,4 @@
 from functools import reduce
-from typing import List
 
 TREE = "#"
 
@@ -12,7 +11,7 @@ class Slope:
         self.tree_count = 0
 
     def evaluate_line(self, line: str, index: int):
-        if not index % self.movement[1] == 0:
+        if index % self.movement[1] != 0:
             return
         self.evaluate_tree(line)
         self.adjust_position()
@@ -48,7 +47,7 @@ def sled_down_slopes(lines):
     return slopes
 
 
-def initial_tree_counts(width) -> List[Slope]:
+def initial_tree_counts(width) -> list[Slope]:
     return [
         Slope((1, 1), width),
         Slope((3, 1), width),

@@ -73,7 +73,7 @@ def parse(input):
     moons = []
 
     for line in input.splitlines():
-        x, y, z = re.search("<x=(-?\d+), y=(-?\d+), z=(-?\d+)>", line).groups()
+        x, y, z = re.search(r"<x=(-?\d+), y=(-?\d+), z=(-?\d+)>", line).groups()
         moons.append(Moon(int(x), int(y), int(z)))
 
     return moons

@@ -40,7 +40,7 @@ def game(player1: list, player2: list):
         if combat_round(player1, player2, memory):
             return True
 
-    return True if len(player2) == 0 else False
+    return len(player2) == 0
 
 
 def combat_round(player1: list, player2: list, memory: list):
@@ -71,7 +71,7 @@ def combat_round(player1: list, player2: list, memory: list):
 
 
 def parse(input):
-    cards = [player_cards for player_cards in input.split("\n\n")]
+    cards = list(input.split("\n\n"))
 
     player_cards1 = [int(i) for i in cards[0].split("\n")[1:]]
     player_cards2 = [int(i) for i in cards[1].split("\n")[1:]]

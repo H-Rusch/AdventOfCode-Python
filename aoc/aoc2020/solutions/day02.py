@@ -1,8 +1,7 @@
 import re
 
-
 # number-number char: string
-regex = re.compile("(\d+)-(\d+)\s(\w):\s(\w+)")
+regex = re.compile(r"(\d+)-(\d+)\s(\w):\s(\w+)")
 
 
 def part1(input):

@@ -65,12 +65,7 @@ def calculate_ore_for_fuel(rules: dict, amount_of_fuel: int) -> int:
                 supply[chemical] += mult * creating_amount - required_amount
 
             needed.extend(
-                list(
-                    map(
-                        lambda i: {"amount": mult * i["amount"], "item": i["item"]},
-                        ingredients,
-                    )
-                )
+                [{"amount": mult * i["amount"], "item": i["item"]} for i in ingredients]
             )
 
     return ore_count
@@ -81,7 +76,7 @@ def parse(input):
         a, i = ingredient.split()
         return {"amount": int(a), "item": i}
 
-    rules = dict()
+    rules = {}
     for line in input.splitlines():
         consumes, produces = line.split(" => ")
 

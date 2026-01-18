@@ -1,5 +1,5 @@
-from collections import deque, defaultdict
 import math
+from collections import defaultdict, deque
 
 
 def part1(input: str) -> int:

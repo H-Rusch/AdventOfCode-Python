@@ -4,9 +4,7 @@ from collections import defaultdict
 def part1(input) -> int:
     orbit_dict = parse(input)
 
-    return sum(
-        [len(body_orbits_bodies(body, orbit_dict)) for body in orbit_dict.keys()]
-    )
+    return sum([len(body_orbits_bodies(body, orbit_dict)) for body in orbit_dict])
 
 
 def body_orbits_bodies(body: str, orbit_dict: dict) -> list:

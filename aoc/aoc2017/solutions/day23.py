@@ -13,7 +13,9 @@ class CPU:
             instruction = self.instructions[self.ic]
             self.ic += self.execute_instruction(*instruction)
 
-    def execute_instruction(self, operation: str, arg1: str, arg2: str = None) -> int:
+    def execute_instruction(
+        self, operation: str, arg1: str, arg2: str | None = None
+    ) -> int:
         match operation:
             case "set":
                 self.registers[arg1] = self.get_value(arg2)
@@ -66,10 +68,7 @@ def is_prime(n: int) -> bool:
         return False
     if n % 2 == 0:
         return False
-    for i in range(3, int(n**0.5), 2):
-        if n % i == 0:
-            return False
-    return True
+    return all(n % i != 0 for i in range(3, int(n**0.5), 2))
 
 
 def parse(input: str) -> list[list[str]]:

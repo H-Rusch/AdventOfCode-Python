@@ -1,5 +1,5 @@
-from .get_examples.load import load_example
 from ..solutions import day08
+from .get_examples.load import load_example
 
 INPUT = load_example("day08.txt")
 
@@ -20,8 +20,8 @@ def test_find_antinode():
     antenna = 4 + 3j
     other = 5 + 5j
 
-    assert 6 + 7j == day08.find_antinode(antenna, other)
-    assert 3 + 1j == day08.find_antinode(other, antenna)
+    assert day08.find_antinode(antenna, other) == 6 + 7j
+    assert day08.find_antinode(other, antenna) == 3 + 1j
 
 
 def test_find_continious_antonodes():
@@ -36,8 +36,8 @@ def test_find_continious_antonodes():
 
 
 def test_part1_example():
-    assert 14 == day08.part1(INPUT)
+    assert day08.part1(INPUT) == 14
 
 
 def test_part2_example():
-    assert 34 == day08.part2(INPUT)
+    assert day08.part2(INPUT) == 34

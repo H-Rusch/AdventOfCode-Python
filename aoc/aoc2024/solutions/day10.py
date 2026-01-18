@@ -1,19 +1,18 @@
 from aoc.util.direction import Direction
 
-
 coordinate = tuple[int, int]
 
 
 def part1(input: str) -> int:
     trailheads, height_map = parse(input)
 
-    return sum(map(lambda start: calculate_score(start, height_map, set()), trailheads))
+    return sum(calculate_score(start, height_map, set()) for start in trailheads)
 
 
 def part2(input: str) -> int:
     trailheads, height_map = parse(input)
 
-    return sum(map(lambda start: calculate_rating(start, height_map), trailheads))
+    return sum(calculate_rating(start, height_map) for start in trailheads)
 
 
 def calculate_score(
@@ -24,10 +23,8 @@ def calculate_score(
         return 1
 
     return sum(
-        map(
-            lambda next: calculate_score(next, height_map, visited),
-            valid_next_steps(current, height_map, visited),
-        )
+        calculate_score(next, height_map, visited)
+        for next in valid_next_steps(current, height_map, visited)
     )
 
 
@@ -36,10 +33,8 @@ def calculate_rating(current: coordinate, height_map: dict[coordinate, int]) -> 
         return 1
 
     return sum(
-        map(
-            lambda next: calculate_rating(next, height_map),
-            valid_next_steps(current, height_map, set()),
-        )
+        calculate_rating(next, height_map)
+        for next in valid_next_steps(current, height_map, set())
     )
 
 

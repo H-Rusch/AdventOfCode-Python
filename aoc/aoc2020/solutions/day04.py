@@ -1,14 +1,13 @@
 import re
 
-
 # create regular expressions which search a passport for the required information
-byr_regex = re.compile("byr:(\d{4})")
-iyr_regex = re.compile("iyr:(\d{4})")
-eyr_regex = re.compile("eyr:(\d{4})")
-hgt_regex = re.compile("hgt:(\d*)(cm|in)")
+byr_regex = re.compile(r"byr:(\d{4})")
+iyr_regex = re.compile(r"iyr:(\d{4})")
+eyr_regex = re.compile(r"eyr:(\d{4})")
+hgt_regex = re.compile(r"hgt:(\d*)(cm|in)")
 hcl_regex = re.compile("hcl:#(([0-9]|[a-f]){6})")
 ecl_regex = re.compile("ecl:((amb)|(blu)|(brn)|(gry)|(grn)|(hzl)|(oth))")
-pid_regex = re.compile("pid:(\d*)")
+pid_regex = re.compile(r"pid:(\d*)")
 
 
 def part1(input):

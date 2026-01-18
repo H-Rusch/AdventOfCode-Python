@@ -1,5 +1,5 @@
-from collections import Counter
 import re
+from collections import Counter
 
 
 def part1(input: str) -> int:
@@ -9,7 +9,7 @@ def part1(input: str) -> int:
 
     for instruction in instructions:
         op, x0, x1, y0, y1, z0, z1 = instruction[:]
-        if any([abs(v) > 50 for v in instruction[1:]]):
+        if any(abs(v) > 50 for v in instruction[1:]):
             continue
 
         for x in range(x0, x1 + 1):

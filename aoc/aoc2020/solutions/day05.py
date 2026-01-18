@@ -10,7 +10,7 @@ def part2(input):
     _, seats = get_seats(boarding_passes)
 
     # remove all None values from the list. These don't have a boarding pass
-    for i in range(seats.count(None)):
+    for _ in range(seats.count(None)):
         seats.remove(None)
 
     # go through the list to check for the seat_id "jumping" 2 spaces instead of 1. This is the missing seat

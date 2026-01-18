@@ -1,4 +1,5 @@
 from collections import deque
+
 from aoc.aoc2019.intcode.intcode import Intcode
 
 

@@ -38,7 +38,7 @@ def fold(coordinates: set, instruction: str) -> set:
 
 
 def show_coordinates(coordinates: set):
-    print_dict = {coordinate: "█ " for coordinate in coordinates}
+    print_dict = dict.fromkeys(coordinates, "█ ")
 
     dimension_x = max([coordinate[0] for coordinate in coordinates])
     dimension_y = max([coordinate[1] for coordinate in coordinates])
@@ -53,7 +53,7 @@ def show_coordinates(coordinates: set):
 def parse(input: str):
     points, fold_instructions = input.split("\n\n")
     points = [point.split(",") for point in points.splitlines()]
-    points = set([(int(point[0]), int(point[1])) for point in points])
+    points = {(int(point[0]), int(point[1])) for point in points}
 
     fold_instructions = fold_instructions.splitlines()
 

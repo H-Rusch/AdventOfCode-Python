@@ -6,7 +6,7 @@ def part1(input: str) -> int:
 
     edges = get_grid_edges(coordinates)
 
-    closest_dict = dict()
+    closest_dict = {}
     # calculate closest coordinate for each coordinate on the grid
     for x in range(edges[0], edges[1] + 1):
         for y in range(edges[2], edges[3] + 1):
@@ -20,7 +20,7 @@ def part1(input: str) -> int:
     # Go through the given coordinates and clauclate the their area.
     # If one tile which is closest to the given coordinate is on the edge, that area is infinite.
     area_counts = np.zeros(len(coordinates))
-    for i, (cx, cy) in enumerate(coordinates):
+    for i, (_cx, _cy) in enumerate(coordinates):
         area_counts[i] = calculate_area(i, closest_dict, edges)
 
     return int(np.max(area_counts))

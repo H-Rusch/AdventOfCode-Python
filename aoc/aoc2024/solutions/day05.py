@@ -20,7 +20,7 @@ def part2(input: str) -> int:
     incorrectly_ordered = filter(
         lambda update: not is_correctly_ordered(rules, update), updates
     )
-    fixed_sorting = map(lambda update: sort(rules, update), incorrectly_ordered)
+    fixed_sorting = (sort(rules, update) for update in incorrectly_ordered)
 
     return sum([update[len(update) // 2] for update in fixed_sorting])
 

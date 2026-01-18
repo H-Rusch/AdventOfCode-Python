@@ -1,4 +1,3 @@
-from typing import List
 from itertools import permutations
 
 
@@ -14,13 +13,13 @@ def part2(input):
     return sum(map(even_division, rows))
 
 
-def checksum(row: List[int]) -> int:
+def checksum(row: list[int]) -> int:
     min_value, max_value = min(row), max(row)
 
     return abs(max_value - min_value)
 
 
-def even_division(row: List[int]) -> int:
+def even_division(row: list[int]) -> int:
     for divident, divisor in permutations(row, 2):
         ok, val = test_quotient(divident, divisor)
         if ok:
@@ -33,5 +32,5 @@ def test_quotient(divident: int, divisor: int) -> (bool, float):
     return (float(quotient).is_integer(), quotient)
 
 
-def parse(input: str) -> List[List[int]]:
+def parse(input: str) -> list[list[int]]:
     return [[int(n) for n in line.split()] for line in input.splitlines()]

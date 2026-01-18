@@ -1,6 +1,5 @@
 import heapq
 
-
 ENERGY_COST = {"A": 1, "B": 10, "C": 100, "D": 1000}
 TARGET = {"A": 2, "B": 4, "C": 6, "D": 8}
 
@@ -8,7 +7,7 @@ TARGET = {"A": 2, "B": 4, "C": 6, "D": 8}
 class CustomPriorityQueue:
     def __init__(self):
         self.queue = []
-        self.costs = dict()
+        self.costs = {}
 
     def empty(self) -> bool:
         return len(self.queue) == 0

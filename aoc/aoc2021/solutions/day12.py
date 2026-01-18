@@ -14,7 +14,7 @@ def part2(input: str) -> int:
 
 
 def search_paths(
-    graph: dict, cave: str, visited: set = None, small_twice: bool = False
+    graph: dict, cave: str, visited: set | None = None, small_twice: bool = False
 ):
     if visited is None:
         visited = set()

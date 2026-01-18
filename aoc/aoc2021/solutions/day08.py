@@ -62,13 +62,11 @@ def deduction(input_entries: list):
         4. Find the input representing '0', '6' or '9' in any order. They are defined by all but one segment. This means
          the missing letter is the fitting letter for the segment which the number does not define.
     """
-    input_entries = list(
-        sorted(
-            list(filter(lambda input_entry: len(input_entry) != 5, input_entries)),
-            key=len,
-        )
+    input_entries = sorted(
+        filter(lambda input_entry: len(input_entry) != 5, input_entries),
+        key=len,
     )
-    all_letters = set([letter for letter in "abcdefg"])
+    all_letters = set("abcdefg")
 
     # dict of possible randomized letters for each segment
     letter_possibilities = {
@@ -120,12 +118,12 @@ def deduction(input_entries: list):
 
         remove_option(letter_possibilities, [letter_to_set], segment_set)
 
-    return {list(v)[0]: k for k, v in letter_possibilities.items()}
+    return {next(iter(v)): k for k, v in letter_possibilities.items()}
 
 
 def remove_option(possible_letters: dict, keys_to_filter: list, value_to_filter: set):
-    for letter in possible_letters.keys():
-        if all([letter != key for key in keys_to_filter]):
+    for letter in possible_letters:
+        if all(letter != key for key in keys_to_filter):
             possible_letters[letter] = possible_letters[letter].difference(
                 value_to_filter
             )
@@ -133,9 +131,6 @@ def remove_option(possible_letters: dict, keys_to_filter: list, value_to_filter:
 
 def parse(input: str):
     data = input.splitlines()
-    data = [
-        [[pattern for pattern in part.split()] for part in entry.split("|")]
-        for entry in data
-    ]
+    data = [[list(part.split()) for part in entry.split("|")] for entry in data]
 
     return data

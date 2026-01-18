@@ -33,7 +33,7 @@ def part2(input):
 
 
 def caught_after_delay_but_slower(layers: dict[int, Layer], delay: int) -> bool:
-    return any([layer.position_at(t + delay) == 0 for t, layer in layers.items()])
+    return any(layer.position_at(t + delay) == 0 for t, layer in layers.items())
 
 
 def caught_after_delay(layers: dict[int, Layer], delay: int) -> bool:

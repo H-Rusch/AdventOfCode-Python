@@ -9,21 +9,21 @@ EXAMPLE_INPUT = """0: 3
 def test_layer_at():
     layer = day13.Layer(0, 5)
 
-    assert 0 == layer.position_at(0)
-    assert 1 == layer.position_at(1)
-    assert 2 == layer.position_at(2)
-    assert 3 == layer.position_at(3)
-    assert 4 == layer.position_at(4)
-    assert 3 == layer.position_at(5)
-    assert 2 == layer.position_at(6)
-    assert 1 == layer.position_at(7)
-    assert 0 == layer.position_at(8)
-    assert 1 == layer.position_at(9)
+    assert layer.position_at(0) == 0
+    assert layer.position_at(1) == 1
+    assert layer.position_at(2) == 2
+    assert layer.position_at(3) == 3
+    assert layer.position_at(4) == 4
+    assert layer.position_at(5) == 3
+    assert layer.position_at(6) == 2
+    assert layer.position_at(7) == 1
+    assert layer.position_at(8) == 0
+    assert layer.position_at(9) == 1
 
 
 def test_part1_example():
-    assert 24 == day13.part1(EXAMPLE_INPUT)
+    assert day13.part1(EXAMPLE_INPUT) == 24
 
 
 def test_part2_example():
-    assert 10 == day13.part2(EXAMPLE_INPUT)
+    assert day13.part2(EXAMPLE_INPUT) == 10

@@ -1,5 +1,6 @@
-from ..solutions import day21
 import numpy as np
+
+from ..solutions import day21
 
 EXAMPLE_INPUT = """../.# => ##./#../...
 .#./..#/### => #..#/..../..../#..#"""

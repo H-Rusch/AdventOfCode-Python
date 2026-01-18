@@ -75,4 +75,4 @@ def extended_euclidian_algorithm(a: int, b: int):
 
 
 def parse(input):
-    return [direction for direction in input.splitlines()]
+    return list(input.splitlines())

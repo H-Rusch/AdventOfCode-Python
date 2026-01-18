@@ -1,6 +1,5 @@
 import re
 
-
 # horrible, but it works I guess..
 # very comforting comment to run into 2 years later xD
 
@@ -25,7 +24,7 @@ def part2(input):
 def create_rule_dict(rules: str):
     # create a rule dictionary which knows the ranges for values for each different field
     range_regex = re.compile(r"(\d*)-(\d*) or (\d*)-(\d*)")
-    rule_dict = dict()
+    rule_dict = {}
     for rule in rules.split("\n"):
         match = range_regex.search(rule).groups()
         rule_dict[rule[: rule.find(":")]] = [int(i) for i in match]
@@ -97,4 +96,4 @@ def part2exec(my_ticket: str, tickets: list, rule_dict: dict):
 
 
 def parse(input):
-    return [direct for direct in input.split("\n\n")]
+    return list(input.split("\n\n"))

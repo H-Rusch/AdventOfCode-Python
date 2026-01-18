@@ -33,7 +33,7 @@ def part2(input) -> int:
     tiles = parse(input)
 
     # build the map by starting from an edge
-    assembled = dict()
+    assembled = {}
     N = int(math.sqrt(len(tiles)))
 
     # take an edge tile and build the map from there

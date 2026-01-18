@@ -1,6 +1,6 @@
 class UnionFind:
     def __init__(self, size: int):
-        self.parent = [i for i in range(size)]
+        self.parent = list(range(size))
 
     def make_set(self, v: int):
         self.parent[v] = v
@@ -18,7 +18,7 @@ class UnionFind:
 
 
 def manhatten_distance(point1, point2) -> int:
-    return sum(abs(v[0] - v[1]) for v in zip(point1, point2))
+    return sum(abs(v[0] - v[1]) for v in zip(point1, point2, strict=True))
 
 
 def part1(input: str) -> int:
@@ -28,12 +28,11 @@ def part1(input: str) -> int:
 
     for i, p1 in enumerate(points):
         for j, p2 in enumerate(points):
-            if j > i:
-                if manhatten_distance(p1, p2) <= 3:
-                    uf.union_set(i, j)
+            if j > i and manhatten_distance(p1, p2) <= 3:
+                uf.union_set(i, j)
 
     clusters = set()
-    for i, p in enumerate(points):
+    for i, _ in enumerate(points):
         clusters.add(uf.find_set(i))
 
     return len(clusters)

@@ -1,10 +1,10 @@
 from functools import total_ordering
 
+translation = {">": 0, "^": 1, "<": 2, "v": 3}
+
 
 @total_ordering
 class Cart:
-    translation = {">": 0, "^": 1, "<": 2, "v": 3}
-
     def __init__(self, x: int, y: int, orientation: str, grid: list[list]):
         self.x = x
         self.y = y

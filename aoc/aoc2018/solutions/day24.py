@@ -24,7 +24,7 @@ class Group:
     def calc_power(self):
         return self.units * self.attack
 
-    def calc_damage_to(self, other: "Group"):
+    def calc_damage_to(self, other: Group):
         mult = (
             0
             if self.attack_type in other.immune
@@ -72,7 +72,7 @@ def part1(input: str) -> int:
 
     fight(immune_army, infection_army)
 
-    return sum(map(lambda g: g.units, immune_army + infection_army))
+    return sum(g.units for g in immune_army + infection_army)
 
 
 def part2(input: str) -> int:
@@ -88,7 +88,7 @@ def part2(input: str) -> int:
 
         boost += 1
 
-    return sum(map(lambda g: g.units, copy_immune + copy_infection))
+    return sum(g.units for g in copy_immune + copy_infection)
 
 
 def fight(immune: list, infection: list, boost: int = 0) -> int:

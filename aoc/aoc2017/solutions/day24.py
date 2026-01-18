@@ -15,7 +15,7 @@ class BridgeGenerator:
     def generate_helper(self, bridge: list, visited: set, open_port: int):
         for component in self.possible_pieces(open_port, visited):
             next_port = self.next_open_port(open_port, *component)
-            next_brigde = bridge[:] + [component]
+            next_brigde = [*bridge[:], component]
             visited.add(component)
             self.generate_helper(next_brigde, visited, next_port)
             visited.remove(component)

@@ -8,7 +8,7 @@ class Step:
         self.prereq = set()
         self.enables = set()
 
-    def remove_prereq(self, step: "Step"):
+    def remove_prereq(self, step: Step):
         self.prereq.remove(step)
 
     def destroy(self):
@@ -118,7 +118,7 @@ def get_time(letter: str) -> int:
 
 
 def parse(input):
-    steps = dict()
+    steps = {}
 
     for line in input.splitlines():
         l1, l2 = re.search(

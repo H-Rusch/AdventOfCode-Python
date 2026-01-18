@@ -81,7 +81,7 @@ def generate_tile_map(instructions: list) -> dict:
     direction = Direction.UP
     position = (0, 0)
 
-    coordinates = dict()
+    coordinates = {}
     to_check = {(0, 0, dir) for dir in Direction}
 
     while computer.state != ExecutionState.HALTED:
@@ -107,8 +107,8 @@ def generate_tile_map(instructions: list) -> dict:
 
 
 def print_maze(tiles: dict):
-    x_values = list(map(lambda c: c[0], tiles.keys()))
-    y_values = list(map(lambda c: c[1], tiles.keys()))
+    x_values = [c[0] for c in tiles]
+    y_values = [c[1] for c in tiles]
 
     x_min, x_max = min(x_values), max(x_values)
     y_min, y_max = min(y_values), max(y_values)

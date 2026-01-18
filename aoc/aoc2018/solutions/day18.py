@@ -41,7 +41,7 @@ def state_change(grid: list) -> list:
 
     for y in range(len(grid)):
         for x in range(len(grid[y])):
-            tree, free, lumber = count_adj_categories(grid, x, y)
+            tree, _, lumber = count_adj_categories(grid, x, y)
 
             current = grid[y][x]
             if current == ".":
@@ -74,8 +74,8 @@ def count_adj_categories(grid: list, x: int, y: int) -> tuple:
 
 
 def get_state_string(grid: list) -> str:
-    return "".join(["".join([ch for ch in line]) for line in grid])
+    return "".join(["".join(list(line)) for line in grid])
 
 
 def parse(input):
-    return [[ch for ch in line] for line in input.strip().splitlines()]
+    return [list(line) for line in input.strip().splitlines()]

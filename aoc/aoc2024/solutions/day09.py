@@ -2,7 +2,7 @@ from abc import ABC
 from collections import deque
 
 
-class Block(ABC):
+class Block(ABC):  # noqa: B024
     def __init__(self, amount: int):
         self.amount = amount
 

@@ -1,4 +1,3 @@
-from typing import List, Tuple
 from collections import Counter
 
 
@@ -8,7 +7,7 @@ def part1(input: str) -> int:
     list1.sort()
     list2.sort()
 
-    return sum([abs(left - right) for left, right in zip(list1, list2)])
+    return sum([abs(left - right) for left, right in zip(list1, list2, strict=True)])
 
 
 def part2(input: str) -> int:
@@ -19,7 +18,7 @@ def part2(input: str) -> int:
     return sum([counts[num] * num for num in list1])
 
 
-def parse(input: str) -> Tuple[List[int], List[int]]:
+def parse(input: str) -> tuple[list[int], list[int]]:
     list1 = []
     list2 = []
     for line in input.splitlines():

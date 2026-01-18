@@ -1,5 +1,5 @@
-from .get_examples.load import load_example
 from ..solutions import day02
+from .get_examples.load import load_example
 
 
 def test_checksum():
@@ -7,15 +7,15 @@ def test_checksum():
     rows = day02.parse(input)
 
     assert len(rows) == 3
-    assert 8 == day02.checksum(rows[0])
-    assert 4 == day02.checksum(rows[1])
-    assert 6 == day02.checksum(rows[2])
+    assert day02.checksum(rows[0]) == 8
+    assert day02.checksum(rows[1]) == 4
+    assert day02.checksum(rows[2]) == 6
 
 
 def test_part1_example():
     input = load_example("day02_1.txt")
 
-    assert 18 == day02.part1(input)
+    assert day02.part1(input) == 18
 
 
 def test_even_division():
@@ -23,9 +23,9 @@ def test_even_division():
     rows = day02.parse(input)
 
     assert len(rows) == 3
-    assert 4 == day02.even_division(rows[0])
-    assert 3 == day02.even_division(rows[1])
-    assert 2 == day02.even_division(rows[2])
+    assert day02.even_division(rows[0]) == 4
+    assert day02.even_division(rows[1]) == 3
+    assert day02.even_division(rows[2]) == 2
 
     assert True
 
@@ -33,4 +33,4 @@ def test_even_division():
 def test_part2_example():
     input = load_example("day02_2.txt")
 
-    assert 9 == day02.part2(input)
+    assert day02.part2(input) == 9

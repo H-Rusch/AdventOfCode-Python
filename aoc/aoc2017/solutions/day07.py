@@ -16,7 +16,7 @@ class Program:
 
         return self.weight + sum(self.calculate_children_weights())
 
-    @cache
+    @cache  # noqa: B019
     def calculate_children_weights(self) -> list[int]:
         return list(map(Program.calculate_weight, self.children))
 
@@ -64,13 +64,11 @@ def find_outlier_weight(numbers: list[int]) -> (int, int):
 
 
 def find_outlier_node(nodes: list[Program], outlier_weight: int) -> Program:
-    return list(filter(lambda node: node.calculate_weight() == outlier_weight, nodes))[
-        0
-    ]
+    return next(filter(lambda node: node.calculate_weight() == outlier_weight, nodes))
 
 
 def parse(input: str) -> Program:
-    programs = dict()
+    programs = {}
 
     create_initial_nodes(programs, input)
     connect_nodes(programs, input)

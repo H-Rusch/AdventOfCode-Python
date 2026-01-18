@@ -1,6 +1,5 @@
-from collections import defaultdict
 import re
-
+from collections import defaultdict
 
 TRANSFORMATION_REGEX = re.compile(r"""In state (.*?):
   If the current value is (0):

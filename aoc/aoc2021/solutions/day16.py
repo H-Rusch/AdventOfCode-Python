@@ -15,17 +15,13 @@ class OperatorPacket(Packet):
 
     def calculate(self) -> int:
         if self.type_id == 0:
-            return reduce(
-                lambda x, y: x + y, map(lambda p: p.calculate(), self.children)
-            )
+            return reduce(lambda x, y: x + y, (p.calculate() for p in self.children))
         elif self.type_id == 1:
-            return reduce(
-                lambda x, y: x * y, map(lambda p: p.calculate(), self.children)
-            )
+            return reduce(lambda x, y: x * y, (p.calculate() for p in self.children))
         elif self.type_id == 2:
-            return min(map(lambda p: p.calculate(), self.children))
+            return min(p.calculate() for p in self.children)
         elif self.type_id == 3:
-            return max(map(lambda p: p.calculate(), self.children))
+            return max(p.calculate() for p in self.children)
         elif self.type_id == 5:
             return (
                 1 if self.children[0].calculate() > self.children[1].calculate() else 0
@@ -71,9 +67,7 @@ def summed_versions(packet: Packet) -> int:
         return int(packet.version, 2)
 
     if isinstance(packet, OperatorPacket):
-        return int(packet.version, 2) + sum(
-            map(lambda c: summed_versions(c), packet.children)
-        )
+        return int(packet.version, 2) + sum(summed_versions(c) for c in packet.children)
 
 
 def parse_packet(binary_representation: str, i: int) -> tuple:

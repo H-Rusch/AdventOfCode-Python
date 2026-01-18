@@ -12,10 +12,7 @@ def part2(input: str) -> int:
 
 def enhance_loop(algorithm: list, img_coordinates: set, iterations: int) -> int:
     for i in range(iterations):
-        if i % 2 == 0:
-            background = 0
-        else:
-            background = 1
+        background = i % 2
 
         next_step = set()
 

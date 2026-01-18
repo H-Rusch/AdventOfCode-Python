@@ -41,9 +41,8 @@ def check_sum_in_last_25(to_search: int, numbers: list):
     # iterate over list of numbers after the preamble of 25
     for i in range(len(numbers)):
         for j in range(i, len(numbers)):
-            if i != j:
-                if numbers[i] + numbers[j] == to_search:
-                    return True
+            if i != j and numbers[i] + numbers[j] == to_search:
+                return True
     return False
 
 

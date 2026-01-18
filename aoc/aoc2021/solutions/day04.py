@@ -24,7 +24,7 @@ class BingoBoard:
         """
         for i in range(len(self.marked)):
             if all(self.marked[i]) or all(
-                [self.marked[j][i] for j in range(len(self.marked))]
+                self.marked[j][i] for j in range(len(self.marked))
             ):
                 return True
 

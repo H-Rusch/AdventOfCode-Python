@@ -1,12 +1,10 @@
-from dataclasses import dataclass
-from argparse import ArgumentParser
-
 import importlib
-from types import ModuleType
+from argparse import ArgumentParser
+from dataclasses import dataclass
 from datetime import datetime
+from types import ModuleType
 
 from get_inputs.load_input import load_input
-
 
 VIABLE_EVENTS = [2017, 2018, 2019, 2020, 2021, 2024]
 VIABLE_DAYS = range(1, 26)
@@ -36,7 +34,7 @@ def parse_arguments() -> Arguments:
 def create_arg_parser() -> ArgumentParser:
     parser = ArgumentParser(
         prog="Advent of Code Python",
-        description="This program solves the Advent of Code event. Inputs are downloaded automatically by the program.",
+        description="This program solves the Advent of Code event. Inputs are downloaded automatically",
     )
     parser.add_argument(
         "year",

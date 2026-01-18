@@ -56,7 +56,7 @@ def get_coordinates_and_steps(instructions: list) -> dict:
             else:
                 y += 1
             steps += 1
-            if (x, y) not in coordinates.keys():
+            if (x, y) not in coordinates:
                 coordinates[(x, y)] = steps
 
     return coordinates

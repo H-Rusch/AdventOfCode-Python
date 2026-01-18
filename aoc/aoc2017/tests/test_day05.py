@@ -8,8 +8,8 @@ example_input = """0
 
 
 def test_part1_example():
-    assert 5 == day05.part1(example_input)
+    assert day05.part1(example_input) == 5
 
 
 def test_part2_example():
-    assert 10 == day05.part2(example_input)
+    assert day05.part2(example_input) == 10

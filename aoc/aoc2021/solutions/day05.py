@@ -2,7 +2,7 @@ import re
 from collections import defaultdict
 
 
-class Point(object):
+class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y

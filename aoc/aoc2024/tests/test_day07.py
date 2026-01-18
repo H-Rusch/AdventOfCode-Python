@@ -1,5 +1,5 @@
-from .get_examples.load import load_example
 from ..solutions import day07
+from .get_examples.load import load_example
 
 INPUT = load_example("day07.txt")
 
@@ -30,8 +30,8 @@ def test_can_be_fulfilled_complex():
 
 
 def test_part1_example():
-    assert 3749 == day07.part1(INPUT)
+    assert day07.part1(INPUT) == 3749
 
 
 def test_part2_example():
-    assert 11387 == day07.part2(INPUT)
+    assert day07.part2(INPUT) == 11387

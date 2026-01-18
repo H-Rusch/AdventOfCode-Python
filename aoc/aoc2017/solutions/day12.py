@@ -1,6 +1,6 @@
+import random
 import re
 from collections import deque
-import random
 
 PIPE_PATTERN = re.compile(r"(\d+) <-> (.*)")
 

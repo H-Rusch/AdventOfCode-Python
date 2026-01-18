@@ -11,7 +11,7 @@ class Tile(Enum):
     START = 2
 
     @staticmethod
-    def parse(ch: chr) -> "Tile":
+    def parse(ch: chr) -> Tile:
         match ch:
             case "#":
                 return Tile.WALL
@@ -43,7 +43,7 @@ def part2(input: str) -> int:
         if coordinate != start
     )
 
-    return sum(map(lambda x: check_if_path_loops(x, start), valid_wall_placements))
+    return sum(check_if_path_loops(x, start) for x in valid_wall_placements)
 
 
 def find_start(tile_map: dict[Coordinate, Tile]) -> Coordinate:
@@ -61,7 +61,7 @@ def simulate_path(
         visited.add(current)
 
         next_position = direction.steps(current)
-        if next_position not in tile_map.keys():
+        if next_position not in tile_map:
             return visited
 
         if tile_map[next_position] == Tile.WALL:
@@ -81,7 +81,7 @@ def check_if_path_loops(tile_map: dict[Coordinate, Tile], start: Coordinate) -> 
         visited.add((current, direction))
 
         next_position = direction.steps(current)
-        if next_position not in tile_map.keys():
+        if next_position not in tile_map:
             return False
 
         if tile_map[next_position] == Tile.WALL:

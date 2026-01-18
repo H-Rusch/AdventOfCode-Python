@@ -1,10 +1,10 @@
-import math
 import copy
+import math
 from itertools import permutations
 
 
 class Node:
-    def __init__(self, value: int = None, parent=None):
+    def __init__(self, value: int | None = None, parent=None):
         self.value = value
         self.parent = parent
         self.left = None
@@ -202,7 +202,7 @@ def create_tree(line: list, parent: Node = None):
         return node
 
     # go further down
-    opening, closing, comma = find_next_part(line)
+    opening, _closing, comma = find_next_part(line)
 
     node = Node(parent=parent)
     left_part = line[:comma]

@@ -87,4 +87,4 @@ def least_common_bit_at_position(diagnostic_data: list, position: int) -> int:
 
 
 def parse(input: str):
-    return [s for s in input.splitlines()]
+    return list(input.splitlines())

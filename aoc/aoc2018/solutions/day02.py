@@ -29,7 +29,7 @@ def count_letters(id_number: str) -> dict:
 def part2(input: str) -> str:
     box_ids = parse(input)
 
-    substrings = dict()
+    substrings = {}
 
     def create_substring(box_id: str, index: int) -> str:
         if (box_id, index) in substrings:

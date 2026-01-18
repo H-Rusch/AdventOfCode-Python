@@ -34,7 +34,7 @@ def part2(input: str) -> int:
 
 def iterate(position: int, dice_value: int, roll_number: int) -> tuple:
     rolled = 0
-    for i in range(3):
+    for _ in range(3):
         rolled += dice_value
         dice_value = (dice_value + 1) % 100
         if dice_value == 0:

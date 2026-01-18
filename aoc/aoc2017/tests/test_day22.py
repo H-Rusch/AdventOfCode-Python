@@ -6,7 +6,7 @@ EXAMPLE_INPUT = """..#
 
 
 def test_part1_example():
-    assert 5587 == day22.part1(EXAMPLE_INPUT)
+    assert day22.part1(EXAMPLE_INPUT) == 5587
 
 
 # commented out since it takes quite some time to finish

@@ -22,7 +22,7 @@ def transform(target_value: int):
 
 def calculate_encryption_key(loop_size: int, subject_number: int):
     value = 1
-    for i in range(loop_size):
+    for _ in range(loop_size):
         value *= subject_number
         value = value % 20201227
     return value

@@ -1,6 +1,6 @@
+import heapq
 import re
 from dataclasses import dataclass
-import heapq
 from functools import total_ordering
 
 

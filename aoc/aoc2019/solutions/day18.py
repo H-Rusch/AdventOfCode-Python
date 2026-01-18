@@ -9,7 +9,7 @@ DOORS = {ch.upper() for ch in KEYS[:-1]}
 def part1(input) -> int:
     tiles = parse(input)
     # find the positions of all keys and the start
-    key_positions = dict()
+    key_positions = {}
     for (dx, dy), symbol in tiles.items():
         if symbol in KEYS:
             key_positions[symbol] = (dx, dy)
@@ -37,7 +37,7 @@ def part1(input) -> int:
             passing_doors, path_cost = key_reaches[position][key]
             if key in keys_owned:
                 continue
-            if all([door.lower() in keys_owned for door in passing_doors]):
+            if all(door.lower() in keys_owned for door in passing_doors):
                 new_keys = keys_owned.union(frozenset(key))
                 if (key, new_keys) not in visited:
                     heapq.heappush(expanded, (cost + path_cost, key, new_keys))
@@ -46,7 +46,7 @@ def part1(input) -> int:
 def part2(input) -> int:
     tiles = parse(input)
     # find the positions of all keys and the start
-    key_positions = dict()
+    key_positions = {}
     for (dx, dy), symbol in tiles.items():
         if symbol in KEYS:
             key_positions[symbol] = (dx, dy)
@@ -90,7 +90,7 @@ def part2(input) -> int:
                 passing_doors, path_cost = key_reaches[position][key]
                 if key in keys_owned:
                     continue
-                if all([door.lower() in keys_owned for door in passing_doors]):
+                if all(door.lower() in keys_owned for door in passing_doors):
                     new_keys = keys_owned.union(frozenset(key))
                     if (key, new_keys) not in visited:
                         heapq.heappush(
@@ -104,7 +104,7 @@ def part2(input) -> int:
 
 
 def find_reachable(tiles: dict, x: int, y: int) -> dict:
-    reachable = dict()
+    reachable = {}
     expanded = [(0, (x, y), frozenset({}))]
     visited = set()
     start = tiles[(x, y)]
@@ -117,7 +117,7 @@ def find_reachable(tiles: dict, x: int, y: int) -> dict:
         visited.add((coordinate, passing_doors))
 
         if tiles[coordinate] in string.ascii_lowercase and tiles[coordinate] != start:
-            reachable[tiles[coordinate]] = ({door for door in passing_doors}, cost)
+            reachable[tiles[coordinate]] = (set(passing_doors), cost)
 
         for dx, dy in get_adjacent(tiles, coordinate[0], coordinate[1]):
             symbol = tiles[(dx, dy)]
@@ -145,7 +145,7 @@ def get_adjacent(tiles: dict, x: int, y: int) -> list:
 
 
 def parse(input):
-    tiles = dict()
+    tiles = {}
     for y, line in enumerate(input.splitlines()):
         for x, symbol in enumerate(line):
             if symbol != "#":

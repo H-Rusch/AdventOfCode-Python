@@ -1,7 +1,8 @@
-from pathlib import Path
-import os
-from . import download_input
 import logging
+import os
+from pathlib import Path
+
+from . import download_input
 
 
 def load_input(year: int, day: int) -> str:

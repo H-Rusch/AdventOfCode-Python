@@ -75,7 +75,7 @@ def fill_row(x: int, y: int, row: list, coords: dict, stack: deque, move: int) -
 
 
 def parse(input):
-    coords = dict()
+    coords = {}
     min_y, max_y = math.inf, -math.inf
     for line in input.splitlines():
         n1, n2, n3 = re.search(r"[xy]=(\d+), [xy]=(\d+)\.\.(\d+)", line).groups()

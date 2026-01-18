@@ -26,8 +26,8 @@ def part2(input) -> int:
     expanded = [(start, 0, 0)]
 
     # get the edges to see if a portal is moving upwards or downwards
-    x_values = list(map(lambda c: c[0], tiles))
-    y_values = list(map(lambda c: c[1], tiles))
+    x_values = [c[0] for c in tiles]
+    y_values = [c[1] for c in tiles]
     x_min, x_max = min(x_values), max(x_values)
     y_min, y_max = min(y_values), max(y_values)
 
@@ -84,15 +84,15 @@ def get_adjacent(x: int, y: int) -> list:
 def parse(input):
     lines = input.splitlines()
     # create a mapping of the full map
-    full_map = dict()
+    full_map = {}
     for y, line in enumerate(lines):
         for x, tile in enumerate(line):
             full_map[(x, y)] = tile
 
     # create portals
     portals = defaultdict(set)
-    x_values = list(map(lambda c: c[0], full_map.keys()))
-    y_values = list(map(lambda c: c[1], full_map.keys()))
+    x_values = [c[0] for c in full_map]
+    y_values = [c[1] for c in full_map]
     x_min, x_max = min(x_values), max(x_values)
     y_min, y_max = min(y_values), max(y_values)
 
@@ -105,7 +105,7 @@ def parse(input):
     # make dictionary which connects the portal tiles to each other
     # also find start and end coordinate
     start, end = None, None
-    portal_links = dict()
+    portal_links = {}
     for code, coordinates in portals.items():
         if code == "AA":
             start = coordinates.pop()

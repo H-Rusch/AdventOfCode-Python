@@ -13,4 +13,4 @@ jgz a -2"""
 
 
 def test_part1_example():
-    assert 4 == day18.part1(EXAMPLE_INPUT)
+    assert day18.part1(EXAMPLE_INPUT) == 4

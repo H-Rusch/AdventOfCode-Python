@@ -21,7 +21,7 @@ def part2(input) -> int:
 
 
 def check_valid_password(password: int) -> bool:
-    digits = [d for d in str(password)]
+    digits = list(str(password))
     same_adjacent = False
     for i in range(len(digits) - 1):
         if digits[i] == digits[i + 1]:
@@ -34,7 +34,7 @@ def check_valid_password(password: int) -> bool:
 
 
 def check_valid_password_part2(password: int) -> bool:
-    digits = [d for d in str(password)]
+    digits = list(str(password))
     ab = digits[0] == digits[1]
     bc = digits[1] == digits[2]
     cd = digits[2] == digits[3]

@@ -67,7 +67,7 @@ class Device:
         self.registers[C] = A
 
     def gtir(self, A, B, C):
-        self.registers[C] = 1 if A > self.registers[B] else 0
+        self.registers[C] = 1 if self.registers[B] < A else 0
 
     def gtri(self, A, B, C):
         self.registers[C] = 1 if self.registers[A] > B else 0
@@ -76,7 +76,7 @@ class Device:
         self.registers[C] = 1 if self.registers[A] > self.registers[B] else 0
 
     def eqir(self, A, B, C):
-        self.registers[C] = 1 if A == self.registers[B] else 0
+        self.registers[C] = 1 if self.registers[B] == A else 0
 
     def eqri(self, A, B, C):
         self.registers[C] = 1 if self.registers[A] == B else 0

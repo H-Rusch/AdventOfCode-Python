@@ -11,7 +11,7 @@ def part1(_) -> int:
             r4 *= 65899
             r4 &= 16777215
 
-            if 256 > r5:
+            if r5 < 256:
                 return r4
             else:
                 r5 = r5 // 256
@@ -33,7 +33,7 @@ def part2(_) -> int:
             r4 *= 65899
             r4 &= 16777215
 
-            if 256 > r5:
+            if r5 < 256:
                 if r4 in seen:
                     return last
                 else:

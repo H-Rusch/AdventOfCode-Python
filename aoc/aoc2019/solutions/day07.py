@@ -1,4 +1,4 @@
-from itertools import permutations
+from itertools import pairwise, permutations
 
 from aoc.aoc2019.intcode.intcode import Intcode
 from aoc.aoc2019.intcode.state import ExecutionState
@@ -40,11 +40,11 @@ def get_output_signal(program: list[int], phases: tuple[int]):
 def get_output_signal_feedback_loop(program: list[int], phases: tuple[int]):
     amplifiers = [Intcode(program) for _ in range(5)]
 
-    for first, second in zip(amplifiers, amplifiers[1:]):
+    for first, second in pairwise(amplifiers):
         second.inputs = first.outputs
     amplifiers[0].inputs = amplifiers[-1].outputs
 
-    for phase, amplifier in zip(phases, amplifiers):
+    for phase, amplifier in zip(phases, amplifiers, strict=True):
         amplifier.add_input(phase)
     amplifiers[0].add_input(0)
 

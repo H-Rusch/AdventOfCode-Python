@@ -28,7 +28,7 @@ def calculate_after_iterations(template: str, insertion_dict: dict, n: int) -> i
     for _ in range(n):
         pair_counts = defaultdict(int)
 
-        for key in polymer.keys():
+        for key in polymer:
             # get the value to insert
             insertion = insertion_dict[key]
 
@@ -50,7 +50,7 @@ def parse(input: str):
     template, pair_insertions = input.split("\n\n")
 
     # make a dict for the pair insertions, mapping the pair to the value to be inserted
-    transform_dict = dict()
+    transform_dict = {}
     for transformation in pair_insertions.split("\n"):
         pair, insertion = re.search(r"([A-Z]{2}) -> ([A-Z])", transformation).groups()
         transform_dict[pair] = insertion

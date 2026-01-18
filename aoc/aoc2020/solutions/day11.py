@@ -162,4 +162,4 @@ def count_seen(i: int, j: int, seats):
 
 
 def parse(input):
-    return [[le for le in st] for st in input.splitlines()]
+    return [list(st) for st in input.splitlines()]

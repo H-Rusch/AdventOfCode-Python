@@ -12,10 +12,10 @@ class Beacon:
 
         self.distances = set()
 
-    def apply_delta(self, other: "Beacon") -> "Beacon":
+    def apply_delta(self, other: Beacon) -> Beacon:
         return Beacon(self.x + other.x, self.y + other.y, self.z + other.z)
 
-    def rotate(self, axis: str) -> "Beacon":
+    def rotate(self, axis: str) -> Beacon:
         if axis == "x":
             return Beacon(self.x, self.z, -self.y)
         elif axis == "y":
@@ -23,12 +23,12 @@ class Beacon:
         elif axis == "z":
             return Beacon(self.y, -self.x, self.z)
 
-    def calculate_distance(self, other: "Beacon") -> int:
+    def calculate_distance(self, other: Beacon) -> int:
         return (
             (self.x - other.x) ** 2 + (self.y - other.y) ** 2 + (self.z - other.z) ** 2
         )
 
-    def __eq__(self, other: "Beacon") -> bool:
+    def __eq__(self, other: Beacon) -> bool:
         return self.x == other.x and self.y == other.y and self.z == other.z
 
     def __hash__(self):
@@ -93,7 +93,7 @@ def manhatten_distance(t1: tuple, t2: tuple) -> int:
 
 def transform(known: Scanner, other: Scanner):
     for i in range(6):
-        for j in range(4):
+        for _ in range(4):
             for o in other.beacons:
                 for k in known.beacons:
                     delta = Beacon(k.x - o.x, k.y - o.y, k.z - o.z)
@@ -141,7 +141,7 @@ def count_overlap(scanner1: Scanner, scanner2: Scanner):
 
 
 def parse(input: str):
-    batches = [batch for batch in input.split("\n\n")]
+    batches = list(input.split("\n\n"))
     scanners = []
 
     for i in range(len(batches)):
@@ -151,7 +151,7 @@ def parse(input: str):
         for reading in readings:
             if reading[1] == "-":
                 continue
-            values = list(map(lambda s: int(s), reading.split(",")))
+            values = [int(s) for s in reading.split(",")]
             scanners[i].beacons.add(Beacon(values[0], values[1], values[2]))
 
     return scanners

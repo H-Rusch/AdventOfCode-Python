@@ -1,7 +1,8 @@
-import requests
-import os
-from dotenv import load_dotenv
 import logging
+import os
+
+import requests
+from dotenv import load_dotenv
 
 SESSION_KEY = "session"
 NOT_LOGGED_IN_TEXT = (

@@ -53,7 +53,7 @@ def determine_paddle_input(ball_x: int, paddle_x: int) -> int:
 
 
 def generate_tile_map(output: list) -> dict:
-    tile_map = dict()
+    tile_map = {}
 
     i = 0
     while i < len(output):
@@ -69,8 +69,8 @@ def generate_tile_map(output: list) -> dict:
 
 
 def render_game(tiles: dict):
-    x_values = list(map(lambda k: k[0], tiles.keys()))
-    y_values = list(map(lambda k: k[1], tiles.keys()))
+    x_values = [k[0] for k in tiles]
+    y_values = [k[1] for k in tiles]
     min_x, max_x = min(x_values), max(x_values)
     min_y, max_y = min(y_values), max(y_values)
 

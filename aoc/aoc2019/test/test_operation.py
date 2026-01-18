@@ -1,20 +1,21 @@
 from collections import deque
+
 from aoc.aoc2019.intcode.ip import InstructionPointer
 from aoc.aoc2019.intcode.operation import (
     Add,
     AdjustRelativeBase,
     Equals,
+    Halt,
     JumpIfFalse,
     JumpIfTrue,
     LessThan,
     Mult,
-    Halt,
     ReadIn,
     WriteOut,
 )
 from aoc.aoc2019.intcode.parameter import (
-    Position,
     Immediate,
+    Position,
     Relative,
 )
 from aoc.aoc2019.intcode.relative_base import RelativeBase

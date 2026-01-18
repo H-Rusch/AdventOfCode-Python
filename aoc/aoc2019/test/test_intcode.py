@@ -1,4 +1,5 @@
 from collections import deque
+
 import pytest
 
 from aoc.aoc2019.intcode import operation
@@ -27,7 +28,7 @@ def test_intode_can_be_created_without_giving_inputs_and_outputs():
 def test_get_latest_ouput_returns_latest_output():
     subject = Intcode([], outputs=deque([3, 4]))
 
-    assert 4 == subject.get_latest_output()
+    assert subject.get_latest_output() == 4
 
 
 def test_get_latest_output_raises_exception_when_no_output_present():
@@ -142,9 +143,9 @@ def test_parse_add():
     result = subject.parse_instruction()
 
     assert isinstance(result, operation.Add)
-    result.param1 == Position(0)
-    result.param2 == Position(0)
-    result.destination == Position(0)
+    assert result.param1 == Position(0)
+    assert result.param2 == Position(0)
+    assert result.destination == Position(0)
 
 
 def test_parse_mult():
@@ -153,9 +154,9 @@ def test_parse_mult():
     result = subject.parse_instruction()
 
     assert isinstance(result, operation.Mult)
-    result.param1 == Position(0)
-    result.param2 == Position(0)
-    result.destination == Position(0)
+    assert result.param1 == Position(0)
+    assert result.param2 == Position(0)
+    assert result.destination == Position(0)
 
 
 def test_parse_read():

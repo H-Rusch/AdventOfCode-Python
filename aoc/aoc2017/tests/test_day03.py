@@ -2,10 +2,10 @@ from ..solutions import day03
 
 
 def test_part1_examples():
-    assert 0 == day03.part1(1)
-    assert 3 == day03.part1(12)
-    assert 2 == day03.part1(23)
-    assert 31 == day03.part1(1024)
+    assert day03.part1(1) == 0
+    assert day03.part1(12) == 3
+    assert day03.part1(23) == 2
+    assert day03.part1(1024) == 31
 
 
 def test_adjacent_generation():
@@ -13,34 +13,34 @@ def test_adjacent_generation():
     spiral.adjacent_sums[(0, 0)] = 1
 
     spiral.spiral_movement()
-    assert 1 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 1
     spiral.spiral_movement()
-    assert 2 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 2
     spiral.spiral_movement()
-    assert 4 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 4
     spiral.spiral_movement()
-    assert 5 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 5
     spiral.spiral_movement()
-    assert 10 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 10
     spiral.spiral_movement()
-    assert 11 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 11
     spiral.spiral_movement()
-    assert 23 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 23
     spiral.spiral_movement()
-    assert 25 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 25
     spiral.spiral_movement()
-    assert 26 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 26
     spiral.spiral_movement()
-    assert 54 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 54
     spiral.spiral_movement()
-    assert 57 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 57
     spiral.spiral_movement()
-    assert 59 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 59
     spiral.spiral_movement()
-    assert 122 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 122
     spiral.spiral_movement()
-    assert 133 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 133
     spiral.spiral_movement()
-    assert 142 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 142
     spiral.spiral_movement()
-    assert 147 == spiral.generate_next_sum()
+    assert spiral.generate_next_sum() == 147

@@ -3,7 +3,7 @@ import re
 
 def part1(input) -> int:
     mask = ""
-    memory = dict()
+    memory = {}
 
     for instruction in input.splitlines():
         if instruction.startswith("mask"):
@@ -11,7 +11,7 @@ def part1(input) -> int:
         else:
             address, value = re.search(r"mem\[(\d+)] = (\d+)", instruction).groups()
             value = list(bin(int(value))[2:].zfill(36))
-            for i, b in enumerate(value):
+            for i, _ in enumerate(value):
                 if mask[i] == "1":
                     value[i] = "1"
                 elif mask[i] == "0":
@@ -23,7 +23,7 @@ def part1(input) -> int:
 
 def part2(input) -> int:
     mask = ""
-    memory = dict()
+    memory = {}
 
     for instruction in input.splitlines():
         if instruction.startswith("mask"):
@@ -53,16 +53,16 @@ def get_floating_addresses(address: list, mask: str):
                 i += 1
             else:
                 if i == 0:
-                    replace_0 = ["0"] + current[i + 1 :]
-                    replace_1 = ["1"] + current[i + 1 :]
+                    replace_0 = ["0", *current[i + 1 :]]
+                    replace_1 = ["1", *current[i + 1 :]]
 
                 elif i == len(current):
-                    replace_0 = current[:i] + ["0"]
-                    replace_1 = current[:i] + ["1"]
+                    replace_0 = [*current[:i], "0"]
+                    replace_1 = [*current[:i], "1"]
 
                 else:
-                    replace_0 = current[:i] + ["0"] + current[i + 1 :]
-                    replace_1 = current[:i] + ["1"] + current[i + 1 :]
+                    replace_0 = [*current[:i], "0", *current[i + 1 :]]
+                    replace_1 = [*current[:i], "1", current[i + 1 :]]
 
                 i += 1
                 expanded.append((replace_1, i))

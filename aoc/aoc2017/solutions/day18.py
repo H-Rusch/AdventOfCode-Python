@@ -1,5 +1,5 @@
 from collections import defaultdict
-from multiprocessing import Queue, Process, Value
+from multiprocessing import Process, Queue, Value
 from queue import Empty
 
 
@@ -16,7 +16,9 @@ class SoundCard:
             instruction = self.instructions[self.ic]
             self.ic += self.execute_instruction(*instruction)
 
-    def execute_instruction(self, operation: str, arg1: str, arg2: str = None) -> int:
+    def execute_instruction(
+        self, operation: str, arg1: str, arg2: str | None = None
+    ) -> int:
         match operation:
             case "snd":
                 self.last_frequency = self.get_value(arg1)
@@ -53,7 +55,9 @@ class ParallelSoundCard(SoundCard):
         self.send_count = Value("i", 0)
         self.other = None
 
-    def execute_instruction(self, operation: str, arg1: str, arg2: str = None) -> int:
+    def execute_instruction(
+        self, operation: str, arg1: str, arg2: str | None = None
+    ) -> int:
         match operation:
             case "snd":
                 self.other.receiving.put(self.get_value(arg1))

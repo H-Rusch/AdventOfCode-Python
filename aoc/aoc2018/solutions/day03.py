@@ -1,9 +1,10 @@
 import re
+
 import numpy as np
 
 
 def part1(input: str) -> int:
-    claims, fabric_grid = parse(input)
+    _claims, fabric_grid = parse(input)
 
     return (fabric_grid >= 2).sum()
 

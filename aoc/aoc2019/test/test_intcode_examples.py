@@ -1,6 +1,7 @@
 import pytest
 
 from aoc.aoc2019.intcode.intcode import Intcode
+
 from .get_examples.load import load_example
 
 

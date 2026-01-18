@@ -8,7 +8,7 @@ class Direction(Enum):
     DOWN = 3
 
     @staticmethod
-    def from_str(input: str) -> "Direction | None":
+    def from_str(input: str) -> Direction | None:
         match input.lower():
             case "east" | "e" | "right" | "r" | ">":
                 return Direction.RIGHT
@@ -33,11 +33,11 @@ class Direction(Enum):
             case Direction.DOWN:
                 return (x, y + steps)
 
-    def turn_right(self, times: int = 1) -> "Direction":
+    def turn_right(self, times: int = 1) -> Direction:
         return Direction((self.value - times) % len(Direction))
 
-    def turn_left(self, times: int = 1) -> "Direction":
+    def turn_left(self, times: int = 1) -> Direction:
         return Direction((self.value + times) % len(Direction))
 
-    def turn_around(self) -> "Direction":
+    def turn_around(self) -> Direction:
         return Direction((self.value + 2) % len(Direction))

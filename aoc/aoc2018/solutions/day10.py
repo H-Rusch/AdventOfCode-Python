@@ -26,7 +26,7 @@ def part1(input):
 
     min_density = math.inf
 
-    for i in range(20_000):
+    for _i in range(20_000):
         # find out when the points are all 'close' together
         min_x = min([point.x for point in points])
         max_x = max([point.x for point in points])

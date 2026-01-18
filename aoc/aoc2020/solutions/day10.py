@@ -17,7 +17,7 @@ def part2(input):
     # create dictionary which shows for each adapter how many ways there are to get to it.
     # Initially there is 1 way to get to the adapter 0
     adapters.pop()
-    possibilities = {adap: 0 for adap in adapters}
+    possibilities = dict.fromkeys(adapters, 0)
     possibilities[0] = 1
     # check for each adapter [i] the next 3 adapters [i + j]. If those [i + j] can be reached the number of paths leading
     # to those adapters [i + j] is increased by the number of paths leading to the starting adapter [i].

@@ -23,11 +23,11 @@ def part2(input):
 
 
 def print_hull(tiles_painted: dict):
-    min_x = min(map(lambda t: t[0], tiles_painted.keys()))
-    max_x = max(map(lambda t: t[0], tiles_painted.keys()))
+    min_x = min(t[0] for t in tiles_painted)
+    max_x = max(t[0] for t in tiles_painted)
 
-    min_y = min(map(lambda t: t[1], tiles_painted.keys()))
-    max_y = max(map(lambda t: t[1], tiles_painted.keys()))
+    min_y = min(t[1] for t in tiles_painted)
+    max_y = max(t[1] for t in tiles_painted)
 
     for y in reversed(range(min_y, max_y + 1)):
         print(

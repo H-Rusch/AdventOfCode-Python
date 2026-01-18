@@ -1,4 +1,5 @@
 from collections import deque
+
 from aoc.aoc2019.intcode.intcode import Intcode
 from aoc.util.direction import Direction
 
@@ -8,7 +9,7 @@ def part1(input):
     tiles = generate_tile_map(instructions)
     intersections = find_intersections(tiles)
 
-    return sum(map(lambda c: c[0] * c[1], intersections))
+    return sum(c[0] * c[1] for c in intersections)
 
 
 def part2(input):
@@ -42,7 +43,7 @@ def generate_tile_map(instructions: list) -> dict:
     computer.run()
 
     x, y = 0, 0
-    coordinates = dict()
+    coordinates = {}
     for tile in [chr(code) for code in computer.outputs]:
         if tile in ["^", "v", "<", ">", "#", "."]:
             coordinates[(x, y)] = tile
@@ -103,21 +104,18 @@ def find_intersections(tiles: dict):
     intersections = []
     scaffold_symbols = ["#", "^", "v", "<", ">"]
     for (x, y), tile in tiles.items():
-        if tile in scaffold_symbols:
-            if all(
-                [
-                    tiles.get((dx, dy), "") in scaffold_symbols
-                    for (dx, dy) in get_adjacent(x, y)
-                ]
-            ):
-                intersections.append((x, y))
+        if tile in scaffold_symbols and all(
+            tiles.get((dx, dy), "") in scaffold_symbols
+            for (dx, dy) in get_adjacent(x, y)
+        ):
+            intersections.append((x, y))
 
     return intersections
 
 
 def print_scaffold(tiles: dict):
-    x_values = list(map(lambda c: c[0], tiles.keys()))
-    y_values = list(map(lambda c: c[1], tiles.keys()))
+    x_values = [c[0] for c in tiles]
+    y_values = [c[1] for c in tiles]
 
     x_min, x_max = min(x_values), max(x_values)
     y_min, y_max = min(y_values), max(y_values)
