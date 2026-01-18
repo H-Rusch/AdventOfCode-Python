@@ -1,10 +1,11 @@
 # AdventOfCode
 
 ## Usage
-* Install required dependencies with `pip install -r requirements.txt`
+* This project assumes the usage of `uv`
 * Entrypoint is `main.py` in the root directory
 * Year and Day are read from the command line arguments
-* Example: `python main.py 2017 1`
+* Example: `uv run main.py 2017 1`
+* Tests can be run using `uv run pytest`
 
 
 ## Automated download of inputs
